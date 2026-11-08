@@ -64,6 +64,16 @@ p{margin:8px 0}
 .simp>.lbl{color:#334155}
 .fact{background:#eff6ff;border-left:5px solid var(--inside)}
 .fact>.lbl{color:#1e40af}
+.lbl .katex{text-transform:none}
+.mind{background:#fdf4ff;border-left:5px solid #c026d3}
+.mind>.lbl{color:#86198f}
+.derive{background:#fff;border:1px solid #ddd6fe;border-left:5px solid #a78bfa}
+.derive>.lbl{color:#5b21b6}
+.derive ol{margin:6px 0 4px;padding-left:22px}
+.derive li{margin:5px 0}
+.sym{display:inline-block;min-width:1.4em;font-weight:700;color:#86198f}
+table.mx.lex td:first-child{white-space:nowrap;font-size:15.5px}
+.ch-num.deep{background:linear-gradient(135deg,#c026d3,#7c3aed)}
 .onesent{background:linear-gradient(135deg,#1d4ed8,#4f46e5);color:#fff;border-radius:12px;padding:14px 18px;margin:26px 0 12px;font-size:17px}
 .onesent b.lbl{display:block;font-size:12px;text-transform:uppercase;letter-spacing:.06em;opacity:.85;margin-bottom:4px}
 .quiz{margin:10px 0 0}
@@ -315,6 +325,7 @@ $$\boldsymbol\theta^\star=\arg\min_{\boldsymbol\theta\in\mathbb R^m} E(\mathbf W
 <div>\(E\)</div><div>Energie: <i>eine</i> Zahl, die sagt, wie schlecht die Form ist (wie ein Loss im ML)</div>
 <div>\(\arg\min\)</div><div>„das \(\boldsymbol\theta\), bei dem \(E\) am kleinsten ist“</div>
 </div><span class="src">Djuren, Gl. 5</span></div>
+<div class="box mind"><span class="lbl">🧠 Tiefer einsteigen</span>Dieses Kapitel gibt den Überblick. <a href="#k10">Kapitel 10</a> geht das Paper Gleichung für Gleichung durch (Gl. 1–24), mit Herleitung und einem „Bild im Kopf“ zu jedem Symbol.</div>
 
 <h3 id="k1-pipeline">Die Pipeline: Mesh → Voxel → Energie, Gradienten zurück</h3>
 <div class="demo"><span class="lbl">② Grafik · Vorwärts und rückwärts</span>
@@ -1174,7 +1185,7 @@ $$\partial_\theta\tilde w(\mathbf x)=\underbrace{\int_{S}\partial_\theta\mathbf 
 <div class="tl"><div class="n">1 · Intuition</div><h4>Jacobson-Folien</h4><p><b>Darauf achten:</b> Folien 34–46 (Definition, offene Formen, Sprung + harmonisch). Folien 58–73 (Deckel-Trick, wichtig für Idee A!). Folien 113–122 nur überfliegen.</p></div>
 <div class="tl"><div class="n">2 · Ableitungen</div><h4>GauWN, Abschn. 3</h4><p><b>Darauf achten:</b> Lemma 3.1 gilt nur für geschlossene Kurven. Abb. 2 (lokale Zerlegung). Abb. 3 (Bias offen!). Abschn. 4.5 (Verhalten) und Abschn. 5 („incomplete boundaries“ = Future Work).</p></div>
 <div class="tl"><div class="n">3 · Offene Flächen</div><h4>Antipodal, Abschn. 3–4</h4><p><b>Darauf achten:</b> Gl. 3 (Mittel über Strahlen). Abb. 4 (Hilfsdreiecke, innere Kanten heben sich auf). Gl. 9 + Alg. 1. Abschn. 4.3.1 (Ray Reuse = Gitter!). Abschn. 4.2 beim ersten Lesen überspringen.</p></div>
-<div class="tl" style="border-color:#1d4ed8;background:#eff6ff"><div class="n">4 · Hauptpaper</div><h4>Djuren, Abschn. 3.1 + 3.3</h4><p><b>Darauf achten:</b> Gl. 8 und Fußnote 2 (Innen-Term verschwindet). Gl. 13 (\(w_i=w_j+1\): hier steckt „geschlossen“). Abb. 3–4 (Shadow Solids). Gl. 22–23. Danach das Supplement (Pseudocode).</p></div>
+<div class="tl" style="border-color:#1d4ed8;background:#eff6ff"><div class="n">4 · Hauptpaper</div><h4>Djuren, Abschn. 3.1 + 3.3</h4><p><b>Darauf achten:</b> Gl. 8 und Fußnote 2 (Innen-Term verschwindet). Gl. 13 (\(w_i=w_j+1\): hier steckt „geschlossen“). Abb. 3–4 (Shadow Solids). Gl. 22–23. Danach das Supplement (Pseudocode). <b>Begleitend:</b> <a href="#k10">Kapitel 10</a> neben das PDF legen und Gleichung für Gleichung mitlesen.</p></div>
 </div>
 <div class="box fact"><span class="lbl">📄 Zum Weiterlesen (aus den Literaturlisten)</span>
 Barill et al. 2018 „Fast winding numbers for soups and clouds“ · Feng, Gillespie, Crane 2023 „Winding Numbers on Discrete Surfaces“ und „Perspectives on Winding Numbers“ · Bangaru et al. 2021 „Systematically differentiating parametric discontinuities“ · Zhang et al. 2019 „A differential theory of radiative transfer“ · Manson &amp; Schaefer 2013 „Analytic Rasterization of Curves with Polynomial Filters“ · Sun et al. 2026 „Variational Mesh Offsetting by Smoothed Winding Number“ · Spainhour &amp; Weiss 2026 (NURBS-GWN) · Martens &amp; Bessmeltsev 2025 „One-Shot Method“.</div>
@@ -1182,6 +1193,520 @@ Barill et al. 2018 „Fast winding numbers for soups and clouds“ · Feng, Gill
 <div class="quiz"><b>Verständnisfragen</b>
 <details><summary>1. In welcher Gleichung von Djuren steckt die Annahme „geschlossen“ am deutlichsten?</summary><div>Gl. 13 → 14 (\(w_i=w_j+1\) und die Zerlegung in Regionen konstanter Winding Number) sowie in Fußnote 2 („the interior term … vanishes“).</div></details>
 <details><summary>2. Welcher Abschnitt von Antipodal ist für Voxelgitter besonders relevant?</summary><div>Abschn. 4.3.1: Bei Gittern kann man Strahlen wiederverwenden (\(W\times H\) Strahlen für \(W\times H\times D\) Voxel). Das ähnelt Djurens Spalten-Scanline.</div></details>
+</div>
+</div></section>
+
+<section class="chapter" id="k10">
+<div class="ch-head"><div class="ch-num deep">10</div><h2>Djuren et al. 2026 im Detail: jede Formel hergeleitet, jede mit Bild im Kopf</h2><span class="chev">▾</span></div>
+<div class="ch-body">
+<h3 id="k10-map">Wie dieses Kapitel funktioniert</h3>
+<p class="lead">Dieses Kapitel geht das Hauptpaper Abschnitt für Abschnitt durch, in der Reihenfolge des Papers. Die Gleichungsnummern sind die des Papers. Jedes Symbol bekommt eine <b>🧠 Bild im Kopf</b>-Box: das Bild, das man sich beim Lesen der Formel vorstellen kann. Danach kommt die Herleitung in kleinen Schritten und dann die Formel genau so, wie sie im Paper steht.</p>
+<div class="box mind"><span class="lbl">🧠 Was „Bild im Kopf“ bedeutet</span>
+Eine Formel ist eine Kurzschrift für ein Bild. \(\Omega\subset\mathbb R^3\) ist kein abstraktes Zeichen, sondern „ein ausgefüllter Klumpen im Raum“. \(\int_{\partial\Omega}\dots\,d\ell\) heißt „lauf über die ganze Haut und sammle dabei etwas auf“. Wer die Bilder kennt, liest eine Formel wie einen Satz. Die Bilder hier sind meine Übersetzungen. Wenn ein Bild über das Paper hinausgeht, steht es in einer gelben Box.</div>
+<div class="demo"><span class="lbl">② Grafik · Der rote Faden des Papers in acht Schritten</span>
+<svg class="figsvg" viewBox="0 0 960 250">
+<defs><marker id="m10a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="#7c3aed"/></marker></defs>
+<g font-size="13" text-anchor="middle">
+<g><rect x="15" y="18" width="210" height="76" rx="12" fill="#eff6ff" stroke="#3b82f6"/><text x="120" y="42" font-weight="700">① Objekt Ω ⊂ ℝⁿ</text><text x="120" y="62">Haut ∂Ω als Mesh gegeben</text><text x="120" y="82" fill="#6b7280">Abschn. 1, Gl. 1</text></g>
+<g><rect x="255" y="18" width="210" height="76" rx="12" fill="#eff6ff" stroke="#3b82f6"/><text x="360" y="42" font-weight="700">② Voxelisieren = abtasten</text><text x="360" y="62">w(xᵢ) an Voxelzentren</text><text x="360" y="82" fill="#6b7280">Gl. 2–3</text></g>
+<g><rect x="495" y="18" width="210" height="76" rx="12" fill="#fef2f2" stroke="#dc2626"/><text x="600" y="42" font-weight="700">③ Problem</text><text x="600" y="62">w ist stückweise konstant: ∂θw = 0</text><text x="600" y="82" fill="#6b7280">Abschn. 3</text></g>
+<g><rect x="735" y="18" width="210" height="76" rx="12" fill="#f0fdf4" stroke="#16a34a"/><text x="840" y="42" font-weight="700">④ Glätten</text><text x="840" y="62">w̃ = Kern k gefaltet mit w</text><text x="840" y="82" fill="#6b7280">Gl. 4–5</text></g>
+<g><rect x="15" y="140" width="210" height="76" rx="12" fill="#f5f3ff" stroke="#7c3aed"/><text x="120" y="164" font-weight="700">⑤ Ableiten (Reynolds)</text><text x="120" y="184">nur der Rand zählt, w kürzt sich</text><text x="120" y="204" fill="#6b7280">Gl. 6–14, Abschn. 3.1</text></g>
+<g><rect x="255" y="140" width="210" height="76" rx="12" fill="#f5f3ff" stroke="#7c3aed"/><text x="360" y="164" font-weight="700">⑥ Schätzen</text><text x="360" y="184">Adjungierte, Monte Carlo, Splatting</text><text x="360" y="204" fill="#6b7280">Gl. 15–16, Abschn. 3.2</text></g>
+<g><rect x="495" y="140" width="210" height="76" rx="12" fill="#fff7ed" stroke="#f97316"/><text x="600" y="164" font-weight="700">⑦ Box + Dreiecke</text><text x="600" y="184">Schattenkörper, exakt</text><text x="600" y="204" fill="#6b7280">Gl. 17–19, Abschn. 3.3</text></g>
+<g><rect x="735" y="140" width="210" height="76" rx="12" fill="#fff7ed" stroke="#f97316"/><text x="840" y="164" font-weight="700">⑧ Ableitung pro Dreieck</text><text x="840" y="184">Faktor ⅓ · Fläche</text><text x="840" y="204" fill="#6b7280">Gl. 20–23</text></g>
+</g>
+<g stroke="#7c3aed" stroke-width="2" fill="none" marker-end="url(#m10a)"><path d="M228,56H252"/><path d="M468,56H492"/><path d="M708,56H732"/><path d="M840,96C840,124 120,112 120,137"/><path d="M228,178H252"/><path d="M468,178H492"/><path d="M708,178H732"/></g>
+<text x="480" y="242" text-anchor="middle" font-size="13" fill="#6b7280">danach: Laufzeit und Vergleich (Abschn. 4.1), drei Anwendungen (Abschn. 4.2–4.4), Ausblick (Abschn. 5)</text>
+</svg></div>
+
+<details class="box fact" open><summary style="cursor:pointer;font-weight:700">📖 Formel-Wörterbuch: alle Symbole des Papers mit Bild im Kopf (zum Nachschlagen)</summary>
+<table class="mx lex">
+<tr><th>Symbol</th><th>gelesen</th><th>🧠 Bild im Kopf</th><th>Stelle</th></tr>
+<tr><td>\(\mathbb R^n\)</td><td>„R hoch n“</td><td>der Raum mit \(n\) Richtungen. \(n=2\): ein unendliches Blatt Papier. \(n=3\): der Raum um dich herum. Ein Punkt ist eine Liste von \(n\) Zahlen.</td><td>Abschn. 1</td></tr>
+<tr><td>\(\Omega\)</td><td>„Omega“</td><td>der ausgemalte Fleck, das Innere des Objekts (der Teig, nicht die Kruste)</td><td>Abschn. 1</td></tr>
+<tr><td>\(\subset\)</td><td>„ist Teilmenge von“</td><td>Ω liegt <i>im</i> Raum, wie ein Fleck auf dem Blatt</td><td>Abschn. 1</td></tr>
+<tr><td>\(\partial\Omega\)</td><td>„Rand von Omega“</td><td>die Haut, der Umriss (die Kruste). Im 3D eine Fläche, z. B. ein Dreiecksnetz.</td><td>Abschn. 1</td></tr>
+<tr><td>\(\mathbf n,\ \mathbf n(\mathbf x_b)\)</td><td>Normale</td><td>ein Pfeil der Länge 1, senkrecht auf der Haut, nach außen</td><td>Gl. 8, 10, 14</td></tr>
+<tr><td>\(\boldsymbol\theta\in\mathbb R^m\)</td><td>„Theta“</td><td>ein Mischpult mit \(m\) Schiebereglern. Meist sind die Regler alle Vertex-Koordinaten.</td><td>Abschn. 1</td></tr>
+<tr><td>\(\Omega(\boldsymbol\theta)\)</td><td>„Omega von Theta“</td><td>die Form, die bei dieser Reglerstellung herauskommt</td><td>Gl. 1</td></tr>
+<tr><td>\(E\)</td><td>Energie</td><td>eine einzige Zahl, eine Höhe über dem Mischpult. Klein = gut (wie ein Loss).</td><td>Gl. 1, 5</td></tr>
+<tr><td>\(\arg\min\)</td><td>„Argument des Minimums“</td><td>nicht der tiefste Wert, sondern die <i>Stelle</i> (Reglerstellung), an der er erreicht wird</td><td>Abschn. 1, Gl. 5</td></tr>
+<tr><td>\(\frac{\partial E}{\partial\boldsymbol\theta},\ \partial_{\boldsymbol\theta}\)</td><td>Ableitung nach θ</td><td>ein Pfeil im Mischpult-Raum: „so drehen, dann steigt E am schnellsten“. Gradientenabstieg geht gegen den Pfeil.</td><td>Gl. 1, Fußnote 1</td></tr>
+<tr><td>\(w(\mathbf x),\ w_{\partial\Omega}\)</td><td>Winding Number</td><td>Wie oft wickelt sich die Haut um den Punkt x? Als <i>Feld</i>: jede Stelle des Raums trägt eine Zahl, wie eine Wetterkarte.</td><td>Gl. 2</td></tr>
+<tr><td>\(\chi_\Omega\)</td><td>„Chi“, Indikator</td><td>ein Lämpchen: an (1) innen, aus (0) außen</td><td>Gl. 3</td></tr>
+<tr><td>\(\mathbf x_{\mathbf i},\ \mathbf i=(i_1,\dots,i_n)\)</td><td>Voxelzentrum, Multi-Index</td><td>die Hausnummer eines Voxels: Spalte, Reihe, Etage. \(\mathbf x_{\mathbf i}\) ist der Mittelpunkt dieses Hauses.</td><td>Gl. 2</td></tr>
+<tr><td>\(d_k\)</td><td>Auflösung</td><td>so viele Voxel gibt es entlang Achse \(k\). Das Gitter ist \(d_1\times d_2\times d_3\) groß.</td><td>Gl. 2, 5</td></tr>
+<tr><td>\(k(\mathbf x-\mathbf x')\)</td><td>Kern (kernel)</td><td>ein Fenster oder Stempel, um \(\mathbf x\) gelegt. Es sagt, wie stark der Punkt \(\mathbf x'\) mitzählt.</td><td>Gl. 4</td></tr>
+<tr><td>\(\tilde w(\mathbf x)\)</td><td>„w Schlange“</td><td>der Mittelwert von \(w\), durch das Fenster gesehen. Mit Box-Kern: der Füllgrad des Voxels.</td><td>Gl. 4, 18</td></tr>
+<tr><td>\(dA(\mathbf x')\)</td><td>Flächen- bzw. Volumenelement</td><td>ein winziges Stückchen Raum um \(\mathbf x'\); das Integral addiert alle Stückchen</td><td>Gl. 4</td></tr>
+<tr><td>\(\mathbf W\in\mathbb R^{d_1\times\dots\times d_n}\)</td><td>das Voxelgitter</td><td>ein \(n\)-dimensionales Zahlen-Array (in PyTorch: ein Tensor der Form \((d_1,\dots,d_n)\))</td><td>Gl. 5</td></tr>
+<tr><td>\(D_i,\ w_i\)</td><td>Region, ihre Winding Number</td><td>Länder auf einer Landkarte; in jedem Land gilt eine feste Zahl</td><td>Gl. 7</td></tr>
+<tr><td>\(\partial D_{i,j}\)</td><td>gemeinsamer Rand</td><td>die Wand zwischen Raum \(i\) und Raum \(j\)</td><td>Gl. 11</td></tr>
+<tr><td>\(\mathbf x_b,\ d\ell(\mathbf x_b)\)</td><td>Randpunkt, Randelement</td><td>ein Punkt auf der Haut; ein winziges Stück Haut (im 2D Länge, im 3D Fläche)</td><td>Gl. 8</td></tr>
+<tr><td>\(\partial_{\boldsymbol\theta}\mathbf x_b^{\mathsf T}\mathbf n\)</td><td>Normalgeschwindigkeit</td><td>wie schnell sich die Haut an dieser Stelle nach außen schiebt</td><td>Gl. 8, 14</td></tr>
+<tr><td>\(\mathbf F_{\mathbf x},\ \nabla\!\cdot\)</td><td>Vektorfeld, Divergenz</td><td>eine Strömung; die Divergenz misst, wie viel an einer Stelle entsteht (Quelle) oder verschwindet</td><td>Gl. 16</td></tr>
+<tr><td>\(\mathrm{sgnInt}(\mathbf x,\mathbf d_{\mathbf x},\cdot)\)</td><td>vorzeichenbehaftete Schnitte</td><td>ein Laserpointer ab \(\mathbf x\) in Richtung \(\mathbf d\). Jeder Treffer zählt +1 oder −1.</td><td>Gl. 17</td></tr>
+<tr><td>\(p_i\)</td><td>Patch</td><td>ein Stück der Haut, beim Mesh ein Dreieck</td><td>Gl. 17</td></tr>
+<tr><td>\(\square_{\mathbf x_{\mathbf i}},\ \mathbf l,\ |\square|\)</td><td>Box, Seitenlängen, Volumen</td><td>ein Legostein, dem die Wände links/unten/vorne gehören, die anderen nicht (halboffen)</td><td>Gl. 18–19</td></tr>
+<tr><td>\(\lambda_j\)</td><td>baryzentrische Koordinate</td><td>ein Zeltdach über dem Dreieck: Höhe 1 an Ecke \(j\), Höhe 0 an der Gegenkante</td><td>Abschn. 3.3, Gl. 22</td></tr>
+<tr><td>\(R_i\in SO(3)\)</td><td>Rotation</td><td>eine Drehung ohne Spiegelung, eine pro Vertex-Nachbarschaft</td><td>Gl. 24</td></tr>
+<tr><td>mellowmax</td><td>weiches Maximum</td><td>ein Maximum mit abgerundeten Ecken, sodass es ableitbar wird</td><td>Abschn. 4.3</td></tr>
+</table></details>
+
+<h3 id="k10-omega">Abschn. 1: Ω ⊂ ℝⁿ und ∂Ω, was steht da eigentlich?</h3>
+<p>Der erste mathematische Satz des Papers sagt: Eine Form kann man auf zwei Arten beschreiben, <i>„(1) as the part of space \(\Omega\subset\mathbb R^n\) covered by the object; or (2) as the boundary \(\partial\Omega\) enclosing its interior“</i> <span class="src">Djuren, Abschn. 1</span>. Daraus folgen die zwei Familien von Darstellungen: <b>Volumendarstellungen</b> (volume representations), etwa Voxelgitter mit Belegung (occupancy), Distanzfeldern oder, wie hier, Winding Numbers. Und <b>Oberflächendarstellungen</b> (surface representations), etwa Polygonnetze, parametrische Flächen oder Subdivision Surfaces <span class="src">Djuren, Abschn. 1</span>.</p>
+<div class="box mind"><span class="lbl">🧠 Bild im Kopf: \(\Omega\subset\mathbb R^n\)</span>
+<b>\(\mathbb R^n\)</b>: Nimm für \(n=2\) ein unendlich großes Blatt Papier. Jeder Punkt darauf ist ein Zahlenpaar \((x,y)\). Für \(n=3\) ist es der ganze Raum um dich herum, und jeder Punkt ist ein Tripel \((x,y,z)\).<br>
+<b>\(\Omega\)</b>: Mal auf das Blatt einen Fleck und füll ihn aus. \(\Omega\) ist die Menge <i>aller</i> Punkte im ausgemalten Fleck. Im 3D ist es der ganze Klumpen: die Knete, nicht nur ihre Oberfläche.<br>
+<b>\(\subset\)</b>: heißt nur „liegt in“. Der Fleck ist ein Teil des Blatts.<br>
+<b>\(\partial\Omega\)</b>: der Umriss, den du mit dem Stift ziehst, <i>bevor</i> du ausmalst. Im 3D ist es die Haut des Klumpens. Ein Dreiecksnetz speichert genau diese Haut und sonst nichts.<br>
+<b>Faustregel:</b> Der Rand hat immer eine Dimension weniger als der Raum. In 1D ist er zwei Punkte, in 2D eine Kurve, in 3D eine Fläche.</div>
+<div class="demo"><span class="lbl">② Grafik · \(\Omega\) und \(\partial\Omega\) in \(n=1,2,3\) Dimensionen</span>
+<svg class="figsvg" viewBox="0 0 960 250">
+<defs><radialGradient id="m10s" cx="40%" cy="35%" r="70%"><stop offset="0" stop-color="#bfdbfe"/><stop offset="1" stop-color="#3b82f6"/></radialGradient></defs>
+<g font-size="14" text-anchor="middle">
+<text x="150" y="26" font-weight="700">n = 1: Zahlengerade ℝ¹</text>
+<line x1="20" y1="125" x2="280" y2="125" stroke="#9ca3af" stroke-width="2"/><path d="M280,125l-9,-5v10z" fill="#9ca3af"/>
+<line x1="90" y1="125" x2="210" y2="125" stroke="#3b82f6" stroke-width="9"/>
+<circle cx="90" cy="125" r="7" fill="#f97316"/><circle cx="210" cy="125" r="7" fill="#f97316"/>
+<text x="150" y="105" fill="#1e40af">Ω = [a, b]</text><text x="90" y="152">a</text><text x="210" y="152">b</text>
+<text x="150" y="200" fill="#9a3412">∂Ω = {a, b}: zwei Punkte</text>
+<text x="480" y="26" font-weight="700">n = 2: Ebene ℝ²</text>
+<rect x="335" y="40" width="290" height="170" rx="6" fill="#f8fafc" stroke="#e5e7eb"/>
+<path d="M390,140C380,90 440,60 490,75C540,55 600,90 585,135C575,180 520,195 470,180C430,195 395,180 390,140Z" fill="#3b82f6" fill-opacity=".35" stroke="#f97316" stroke-width="4"/>
+<text x="488" y="135" fill="#1e40af" font-size="18" font-weight="700">Ω</text><text x="607" y="80" fill="#9a3412">∂Ω</text><text x="350" y="60" fill="#9ca3af" text-anchor="start">ℝ²∖Ω</text>
+<text x="480" y="232" fill="#9a3412">∂Ω = geschlossene Kurve (1D)</text>
+<text x="810" y="26" font-weight="700">n = 3: Raum ℝ³</text>
+<ellipse cx="810" cy="125" rx="88" ry="82" fill="url(#m10s)" stroke="#f97316" stroke-width="4"/>
+<ellipse cx="810" cy="125" rx="88" ry="24" fill="none" stroke="#f97316" stroke-width="1.5" stroke-dasharray="5 4"/>
+<path d="M745,95l25,-30l30,22z" fill="none" stroke="#9a3412" stroke-width="1.5"/><path d="M800,87l30,-28l25,32z" fill="none" stroke="#9a3412" stroke-width="1.5"/>
+<text x="810" y="168" fill="#fff" font-size="18" font-weight="700">Ω</text>
+<text x="810" y="232" fill="#9a3412">∂Ω = Fläche (2D), z. B. Dreiecksnetz</text>
+</g></svg>
+<p class="cap">Der Rand hat stets Dimension \(n-1\). Ein Mesh speichert nur das Orange; eine Volumendarstellung speichert auch das Blaue (und das Graue).</p></div>
+<div class="demo" data-demo="omega"><span class="lbl">② Interaktiv · Ist \(\mathbf x\in\Omega\)? Zwei Arten, dasselbe Objekt zu speichern</span>
+<canvas width="760" height="380"></canvas>
+<div class="controls"><select data-opt="mode"><option value="both">Mathematisch: Ω (blau) und ∂Ω (orange)</option><option value="vol">Volumendarstellung: jedes Pixel speichert innen/außen</option><option value="surf">Oberflächendarstellung: nur die Eckpunkte des Randes</option></select></div>
+<div class="readout" data-out></div>
+<p class="cap">Zieh den violetten Punkt \(\mathbf x\) und die Eckpunkte. Achte auf die Speicherbilanz: Das Pixelgitter speichert vor allem leeren Raum. Darauf zielt das Paper mit „avoid storing information that is irrelevant“ <span class="src">Abschn. 1</span>.</p></div>
+<div class="box formula"><span class="lbl">③ Formel</span>
+$$\Omega\subset\mathbb R^n,\qquad \partial\Omega=\text{Rand von }\Omega,\qquad \mathbf x\in\Omega\ \text{ bzw. }\ \mathbf x\notin\Omega$$
+<div class="legend">
+<div>\(\mathbb R^n\)</div><div>Raum aller Listen \((x_1,\dots,x_n)\) aus \(n\) reellen Zahlen; im Paper \(n=2\) (Abbildungen) oder \(n=3\) (Meshes)</div>
+<div>\(\Omega\)</div><div>der Teil des Raums, den das Objekt einnimmt</div>
+<div>\(\partial\Omega\)</div><div>sein Rand, die Oberfläche, die das Innere einschließt</div>
+<div>\(\in,\ \notin\)</div><div>„liegt in“ bzw. „liegt nicht in“ (für einen einzelnen Punkt)</div>
+</div><span class="src">Djuren, Abschn. 1</span></div>
+<div class="box note"><span class="lbl">⚠️ Achtung: \(\partial\) hat im Paper zwei Bedeutungen</span>
+Vor einer Menge heißt \(\partial\) „Rand von“: \(\partial\Omega\), \(\partial D_i\). Vor einem Index oder in einem Bruch heißt es „Ableitung“: \(\partial_{\boldsymbol\theta}\), \(\frac{\partial E}{\partial\boldsymbol\theta}\). In Gl. 8 stehen beide nebeneinander. Das ist kein Zufall: Die Ableitung des Volumens lebt genau auf dem Rand (siehe unten).</div>
+
+<h3 id="k10-theta">Abschn. 1: Parameter θ, Energie E und die Kettenregel (Gl. 1)</h3>
+<p>Die Fläche hängt von Parametern ab: \(\Omega(\boldsymbol\theta)\) mit \(\boldsymbol\theta\in\mathbb R^m\), <i>„e.g., vertex positions“</i>. Gesucht ist \(\arg\min_{\boldsymbol\theta}E(\Omega(\boldsymbol\theta))\). Gradientenverfahren brauchen dafür die Ableitung, und die zerlegt das Paper mit der Kettenregel <span class="src">Djuren, Abschn. 1, Gl. 1</span>.</p>
+<div class="box mind"><span class="lbl">🧠 Bild im Kopf: \(\boldsymbol\theta\in\mathbb R^m\), \(E\) und \(\arg\min\)</span>
+<b>\(\boldsymbol\theta\)</b> ist ein <b>Mischpult</b> mit \(m\) Schiebereglern. Ein Dreiecksnetz mit \(V\) Vertices hat \(m=3V\) Regler: \(x\), \(y\), \(z\) jedes Vertex. Eine Stellung aller Regler ist <i>ein</i> Punkt im \(\mathbb R^m\) und damit genau eine Form.<br>
+<b>\(E\)</b> ist eine <b>Landschaft</b> über diesem Mischpult: Jede Reglerstellung bekommt eine Höhe. Hohe Werte bedeuten, dass die Form die Wünsche schlecht erfüllt.<br>
+<b>\(\arg\min\)</b> ist das <b>tiefste Tal</b>. Gesucht ist nicht die Talhöhe, sondern <i>wo</i> das Tal liegt, also die Reglerstellung \(\boldsymbol\theta^\star\).<br>
+<b>\(\partial E/\partial\boldsymbol\theta\)</b> ist ein Pfeil mit \(m\) Einträgen, der bergauf zeigt. Gradientenabstieg macht immer einen kleinen Schritt gegen den Pfeil.</div>
+<div class="box mind"><span class="lbl">🧠 Bild im Kopf: Gl. 1 als zwei Zahnräder</span>
+Dreh an einem Regler. <b>Zahnrad 1</b> \(\partial\Omega/\partial\boldsymbol\theta\) übersetzt das in „das Volumen verändert sich so“. <b>Zahnrad 2</b> \(\partial E/\partial\Omega\) übersetzt „Volumen verändert sich“ in „Energie verändert sich“. Zahnrad 2 hängt von der Aufgabe ab, Zahnrad 1 nur von der Geometrie. Das Paper baut Zahnrad 1 einmal für alle Aufgaben: <i>„The first factor depends on the particular energy, the second factor is the general problem we solve“</i> <span class="src">Abschn. 1</span>.</div>
+<div class="demo" data-demo="theta"><span class="lbl">② Interaktiv · Gl. 1 im Kleinen: ein Dreieck, 6 Regler, eine Energie</span>
+<canvas width="760" height="340"></canvas>
+<div class="controls"><label>Zielfläche \(A^\star\) <input type="range" min="1" max="8" step="0.1" value="4" data-opt="target"></label><button class="b" data-act="step">Einen Gradientenschritt machen</button><button class="b sec" data-act="reset">↺</button></div>
+<div class="readout" data-out></div>
+<p class="cap">Hier ist „das Volumen“ zu einer einzigen Zahl vereinfacht, der Fläche \(A\) des Dreiecks, und \(E=(A-A^\star)^2\). Die violetten Pfeile zeigen \(-\partial E/\partial\mathbf v_j\), also wohin Gradientenabstieg jeden Vertex schiebt. Das ist ein Spielzeug zur Kettenregel, nicht die Energie des Papers.</p></div>
+<div class="box formula"><span class="lbl">③ Formel (Gl. 1)</span>
+$$\frac{\partial E(\Omega(\boldsymbol\theta))}{\partial\boldsymbol\theta}=\frac{\partial E}{\partial\Omega}\,\frac{\partial\Omega}{\partial\boldsymbol\theta}$$
+<div class="legend">
+<div>\(\boldsymbol\theta\in\mathbb R^m\)</div><div>die \(m\) Parameter (z. B. alle Vertex-Koordinaten)</div>
+<div>\(\Omega(\boldsymbol\theta)\)</div><div>das Volumen, das diese Parameter beschreiben</div>
+<div>\(E\)</div><div>Energie, eine Zahl; „Energie“ ist hier dasselbe wie Loss oder Kostenfunktion</div>
+<div>\(\frac{\partial E}{\partial\Omega}\)</div><div>energiespezifisch: wie reagiert \(E\) auf Änderungen des Volumens?</div>
+<div>\(\frac{\partial\Omega}{\partial\boldsymbol\theta}\)</div><div>allgemein: wie reagiert das Volumen auf die Parameter? <b>Das löst das Paper.</b></div>
+</div><span class="src">Djuren, Gl. 1</span></div>
+<div class="box fact"><span class="lbl">📄 Woher die Idee kam</span>Ursprünglich wollten die Autoren Formen optimieren, die man mit einer Bandsäge schneiden kann. Solche Formen sind Schnittmengen von Extrusionen (extrusions) und lassen sich auf einem Voxelgitter leicht ausdrücken <span class="src">Abschn. 1</span>. Daraus wurde Anwendung 4.3.</div>
+<h3 id="k10-sample">Abschn. 3: Voxelisieren heißt abtasten (Gl. 2 und 3)</h3>
+<p>Abschnitt 3 beginnt mit einer Definition: <i>„Voxelization of a closed surface \(\partial\Omega\) in \(\mathbb R^n\) can generally be understood as point-sampling its winding number field“</i> <span class="src">Djuren, Abschn. 3</span>. Hier steht ausdrücklich „closed“: Die ganze Herleitung setzt eine geschlossene Fläche voraus.</p>
+<div class="box mind"><span class="lbl">🧠 Bild im Kopf: Gl. 2</span>
+Stell dir das Gitter als <b>Regal voller Messfühler</b> vor. In der Mitte jedes Fachs steckt ein Fühler, der nur eine Frage beantwortet: „Wie oft bin ich von der Haut umwickelt?“ Das ist \(w_{\partial\Omega}(\mathbf x_{\mathbf i})\).<br>
+<b>Multi-Index \(\mathbf i=(i_1,i_2,i_3)\)</b>: die Fachnummer im Regal: Spalte \(i_1\), Reihe \(i_2\), Etage \(i_3\). <b>\(d_k\)</b> ist die Zahl der Fächer entlang Achse \(k\); ein \(128^3\)-Gitter hat \(d_1=d_2=d_3=128\).<br>
+<b>Winding-Number-<i>Feld</i></b>: Jede Stelle des Raums trägt eine Zahl, wie eine Temperaturkarte. Abtasten heißt: Man liest die Karte nur an den Fühlern ab und wirft den Rest weg.</div>
+<div class="box mind"><span class="lbl">🧠 Bild im Kopf: Gl. 3, der Indikator \(\chi_\Omega\)</span>
+Hat die Haut keine Selbstüberschneidungen, kennt jeder Fühler nur zwei Antworten: 1 (umwickelt, also innen) oder 0 (außen). \(\chi_\Omega\) ist ein <b>Lämpchen</b>, das innen leuchtet. Erst mit Selbstüberschneidungen entstehen Werte wie 2 („doppelt umwickelt“) oder −1 (falsch herum umwickelt).</div>
+<div class="box formula"><span class="lbl">③ Formel (Gl. 2 und 3)</span>
+$$w_{\partial\Omega}(\mathbf x_{\mathbf i}),\qquad \mathbf i=(i_1,\dots,i_n),\quad 1\le i_k\le d_k \qquad\text{(2)}$$
+$$w_{\partial\Omega}(\mathbf x)=\chi_\Omega(\mathbf x)=\begin{cases}1,&\mathbf x\in\Omega\\0,&\mathbf x\notin\Omega\end{cases}\qquad\text{(3, nur ohne Selbstüberschneidung)}$$
+<div class="legend">
+<div>\(w_{\partial\Omega}(\mathbf x)\in\mathbb R\)</div><div>Winding Number der geschlossenen Fläche \(\partial\Omega\) am Punkt \(\mathbf x\)</div>
+<div>\(\mathbf x_{\mathbf i}\in\mathbb R^n\)</div><div>Mittelpunkt des Voxels mit Multi-Index \(\mathbf i\)</div>
+<div>\(d_k\)</div><div>Anzahl Voxel entlang der Achse \(k\)</div>
+<div>\(\chi_\Omega\)</div><div>Indikatorfunktion (indicator function) von \(\Omega\)</div>
+</div><span class="src">Djuren, Gl. 2–3</span></div>
+
+<h3 id="k10-ae">Abschn. 3: Warum Punktproben keine brauchbare Ableitung haben („fast überall null“)</h3>
+<p>Das Paper schließt in einem Satz: Das Winding-Number-Feld ist stückweise konstant, also ist \(\partial_{\boldsymbol\theta}w(\mathbf x)=0\) <i>fast überall</i> (almost everywhere), und \(\partial_{\boldsymbol\theta}w(\mathbf x_{\mathbf i})\) ist entweder null oder undefiniert <span class="src">Djuren, Abschn. 3</span>. Fußnote 1 erklärt die Kurzschrift: \(\partial_{\boldsymbol\theta}f\) heißt \(\partial f/\partial\boldsymbol\theta\).</p>
+<div class="box mind"><span class="lbl">🧠 Bild im Kopf: „stückweise konstant“ und „fast überall“</span>
+<b>Stückweise konstant</b>: eine Treppe aus flachen Stufen. Auf einer Stufe ist die Steigung 0, an der Kante gibt es keine Steigung (senkrechter Sprung).<br>
+<b>Fast überall</b>: Die Sprünge passieren nur auf der Haut selbst, und die ist hauchdünn: im 3D eine Fläche ohne Volumen. Wirfst du einen Dartpfeil blind in den Raum, triffst du die Haut mit Wahrscheinlichkeit 0. „Fast überall“ heißt „überall außer auf einer Menge, die man mit Wahrscheinlichkeit 0 trifft“.<br>
+<b>Für den Optimierer</b>: Jeder Fühler meldet „wenn du θ ein bisschen bewegst, ändert sich bei mir nichts“. Erst wenn die Haut über ihn hinwegläuft, springt er, ohne Vorwarnung. Ein Gradient aus lauter Nullen zeigt nirgendwohin.</div>
+<div class="demo" data-demo="sample"><span class="lbl">② Interaktiv · Punktprobe springt, Füllgrad gleitet</span>
+<canvas width="760" height="380"></canvas>
+<div class="controls"><label>Form verschieben \(t\) <input type="range" min="-1" max="1" step="0.005" value="0" data-opt="t"></label>
+<select data-opt="res"><option value="1">grobes Gitter (h = 1)</option><option value="0.5" selected>feineres Gitter (h = 0,5)</option></select>
+<label><input type="checkbox" data-opt="box"> Füllgrad (Box-gefiltert) statt Punktprobe zeigen</label></div>
+<div class="readout" data-out></div>
+<p class="cap">Klick auf ein Voxel, um es auszuwählen (violett). Rechts siehst du seinen Wert in Abhängigkeit von der Verschiebung \(t\): grau die Punktprobe \(w(\mathbf x_{\mathbf i})\) (Treppe), blau der Füllgrad \(\tilde w(\mathbf x_{\mathbf i})\) (stetig, Gl. 18). Die Steigung der blauen Kurve ist die Ableitung, die das Paper berechnet.</p></div>
+
+<h3 id="k10-filter">Abschn. 3: Glätten durch Faltung (Gl. 4)</h3>
+<p>Die Lösung ist, das Feld vor dem Abtasten zu <b>filtern</b> (prefiltering). Statt \(w\) am Punkt zu lesen, mittelt man \(w\) gewichtet über eine Umgebung <span class="src">Djuren, Abschn. 3, Gl. 4</span>. Die Idee ist alt: Filtern verhindert Aliasing, macht den Divergenzsatz anwendbar <span class="src">Manson &amp; Schaefer 2011</span> und macht die Funktion ableitbar <span class="src">Sun et al. 2024</span> <span class="src">Djuren, Abschn. 2</span>.</p>
+<div class="box derive"><span class="lbl">🧮 Herleitung in vier Schritten</span><ol>
+<li><b>Statt eines Punktes eine Umgebung.</b> Wir fragen nicht nur \(\mathbf x\), sondern alle Punkte \(\mathbf x'\) in der Nähe.</li>
+<li><b>Gewichte.</b> Jeder Nachbar \(\mathbf x'\) bekommt ein Gewicht \(k(\mathbf x-\mathbf x')\). Es hängt nur vom Versatz \(\mathbf x-\mathbf x'\) ab, also ist das Fenster überall gleich, nur verschoben.</li>
+<li><b>Gewichtete Summe.</b> Wir zerlegen den Raum in winzige Stückchen \(dA(\mathbf x')\) und summieren „Gewicht × Wert × Stückchengröße“. Für unendlich kleine Stückchen ist diese Summe das Integral.</li>
+<li><b>Ergebnis.</b> Das Ergebnis heißt Faltung (convolution) \(\tilde w=k*w\). Wenn sich die Haut ein wenig bewegt, ändert sich nur ein kleiner Teil der Fläche unter dem Fenster. Also ändert sich \(\tilde w\) <i>stetig</i>.</li></ol></div>
+<div class="box mind"><span class="lbl">🧠 Bild im Kopf: Gl. 4</span>
+Leg ein <b>Milchglas-Fenster</b> mit Mittelpunkt \(\mathbf x\) auf die Winding-Number-Karte und schau, welche mittlere Farbe durchscheint. \(\mathbf x'\) ist ein Finger, der über alle Stellen unter dem Fenster fährt. \(k(\mathbf x-\mathbf x')\) sagt, wie klar das Glas an dieser Stelle ist. Beim <b>Box-Kern</b> ist es überall gleich klar und hat scharfe Kanten. Beim <b>Gauß-Kern</b> ist es in der Mitte klar und wird nach außen trüb. Mit Box-Kern in Voxelgröße ist \(\tilde w\) genau der <b>Füllgrad des Voxels</b>.</div>
+<div class="demo" data-demo="window"><span class="lbl">② Interaktiv · Das Fenster \(k(\mathbf x-\mathbf x')\) über der Form</span>
+<canvas width="760" height="360"></canvas>
+<div class="controls"><select data-opt="k"><option value="box">Box-Kern (Djuren)</option><option value="gau">Gauß-Kern (GauWN)</option></select>
+<label>Fenstergröße <input type="range" min="0.3" max="2.4" step="0.01" value="1" data-opt="s"></label>
+<label><input type="checkbox" data-opt="field"> \(\tilde w\) überall zeigen</label></div>
+<div class="readout" data-out></div>
+<p class="cap">Zieh den Mittelpunkt \(\mathbf x\) (violett) und die Eckpunkte der Form. Beim Box-Kern wird \(\tilde w\) exakt als Fläche (Form ∩ Fenster) / Fensterfläche berechnet, beim Gauß-Kern numerisch auf einem 41×41-Raster. „\(\tilde w\) überall“ zeigt das Box-gefilterte Feld: Die harte Kante wird zu einem weichen Übergang.</p></div>
+<div class="box formula"><span class="lbl">③ Formel (Gl. 4)</span>
+$$\tilde w(\mathbf x)=\int_{\mathbb R^n}k(\mathbf x-\mathbf x')\,w(\mathbf x')\,dA(\mathbf x')$$
+<div class="legend">
+<div>\(\tilde w(\mathbf x)\)</div><div>gefilterte (geglättete) Winding Number am Punkt \(\mathbf x\)</div>
+<div>\(\mathbf x'\)</div><div>Integrationsvariable: läuft über den ganzen Raum \(\mathbb R^n\)</div>
+<div>\(k(\mathbf x-\mathbf x')\)</div><div>Kern (kernel): Gewicht des Punktes \(\mathbf x'\) für den Wert bei \(\mathbf x\); hängt nur vom Versatz ab</div>
+<div>\(w(\mathbf x')\)</div><div>die ungefilterte, stückweise konstante Winding Number</div>
+<div>\(dA(\mathbf x')\)</div><div>Flächen- bzw. Volumenelement um \(\mathbf x'\) (das Paper schreibt auch im 3D \(dA\))</div>
+</div><span class="src">Djuren, Gl. 4</span></div>
+
+<h3 id="k10-energy">Abschn. 3: Das eigentliche Optimierungsproblem (Gl. 5)</h3>
+<div class="row">
+<div class="box mind"><span class="lbl">🧠 Bild im Kopf: \(\mathbf W\in\mathbb R^{d_1\times\dots\times d_n}\)</span>
+\(\mathbf W\) ist ein <b>Zauberwürfel aus Zahlen</b>: \(d_1\cdot d_2\cdot d_3\) kleine Würfel, jeder mit seinem Füllgrad \(\tilde w(\mathbf x_{\mathbf i})\) beschriftet. In PyTorch ist es ein Tensor der Form <code>(d1, d2, d3)</code>. Die Energie \(E\) frisst den ganzen Würfel und spuckt eine Zahl aus. Der Weg ist also: Regler → Haut → Zahlenwürfel → eine Zahl.</div>
+<svg class="figsvg" viewBox="0 0 420 200" style="flex:1 1 320px">
+<g font-size="13"><g stroke="#94a3b8">
+<rect x="20" y="30" width="34" height="34" fill="#f1f5f9"/><rect x="54" y="30" width="34" height="34" fill="#bfdbfe"/><rect x="88" y="30" width="34" height="34" fill="#93c5fd"/><rect x="122" y="30" width="34" height="34" fill="#f1f5f9"/>
+<rect x="20" y="64" width="34" height="34" fill="#bfdbfe"/><rect x="54" y="64" width="34" height="34" fill="#3b82f6"/><rect x="88" y="64" width="34" height="34" fill="#3b82f6"/><rect x="122" y="64" width="34" height="34" fill="#dbeafe"/>
+<rect x="20" y="98" width="34" height="34" fill="#dbeafe"/><rect x="54" y="98" width="34" height="34" fill="#3b82f6"/><rect x="88" y="98" width="34" height="34" fill="#1e40af"/><rect x="122" y="98" width="34" height="34" fill="#bfdbfe"/>
+<rect x="20" y="132" width="34" height="34" fill="#f1f5f9"/><rect x="54" y="132" width="34" height="34" fill="#dbeafe"/><rect x="88" y="132" width="34" height="34" fill="#bfdbfe"/><rect x="122" y="132" width="34" height="34" fill="#f1f5f9"/></g>
+<g text-anchor="middle" font-size="10.5"><text x="37" y="51">0</text><text x="71" y="51">0,3</text><text x="105" y="51">0,5</text><text x="139" y="51">0</text><text x="37" y="85">0,3</text><text x="71" y="85" fill="#fff">1</text><text x="105" y="85" fill="#fff">1</text><text x="139" y="85">0,2</text><text x="37" y="119">0,2</text><text x="71" y="119" fill="#fff">1</text><text x="105" y="119" fill="#fff">2</text><text x="139" y="119">0,3</text><text x="37" y="153">0</text><text x="71" y="153">0,2</text><text x="105" y="153">0,3</text><text x="139" y="153">0</text></g>
+<text x="12" y="190">W (hier 4×4): eine Zahl pro Voxel</text>
+<path d="M175,98H245" stroke="#7c3aed" stroke-width="2.5" marker-end="url(#m10a)"/><text x="210" y="88" text-anchor="middle" fill="#5b21b6">E(·)</text>
+<rect x="260" y="70" width="140" height="56" rx="10" fill="#f5f3ff" stroke="#7c3aed"/><text x="330" y="96" text-anchor="middle" font-weight="700">E(W) = 0,82</text><text x="330" y="114" text-anchor="middle" font-size="11.5">eine einzige Zahl</text></g></svg>
+</div>
+<div class="box formula"><span class="lbl">③ Formel (Gl. 5)</span>
+$$\boldsymbol\theta^\star=\arg\min_{\boldsymbol\theta}E(\mathbf W),\qquad \mathbf W\in\mathbb R^{d_1\times\dots\times d_n},\qquad \mathbf W_{\mathbf i}=\tilde w(\mathbf x_{\mathbf i})$$
+<div class="legend">
+<div>\(\boldsymbol\theta^\star\)</div><div>die beste Reglerstellung</div>
+<div>\(\mathbf W\)</div><div>das Voxelgitter der <i>gefilterten</i> Winding Numbers</div>
+<div>\(\mathbf W_{\mathbf i}\)</div><div>Eintrag mit Multi-Index \(\mathbf i\): \(\tilde w\) am Voxelzentrum</div>
+</div><span class="src">Djuren, Gl. 5</span></div>
+<div class="box mind"><span class="lbl">🧠 Bild im Kopf: Was bisher fehlt</span>
+Wir können jetzt rechnen: Regler → \(\mathbf W\) → \(E\). Für den Gradienten fehlt der Rückweg: Wie ändert sich jeder Eintrag von \(\mathbf W\), wenn ein Regler sich bewegt? Das ist \(\partial_{\boldsymbol\theta}\tilde w(\mathbf x)\), das Thema von Abschn. 3.1.</div>
+<h3 id="k10-moving">Abschn. 3.1: Warum man nicht einfach „unter dem Integral“ ableiten darf (Gl. 6–7)</h3>
+<p>Gesucht ist die Ableitung von Gl. 4. Das Paper schreibt sie als Gl. 6 hin und warnt sofort: <i>„simply differentiating under the integral would be incorrect since the discontinuities of the integrand move with θ“</i> <span class="src">Djuren, Abschn. 3.1</span>. Der Box-Kern hat zwar ebenfalls Kanten, aber die bewegen sich nicht, denn \(\boldsymbol\theta\) verändert weder den Kern noch das Gitter. Wandernde Sprünge kommen nur von \(w\). Sun et al. haben das Problem in 2D mit einer Heaviside-Zerlegung und Gauß-Kern gelöst. Djuren nimmt stattdessen das <b>Reynolds-Transporttheorem</b> (Reynolds transport theorem), wie im differenzierbaren Rendering <span class="src">Zhang et al. 2019</span>. Das funktioniert in jeder Dimension <span class="src">Djuren, Abschn. 3.1</span>.</p>
+<div class="box derive"><span class="lbl">🧮 Das kleinste Beispiel, an dem man den Fehler sieht</span>
+Nimm \(f(\theta)=\int_0^{\theta}1\,dx=\theta\). Die richtige Ableitung ist \(f'(\theta)=1\). Leitet man „unter dem Integral“ ab, bekommt man \(\int_0^\theta\partial_\theta 1\,dx=0\), weil der Integrand 1 gar nicht von \(\theta\) abhängt. Das ist falsch. Die ganze Änderung steckt in der <b>wandernden Grenze</b> \(x=\theta\): Pro Schritt \(d\theta\) kommt ein Streifen der Breite \(d\theta\) mit Höhe 1 dazu. Bei Gl. 4 ist es genauso: \(w\) ist innerhalb jeder Region konstant, nur die Regionsgrenzen wandern.</div>
+<div class="box mind"><span class="lbl">🧠 Bild im Kopf: Gl. 7, die Regionen \(D_i\)</span>
+Stell dir die Winding-Number-Karte als <b>politische Landkarte</b> vor. Jedes Land \(D_i\) hat eine feste Zahl \(w_i\) (0 im Meer, 1 im Inland, 2 dort, wo sich die Haut doppelt um den Punkt wickelt). Bewegst du \(\boldsymbol\theta\), verschieben sich nur die <b>Grenzen</b>, die Länder behalten ihre Zahl. Deshalb kann man das Integral über den ganzen Raum in eine Summe über Länder zerlegen. In jedem Land ist \(w=w_i\) eine Konstante.</div>
+<div class="demo" data-demo="regions"><span class="lbl">② Interaktiv · Regionen \(D_i\) und ihre Wände \(\partial D_{i,j}\) an einer echten, sich selbst überlappenden Kurve</span>
+<canvas width="760" height="420"></canvas>
+<div class="controls"><select data-opt="mode"><option value="reg">Regionen D_i mit ihren Werten w_i (Gl. 7)</option><option value="wall">Gemeinsame Wände: links | rechts (Gl. 11–13)</option></select></div>
+<div class="readout" data-out></div>
+<p class="cap">Zieh die Eckpunkte. Die Regionen werden aus dem echten Winding-Number-Feld berechnet (Flood-Fill auf einem Pixelraster). Im Wand-Modus wird an jedem Kurvenstück \(w\) direkt links und rechts gemessen. Links ist die Innenseite, rechts die Seite, in die die Normale zeigt.</p></div>
+<div class="box formula"><span class="lbl">③ Formel (Gl. 6 und 7)</span>
+$$\partial_{\boldsymbol\theta}\tilde w(\mathbf x)=\partial_{\boldsymbol\theta}\int_{\mathbb R^n}k(\mathbf x-\mathbf x')\,w(\mathbf x')\,dA(\mathbf x')\qquad(6)$$
+$$\partial_{\boldsymbol\theta}\tilde w(\mathbf x)=\sum_i\partial_{\boldsymbol\theta}\int_{D_i}k(\mathbf x-\mathbf x')\,w_i\,dA(\mathbf x')\qquad(7)$$
+<div class="legend">
+<div>\(D_i\)</div><div>Region, in der \(w\) konstant ist; die \(D_i\) zerlegen den ganzen Raum (partition)</div>
+<div>\(w_i\)</div><div>der konstante Wert von \(w\) in \(D_i\) (eine ganze Zahl)</div>
+</div><span class="src">Djuren, Gl. 6–7</span></div>
+
+<h3 id="k10-reynolds">Abschn. 3.1: Reynolds-Transporttheorem, nur der wandernde Rand zählt (Gl. 8–9)</h3>
+<p>Für eine Region, die sich mit \(\boldsymbol\theta\) bewegt, zerlegt das Reynolds-Transporttheorem die Ableitung in zwei Teile <span class="src">Djuren, Gl. 8</span>. Der <b>Innen-Term</b> erfasst, wie sich der Integrand an festen Orten ändert. Der <b>Rand-Term</b> erfasst, wie viel der wandernde Rand neu überstreicht.</p>
+<div class="box formula"><span class="lbl">③ Formel (Gl. 8)</span>
+$$\partial_{\boldsymbol\theta}\!\int_{D_i}\!k(\mathbf x-\mathbf x')w_i\,dA(\mathbf x')=\underbrace{\int_{D_i\setminus\partial D_i}\!\partial_{\boldsymbol\theta}\big(k(\mathbf x-\mathbf x')w_i\big)\,dA(\mathbf x')}_{\text{Innen-Term}}+\underbrace{\int_{\partial D_i}\!\partial_{\boldsymbol\theta}\mathbf x_b^{\mathsf T}\,\mathbf n_i(\mathbf x_b)\,k(\mathbf x-\mathbf x_b)\,w_i\,d\ell(\mathbf x_b)}_{\text{Rand-Term}}$$
+<div class="legend">
+<div>\(D_i\setminus\partial D_i\)</div><div>das Innere der Region ohne ihren Rand</div>
+<div>\(\mathbf x_b\)</div><div>ein Punkt auf dem Rand \(\partial D_i\) („b“ für boundary)</div>
+<div>\(\partial_{\boldsymbol\theta}\mathbf x_b\)</div><div>Geschwindigkeit des Randpunkts, wenn \(\boldsymbol\theta\) sich ändert</div>
+<div>\(\mathbf n_i(\mathbf x_b)\)</div><div>nach außen zeigende Normale <i>der Region</i> \(D_i\)</div>
+<div>\(\partial_{\boldsymbol\theta}\mathbf x_b^{\mathsf T}\mathbf n_i\)</div><div>Normalgeschwindigkeit: nur der Anteil senkrecht zum Rand</div>
+<div>\(d\ell(\mathbf x_b)\)</div><div>Längenelement (2D) bzw. Flächenelement (3D) des Randes</div>
+</div><span class="src">Djuren, Gl. 8</span></div>
+<div class="box mind"><span class="lbl">🧠 Bild im Kopf: die beiden Terme</span>
+<b>Innen-Term</b>: Eine Pfütze, auf der Laub liegt (das Laub ist \(k\cdot w_i\)). Ändert sich das Laub an Ort und Stelle? Nein: \(k\) hängt nicht von \(\boldsymbol\theta\) ab und \(w_i\) ist eine feste Zahl. Also ist der Innen-Term <b>null</b>.<br>
+<b>Rand-Term</b>: Die Pfütze breitet sich aus. Wo der Rand nach außen wandert, kommt neues Laub hinzu; wo er nach innen wandert, fällt Laub heraus. Wie viel, hängt nur davon ab, wie schnell der Rand an dieser Stelle <i>senkrecht</i> zu sich selbst wandert.</div>
+<div class="box mind"><span class="lbl">🧠 Bild im Kopf: Normalgeschwindigkeit \(\partial_{\boldsymbol\theta}\mathbf x_b^{\mathsf T}\mathbf n\)</span>
+Schieb ein <b>Lineal über den Tisch</b>. Schiebst du es quer zu seiner Kante, überstreicht es neue Fläche. Schiebst du es entlang seiner Kante, überstreicht es gar nichts Neues. Das Skalarprodukt mit \(\mathbf n\) wirft den Längs-Anteil weg und behält nur den Quer-Anteil. Deshalb zählt auch nicht, ob die Vertices „entlang der Fläche rutschen“.</div>
+<div class="demo" data-demo="normalvel"><span class="lbl">② Interaktiv · Rand-Term = überstrichene Fläche (Gl. 8 mit \(k\cdot w=1\))</span>
+<canvas width="760" height="380"></canvas>
+<div class="controls"><label>Richtung, in die der Vertex bewegt wird <input type="range" min="0" max="360" step="1" value="60" data-opt="ang"></label><label><input type="checkbox" data-opt="tan" checked> Tangential-Anteil zeigen (grau)</label></div>
+<div class="readout" data-out></div>
+<p class="cap">Klick auf einen Eckpunkt, um ihn auszuwählen. Entlang seiner beiden Kanten siehst du die Geschwindigkeit der Randpunkte: 1 am Vertex, 0 am anderen Kantenende. Grün und rot ist der Normalanteil (nach außen bzw. innen), grau der Tangentialanteil, der nichts beiträgt. Der Readout vergleicht \(\int v_n\,d\ell\) mit finiten Differenzen der Polygonfläche.</p></div>
+<p>Weil der Innen-Term verschwindet, bleibt nur der Rand-Term <span class="src">Djuren, Gl. 9</span>:</p>
+<div class="box formula"><span class="lbl">③ Formel (Gl. 9)</span>
+$$\partial_{\boldsymbol\theta}\tilde w(\mathbf x)=\sum_i\int_{\partial D_i}\partial_{\boldsymbol\theta}\mathbf x_b^{\mathsf T}\,\mathbf n_i(\mathbf x_b)\,k(\mathbf x-\mathbf x_b)\,w_i\,d\ell(\mathbf x_b)$$
+<span class="src">Djuren, Gl. 9</span></div>
+<div class="box fact"><span class="lbl">📄 Fußnote 2: Was hier einfacher ist als beim differenzierbaren Rendering</span>
+(1) Der Innen-Term verschwindet, denn der Integrand ist pro Region konstant. Beim Rendering ist das nicht so. (2) Beim Rendering sind die Sprünge die <b>Silhouetten</b>, also die Konturen eines Objekts aus Sicht der Kamera. Die muss man erst mühsam finden. Hier ist die <b>gesamte Fläche</b> die Sprungstelle, also ist das Abtasten der Sprünge trivial: Man tastet einfach die Fläche ab <span class="src">Djuren, Fußnote 2</span>.</div>
+<p>Übrig bleibt ein praktisches Problem: Die Ränder \(\partial D_i\) aus Gl. 9 muss man kennen. Mit Selbstüberschneidungen sind das komplizierte Puzzleteile. Die nächsten zwei Schritte zeigen, dass man sie gar nicht braucht.</p>
+
+<h3 id="k10-special">Abschn. 3.1: Sonderfall ohne Selbstüberschneidung (Gl. 10)</h3>
+<div class="row">
+<div class="box mind"><span class="lbl">🧠 Bild im Kopf: jede Hautstelle wird zweimal gezählt</span>
+Ohne Selbstüberschneidung gibt es nur zwei Länder: <b>Innen</b> \(D_1=\Omega\) mit \(w_1=1\) und <b>Außen</b> \(D_2=\mathbb R^n\setminus\Omega\) mit \(w_2=0\). Beide grenzen an dieselbe Haut. Ihre Außen-Normalen zeigen in entgegengesetzte Richtungen: \(\mathbf n_1=\mathbf n\), \(\mathbf n_2=-\mathbf n\). In Gl. 9 taucht jede Hautstelle also zweimal auf: einmal mit \(+v_n\cdot 1\), einmal mit \(-v_n\cdot 0\). Zusammen bleibt \(v_n\,(w_1-w_2)=v_n\).</div>
+<svg class="figsvg" viewBox="0 0 420 220" style="flex:1 1 320px">
+<path d="M0,0H420V220H0Z" fill="#f3f4f6"/><path d="M0,0H210C170,60 250,140 205,220H0Z" fill="#3b82f6" fill-opacity=".35"/>
+<path d="M210,0C170,60 250,140 205,220" fill="none" stroke="#f97316" stroke-width="5"/>
+<g font-size="14"><text x="40" y="70" fill="#1e40af" font-weight="700">D₁ = Ω,  w₁ = 1</text><text x="275" y="70" fill="#4b5563" font-weight="700">D₂ = ℝⁿ∖Ω,  w₂ = 0</text></g>
+<path d="M214,110H284" stroke="#7c3aed" stroke-width="3" marker-end="url(#m10a)"/><text x="232" y="96" font-size="13" fill="#5b21b6">n₁ = n</text>
+<path d="M206,126H136" stroke="#7c3aed" stroke-width="3" marker-end="url(#m10a)"/><text x="140" y="146" font-size="13" fill="#5b21b6">n₂ = −n</text>
+<text x="210" y="205" font-size="13" text-anchor="middle">Beitrag: v_n·w₁ + (−v_n)·w₂ = v_n·(1 − 0)</text></svg>
+</div>
+<div class="box formula"><span class="lbl">③ Formel (Gl. 10)</span>
+$$\partial_{\boldsymbol\theta}\tilde w(\mathbf x)=\int_{\partial\Omega}\partial_{\boldsymbol\theta}\mathbf x_b^{\mathsf T}\,\mathbf n(\mathbf x_b)\,k(\mathbf x-\mathbf x_b)\,(w_1-w_2)\,d\ell(\mathbf x_b),\qquad w_1=1,\ w_2=0$$
+<div class="legend"><div>\(\mathbf n\)</div><div>Normale der Fläche \(\partial\Omega\) (nach außen)</div><div>\(w_1-w_2\)</div><div>Sprung der Winding Number über die Haut, hier \(1-0=1\)</div></div>
+<span class="src">Djuren, Gl. 10</span></div>
+
+<h3 id="k10-general">Abschn. 3.1: Allgemeiner Fall, die Winding Numbers kürzen sich heraus (Gl. 11–14)</h3>
+<p>Mit Selbstüberschneidungen gibt es viele Länder. Das Paper zerlegt den Rand jedes Landes in die Wandstücke zu seinen Nachbarn <span class="src">Gl. 11</span> und sortiert die Summe nach diesen Wandstücken um <span class="src">Gl. 12</span>.</p>
+<div class="box derive"><span class="lbl">🧮 Herleitung in vier Schritten</span><ol>
+<li><b>Wände benennen (Gl. 11).</b> Der Rand von Land \(i\) besteht aus seinen Wänden zu allen Nachbarländern: \(\partial D_i=\bigcup_{j\ne i}\partial D_{i,j}\).</li>
+<li><b>Nach Wänden umsortieren (Gl. 12).</b> In Gl. 9 wird über Länder und dann über ihren Rand summiert. Jetzt summiert man über Länder und dann über deren Wände.</li>
+<li><b>Doppelte Überdeckung (double cover).</b> Jede Wand kommt zweimal vor: als \(\partial D_{i,j}\) mit der Normale \(\mathbf n_i\) und als \(\partial D_{j,i}\) mit \(\mathbf n_j=-\mathbf n_i\). Fasst man beide zusammen, bleibt pro Wand der Faktor \((w_i-w_j)\) (Gl. 13). Die Benennung wählt man so, dass \(\mathbf n_i\) mit der Flächennormale \(\mathbf n\) übereinstimmt.</li>
+<li><b>Der Sprung ist immer 1.</b> Geht man an einer geschlossenen Fläche in Richtung der Normale hindurch, fällt die Winding Number um genau 1. Also ist \(w_i=w_j+1\), der Faktor ist überall 1, und alle \(w_i\) verschwinden aus der Formel (Gl. 14).</li></ol></div>
+<div class="box mind"><span class="lbl">🧠 Bild im Kopf: Hausnummern an einer Wand</span>
+Stell dir die Länder als <b>Räume eines Hauses</b> vor und die Haut als Wände. Auf beiden Seiten jeder Wand hängt ein Schild mit der Winding Number des Raums. Egal welche Wand du nimmst: Auf der Seite, von der die Normale wegzeigt, steht <b>genau 1 mehr</b>. Deshalb muss man nie wissen, welche Räume es gibt, man braucht keinen Grundriss. Man läuft einfach die Wände ab, also die Dreiecke des Meshes. Das ist die eigentliche Pointe von Abschn. 3.1.</div>
+<div class="box formula"><span class="lbl">③ Formel (Gl. 11–14)</span>
+$$\partial D_i=\bigcup_{j\ne i}\partial D_{i,j}\qquad(11)$$
+$$\partial_{\boldsymbol\theta}\tilde w(\mathbf x)=\sum_i\sum_{j\ne i}\int_{\partial D_{i,j}}\partial_{\boldsymbol\theta}\mathbf x_b^{\mathsf T}\,\mathbf n_i(\mathbf x_b)\,k(\mathbf x-\mathbf x_b)\,w_i\,d\ell(\mathbf x_b)\qquad(12)$$
+$$\partial_{\boldsymbol\theta}\tilde w(\mathbf x)=\sum_{\text{Wände }\{i,j\}}\int_{\partial D_{i,j}}\partial_{\boldsymbol\theta}\mathbf x_b^{\mathsf T}\,\mathbf n_i(\mathbf x_b)\,k(\mathbf x-\mathbf x_b)\,(w_i-w_j)\,d\ell(\mathbf x_b)\qquad(13)$$
+$$w_i=w_j+1\ \Longrightarrow\ \boxed{\ \partial_{\boldsymbol\theta}\tilde w(\mathbf x)=\int_{\partial\Omega}\partial_{\boldsymbol\theta}\mathbf x_b^{\mathsf T}\,\mathbf n(\mathbf x_b)\,k(\mathbf x-\mathbf x_b)\,d\ell(\mathbf x_b)\ }\qquad(14)$$
+<div class="legend">
+<div>\(\partial D_{i,j}\)</div><div>die gemeinsame Wand von \(D_i\) und \(D_j\) (ein Teil der Fläche \(\partial\Omega\))</div>
+<div>\(w_i-w_j\)</div><div>Sprung der Winding Number über diese Wand; für geschlossene Flächen immer 1</div>
+<div>Gl. 14</div><div>Integral über die <i>ganze Fläche</i>; hängt nicht mehr von den Winding Numbers ab</div>
+</div><span class="src">Djuren, Gl. 11–14</span> <span class="src">Notation von Gl. 13 hier vereinfacht</span></div>
+<div class="box fact"><span class="lbl">📄 Fußnote 3: Was, wenn zwei Hautstücke exakt aufeinanderliegen?</span>
+Eine Selbstüberschneidung mit Maß ungleich null (zwei Flächenstücke liegen deckungsgleich aufeinander) erzeugt eine Region \(D_i\) mit Volumen null, aber mit passender Winding Number. Die Herleitung gilt dann weiter <span class="src">Djuren, Fußnote 3</span>. Bild: zwei aufeinandergeklebte Blätter mit einem „Raum“ der Dicke 0 dazwischen.</div>
+<div class="box note"><span class="lbl">⚠️ Genau hier steckt „geschlossen“</span>
+Schritt 4 braucht zweierlei: dass \(w\) in jeder Region konstant ist, und dass der Sprung überall genau 1 beträgt. Bei einer <b>offenen</b> Fläche ist \(w\) außerhalb der Haut nicht stückweise konstant, sondern ändert sich stetig und hängt selbst von \(\boldsymbol\theta\) ab. Dann verschwindet schon der Innen-Term in Gl. 8 nicht mehr. Ausführlich in <a href="#k7">Kapitel 7</a>.</div>
+<h3 id="k10-steps">Abschn. 3.2: Vom Integral zum Gradienten in drei Schritten (Gl. 15)</h3>
+<p>Mit Gl. 4 und Gl. 14 lässt sich alles ausrechnen. Das Paper nennt drei Schritte <span class="src">Djuren, Abschn. 3.2</span>: (1) \(\tilde w\) an allen Voxelzentren schätzen (Gl. 4). (2) Die Energie auswerten und die <b>adjungierte Winding Number</b> (adjoint) \(\partial E/\partial\tilde w(\mathbf x_{\mathbf i})\) berechnen; das macht z. B. PyTorch. (3) Mit Gl. 15 den Gradienten nach \(\boldsymbol\theta\) zusammensetzen.</p>
+<div class="box mind"><span class="lbl">🧠 Bild im Kopf: die Adjungierte und Gl. 15</span>
+Nach Schritt 2 hängt an jedem Voxel ein <b>Zettel</b>: „Wäre ich ein bisschen voller, würde \(E\) um so viel steigen.“ Das ist \(\partial E/\partial\tilde w(\mathbf x_{\mathbf i})\). Gl. 14 sagt für jedes Voxel: „Wenn du Regler \(\theta\) drehst, werde ich so viel voller.“ Gl. 15 multipliziert pro Voxel die beiden Zahlen und addiert über alle Voxel. Das ist die Kettenregel aus Gl. 1, ausgeschrieben für ein Gitter: Zahnrad 2 sind die Zettel, Zahnrad 1 ist Gl. 14.</div>
+<div class="box formula"><span class="lbl">③ Formel (Gl. 15)</span>
+$$\partial_{\boldsymbol\theta}E=\sum_{\mathbf i}\frac{\partial E}{\partial\tilde w(\mathbf x_{\mathbf i})}\,\partial_{\boldsymbol\theta}\tilde w(\mathbf x_{\mathbf i})$$
+<div class="legend"><div>\(\frac{\partial E}{\partial\tilde w(\mathbf x_{\mathbf i})}\)</div><div>Adjungierte: Empfindlichkeit der Energie für Voxel \(\mathbf i\) (von Autograd)</div><div>\(\partial_{\boldsymbol\theta}\tilde w(\mathbf x_{\mathbf i})\)</div><div>Empfindlichkeit des Voxels für die Parameter (Gl. 14)</div></div>
+<span class="src">Djuren, Gl. 15</span></div>
+
+<h3 id="k10-mc">Abschn. 3.2: Monte-Carlo-Schätzer, Divergenzsatz und „Splatting“ (Gl. 16)</h3>
+<p>Als einfachen Referenz-Schätzer nennt das Paper Monte Carlo. Man zieht Punkte in jedem Voxel <b>geschichtet</b> (stratified, ein Punkt pro Unterzelle), berechnet dort \(w\) und mittelt. \(w\) an einem Punkt bekommt man durch <b>Strahl-Zählen</b> (ray counting): ein einziger Strahl in eine beliebige Richtung genügt, weil die Fläche geschlossen ist <span class="src">Djuren, Abschn. 3.2</span>. Für die Ableitung tastet man die <i>Fläche</i> ab, denn Gl. 14 ist ein Flächenintegral. Den Beitrag jedes Flächenpunkts verteilt man in die Voxel, deren Kern ihn erfasst. Das nennt das Paper <b>„splatting“</b>.</p>
+<div class="row">
+<div class="box mind"><span class="lbl">🧠 Bild im Kopf: geschichtet abtasten und splatten</span>
+<b>Geschichtet</b>: Statt 16 Dartpfeile blind auf ein Voxel zu werfen, teilst du es in 4×4 Kästchen und wirfst in jedes genau einen Pfeil. Dann klumpen die Proben nicht, und der Schätzer streut weniger.<br>
+<b>Splatten</b>: Statt dass jedes Voxel die ganze Fläche nach Beiträgen absucht, <b>kleckst</b> jeder Flächenpunkt seinen Beitrag wie einen Farbtropfen in die Voxel um sich herum. Das geht schnell, wenn der Kern klein ist (kompakter Träger).</div>
+<div class="box mind"><span class="lbl">🧠 Bild im Kopf: Divergenz und Divergenzsatz (Gl. 16)</span>
+Ein Vektorfeld \(\mathbf F\) ist eine <b>Strömung</b>, an jeder Stelle ein Pfeil. \(\nabla\cdot\mathbf F\) misst an einem Punkt, wie viel Wasser dort aus einer <b>Quelle</b> sprudelt. Der Divergenzsatz sagt: Alles, was innen sprudelt, muss durch die Haut hinausfließen. Statt alle Quellen im Volumen zu zählen, misst man den <b>Fluss durch die Haut</b> \(\int_{\partial\Omega}\mathbf F^{\mathsf T}\mathbf n\,d\ell\). Wählt man \(\mathbf F\) so, dass die Quellstärke gerade der Kern \(k\) ist, wird das Volumenintegral von Gl. 4 zu einem Flächenintegral.</div>
+</div>
+<div class="box formula"><span class="lbl">③ Formel (Gl. 16)</span>
+$$\tilde w(\mathbf x)=\int_{\partial\Omega}\mathbf F_{\mathbf x}(\mathbf x_b)^{\mathsf T}\,\mathbf n(\mathbf x_b)\,d\ell(\mathbf x_b)\qquad\text{mit}\qquad\nabla\cdot\mathbf F_{\mathbf x}(\mathbf x')=k(\mathbf x-\mathbf x')$$
+<div class="legend"><div>\(\mathbf F_{\mathbf x}\)</div><div>ein Vektorfeld, dessen Divergenz der um \(\mathbf x\) zentrierte Kern ist</div><div>\(\nabla\cdot\)</div><div>Divergenz: Summe der Ableitungen jeder Komponente nach ihrer eigenen Koordinate</div></div>
+<span class="src">Djuren, Gl. 16</span> <span class="src">Fußnote 4: der Beweis von Sun et al. gilt in jeder Dimension</span></div>
+<p>Tastet man dieses Flächenintegral naiv ab und splattet es in die Voxel, in denen \(\mathbf F\ne0\) ist, entstehen <b>balkenförmige Artefakte</b>, wie Sun et al. beobachtet haben <span class="src">Djuren, Abschn. 3.2</span> <span class="src">Sun et al. 2024, Abb. 14</span>. Abschn. 3.3 umgeht das mit einer exakten Lösung für stückweise lineare Flächen.</p>
+<div class="box hyp"><span class="lbl">💡 Idee, nicht bewiesen · Eigene Herleitung: Schattenkörper sind Gl. 16 mit einem „senkrechten“ Feld</span>
+Das Paper gibt kein \(\mathbf F\) für den Box-Kern an. Ein naheliegendes ist: \(\mathbf F_{\mathbf x}(\mathbf x')=\mathbf e_n\int_{g}^{x'_n}k\big(\mathbf x-(x'_1,\dots,x'_{n-1},s)\big)\,ds\). Es zeigt überall senkrecht nach oben (Richtung \(\mathbf e_n\)), und seine Stärke ist die Kernmasse in der Säule zwischen der Grundebene \(g\) und \(\mathbf x'\). Seine Divergenz ist \(\partial_{x'_n}F_n=k(\mathbf x-\mathbf x')\), wie Gl. 16 verlangt. Eingesetzt sammelt jeder Hautpunkt mit dem Vorzeichen von \(n_n\) die Kernmasse unter sich ein. Das ist genau der signierte Schattenkörper ∩ Box aus Abschn. 3.3. Wenn das stimmt, ist der Scanline-Algorithmus die exakte Auswertung von Gl. 16 für genau dieses Feld.</div>
+
+<h3 id="k10-ray">Abschn. 3.3: Winding Number durch Strahl-Zählen, zerlegt in Patches (Gl. 17)</h3>
+<p>Für geschlossene Flächen gilt der klassische Satz <span class="src">Grünbaum &amp; Shephard 1990</span>: Man schießt von \(\mathbf x\) einen Strahl in Richtung \(\mathbf d_{\mathbf x}\) und zählt die Durchstoßpunkte mit Vorzeichen. Es zählt +1, wenn \(\mathbf d^{\mathsf T}\mathbf n\gt0\) (Strahl tritt in Normalenrichtung aus), und −1, wenn \(\mathbf d^{\mathsf T}\mathbf n\lt0\). Zerlegt man die Fläche in disjunkte Stücke (Patches) \(p_i\), zerfällt die Zählung in eine Summe <span class="src">Djuren, Gl. 17</span>.</p>
+<div class="box formula"><span class="lbl">③ Formel (Gl. 17)</span>
+$$w(\mathbf x)=\mathrm{sgnInt}(\mathbf x,\mathbf d_{\mathbf x},\partial\Omega)=\sum_i\mathrm{sgnInt}(\mathbf x,\mathbf d_{\mathbf x},p_i)=\sum_i w_i(\mathbf x,\mathbf d_{\mathbf x})$$
+<div class="legend">
+<div>\(\mathbf d_{\mathbf x}\)</div><div>Richtung des Strahls von \(\mathbf x\) aus</div>
+<div>\(\mathrm{sgnInt}\)</div><div>Summe der vorzeichenbehafteten Schnitte (signed intersections) des Strahls mit einer Menge</div>
+<div>\(p_i\)</div><div>Patches: disjunkte Stücke, deren Vereinigung \(\partial\Omega\) ist (bei Meshes: Dreiecke)</div>
+<div>\(w_i(\mathbf x,\mathbf d_{\mathbf x})\)</div><div>Beitrag des Patches \(p_i\) zur Zählung</div>
+</div><span class="src">Djuren, Gl. 17</span></div>
+<p>Das Paper trifft zwei Entscheidungen <span class="src">Abschn. 3.3</span>: <b>(1)</b> \(\mathbf d_{\mathbf x}\) ist für alle \(\mathbf x\) dieselbe Richtung. <b>(2)</b> Jeder Patch wird von jedem Strahl in Richtung \(\mathbf d\) höchstens einmal getroffen. Das gilt für Dreiecke; Grenzfälle wie senkrecht stehende Dreiecke tragen später null bei <span class="src">Fußnote 5</span>. Dann ist \(w_i\in\{-1,0,1\}\) und stückweise konstant <span class="src">Abb. 3</span>. Praktisch nimmt man eine <b>Grundebene</b> und zwei Richtungen \(\mathbf d\) und \(-\mathbf d\), jeweils von der Ebene weg.</p>
+<div class="box mind"><span class="lbl">🧠 Bild im Kopf: Patch-Beiträge als Schattenkörper</span>
+Stell dir eine Sonne senkrecht über dem Boden vor; die Strahlen laufen parallel, als <b>orthografische Projektion</b>. Jedes Dreieck wirft einen Schatten auf die Grundebene. Der Raum zwischen Dreieck und Schatten ist sein <b>Schattenkörper</b> (shadow solid): ein Lichtvorhang, der senkrecht vom Dreieck zum Boden fällt. Ein Punkt in diesem Vorhang sieht das Dreieck genau einmal, wenn er von der Grundebene weg schaut, also ist sein Beitrag ±1. Ein Punkt außerhalb sieht es nie und bekommt 0. Das Vorzeichen kommt von der Normale: zeigt sie von der Grundebene weg, ist der Beitrag +1.</div>
+
+<h3 id="k10-box">Abschn. 3.3: Box-Filter und halboffene Boxen (Gl. 18–19)</h3>
+<p>Als Kern nimmt das Paper eine Box, die genau auf die Voxel passt. Dann ist \(\tilde w(\mathbf x_{\mathbf i})\) einfach der Mittelwert von \(w\) im Voxel <span class="src">Djuren, Gl. 18–19</span>. Das ist die Schlüsselidee aus Abschn. 2: Der Box-Filter nutzt das reguläre Gitter aus, sodass man keine Beschleunigungsstrukturen braucht.</p>
+<div class="box formula"><span class="lbl">③ Formel (Gl. 18 und 19)</span>
+$$\tilde w(\mathbf x_{\mathbf i})=\frac{1}{|\square_{\mathbf x_{\mathbf i}}|}\int_{\square_{\mathbf x_{\mathbf i}}}w(\mathbf x)\,dA(\mathbf x)\qquad(18)$$
+$$\square_{\mathbf x_{\mathbf i}}=\Big\{\mathbf y\ \Big|\ x_{\mathbf i,j}-\tfrac{l_j}{2}\le y_j\lt x_{\mathbf i,j}+\tfrac{l_j}{2}\ \text{ für alle } j\Big\}\qquad(19)$$
+<div class="legend">
+<div>\(\square_{\mathbf x_{\mathbf i}}\)</div><div>die Box (das Voxel) um das Zentrum \(\mathbf x_{\mathbf i}\)</div>
+<div>\(|\square_{\mathbf x_{\mathbf i}}|\)</div><div>ihr Volumen \(l_1\cdot l_2\cdot l_3\)</div>
+<div>\(\mathbf l=(l_1,\dots,l_n)\)</div><div>Seitenlängen; Voxel dürfen also Quader sein</div>
+<div>\(x_{\mathbf i,j},\ y_j\)</div><div>\(j\)-te Koordinate des Zentrums bzw. des Punkts \(\mathbf y\)</div>
+<div>\(\le\ \dots\ \lt\)</div><div>halboffen: unten/links inklusive, oben/rechts exklusive</div>
+</div><span class="src">Djuren, Gl. 18–19</span></div>
+<div class="box mind"><span class="lbl">🧠 Bild im Kopf: halboffen wie Grundstücke</span>
+Jedes Voxel besitzt seinen linken, vorderen und unteren Zaun, aber nicht den rechten, hinteren und oberen; die gehören dem Nachbarn. So gehört <b>jeder Punkt des Raums zu genau einem Voxel</b>, auch einer, der genau auf einer Grenze liegt. Nichts wird doppelt gezählt, nichts fällt durch die Ritzen.</div>
+<div class="box derive"><span class="lbl">🧮 Herleitung: Füllgrad = Summe der Schattenvolumen</span><ol>
+<li>Gl. 17 in Gl. 18 einsetzen: \(\tilde w(\mathbf x_{\mathbf i})=\frac1{|\square|}\int_\square\sum_p w_p\,dA=\sum_p\frac1{|\square|}\int_\square w_p\,dA\).</li>
+<li>\(w_p\) ist +1 oder −1 im Schattenkörper von \(p\) und 0 sonst. Das Integral ist also das <b>signierte Volumen von (Schattenkörper ∩ Voxel)</b>.</li>
+<li>Ergebnis: Füllgrad = Σ über Dreiecke (signiertes Volumen ihres Schattenkörpers im Voxel) / Voxelvolumen <span class="src">Abschn. 3.3</span>. Es gibt keine Strahlen und kein Monte Carlo mehr, nur Geometrie von Prismen.</li></ol></div>
+
+<h3 id="k10-algo">Abschn. 3.3: Der Algorithmus für Dreiecksnetze, Schritt für Schritt</h3>
+<div class="steps box simp"><span class="lbl">📄 Die Schritte aus dem Paper</span>
+<b>(1)</b> Grundebene \((x,y,0)\), Richtung \(\mathbf d=(0,0,1)\).<br>
+<b>(2)</b> Jedes Dreieck wird mit dem Gitter geschnitten. Es entstehen konvexe Polygone mit 3 bis 9 Ecken, jedes in genau einem Voxel. Sie werden <b>fächertrianguliert</b>: eine Ecke festhalten und die Kanten ablaufen, die diese Ecke nicht berühren. Das ergibt bis zu 7 Teildreiecke.<br>
+<b>(3)</b> Jedes Teildreieck trägt zu seinem Voxel \((i,j,k)\) und zu allen Voxeln darunter bis \((i,j,0)\) bei:<br>
+&nbsp;&nbsp;<b>(3.1)</b> Eigenes Voxel: signiertes Schattenvolumen minus das, was die Voxel darunter bekommen. Schattenvolumen = signierte projizierte Fläche × Höhe des Schwerpunkts.<br>
+&nbsp;&nbsp;<b>(3.2)</b> Jedes Voxel darunter: signierte Schattenfläche × Seitenlänge in \(\mathbf d\)-Richtung. Das ähnelt der Scan-Konvertierung (scan conversion).
+<span class="src">Djuren, Abschn. 3.3, Abb. 4</span></div>
+<div class="box mind"><span class="lbl">🧠 Bild im Kopf: warum „projizierte Fläche × Schwerpunkthöhe“?</span>
+Der Schattenkörper eines Dreiecks ist ein <b>schräg abgeschnittenes Prisma</b>: unten der Schatten, oben das Dreieck. Die Höhe über dem Boden ist über dem Schatten eine lineare Funktion. Das Volumen ist Grundfläche × <i>mittlere</i> Höhe, und der Mittelwert einer linearen Funktion über einem Dreieck ist ihr Wert im Schwerpunkt: \(\bar z=(z_1+z_2+z_3)/3\). Die Voxel darunter sind komplett vom Vorhang durchsetzt, also bekommen sie Fläche × volle Voxelhöhe.</div>
+<div class="demo" data-demo="prism"><span class="lbl">② Interaktiv (3D) · Ein Dreieck, sein Schattenkörper und die Voxelsäule darunter</span>
+<div class="three"><div class="msg">3D-Szene wird geladen … (braucht Internet für Three.js)</div></div>
+<div class="controls">
+<label>Höhe z₁ <input type="range" min="2.05" max="2.95" step="0.01" value="2.25" data-opt="z1"></label>
+<label>z₂ <input type="range" min="2.05" max="2.95" step="0.01" value="2.85" data-opt="z2"></label>
+<label>z₃ <input type="range" min="2.05" max="2.95" step="0.01" value="2.55" data-opt="z3"></label>
+<label><input type="checkbox" data-opt="flip"> Dreieck umdrehen (Normale nach unten)</label></div>
+<div class="readout" data-out></div>
+<p class="cap">Voxel mit Seitenlänge 1, das Dreieck liegt im Voxel \(k=2\). Dunkel: der Teil des Schattenkörpers im eigenen Voxel (Schritt 3.1). Hell: die zwei Voxel darunter, die komplett durchsetzt sind (Schritt 3.2). Grün heißt positiver, rot negativer Beitrag. Die Szene lässt sich mit der Maus drehen.</p></div>
+<div class="demo" data-demo="clip"><span class="lbl">② Interaktiv · Schritt (2): Dreieck ∩ Gitter → konvexe Polygone → Fächer-Triangulierung</span>
+<canvas width="760" height="400"></canvas>
+<div class="readout" data-out></div>
+<p class="cap">Draufsicht auf ein Dreieck, das in einer einzigen Voxelschicht liegt; zieh die Ecken. Jede Schnittebene kann einem konvexen Polygon höchstens eine Ecke hinzufügen. In der Draufsicht schneiden 4 Ebenen (max. 3 + 4 = 7 Ecken), beim Würfel in 3D 6 Ebenen (max. 3 + 6 = 9 Ecken, wie im Paper). Ein Fächer aus einem \(k\)-Eck liefert \(k-2\) Dreiecke, also höchstens 7.</p></div>
+<p>Die 2D-Version dieses Algorithmus (Abb. 4) kannst du in <a href="#k1-shadow">Kapitel 1</a> Schritt für Schritt abspielen. Das Verfahren ist ein Sonderfall der Scanline-Rasterisierung von Manson &amp; Schaefer 2013, erweitert auf 3D <span class="src">Abschn. 3.3</span>.</p>
+<div class="box fact"><span class="lbl">📄 Zwei Beschleunigungen aus dem Paper</span>
+(a) Die Grundebene in die <b>Mitte</b> des Gitters legen und für die obere Hälfte \(\mathbf d\), für die untere \(-\mathbf d\) nehmen. Das halbiert die mittlere Strecke, die Beiträge nach unten wandern müssen. (b) Die Beiträge nach unten erst <b>sammeln</b> und in einem zweiten Durchgang verteilen <span class="src">Abschn. 3.3</span>. Bild dazu: Statt jeden Beitrag einzeln die Treppe hinunterzutragen, legt man pro Etage einen Zettel hin und läuft am Ende einmal pro Säule von oben nach unten, wobei man die Zettel aufsummiert.</div>
+<h3 id="k10-deriv">Abschn. 3.3: Die Ableitung pro Dreieck und der Faktor ⅓ (Gl. 20–23)</h3>
+<p>Jetzt wird der Box-Kern in Gl. 14 eingesetzt. Er ist \(1/|\square|\) innerhalb des Voxels und 0 außerhalb. Damit bleibt nur das Stück Fläche übrig, das im Voxel liegt <span class="src">Djuren, Gl. 20–21</span>.</p>
+<div class="box formula"><span class="lbl">③ Formel (Gl. 20 und 21)</span>
+$$\partial_{\boldsymbol\theta}\tilde w(\mathbf x_{\mathbf i})=\int_{\partial\Omega}\partial_{\boldsymbol\theta}\mathbf x_b^{\mathsf T}\mathbf n(\mathbf x_b)\,k_\square(\mathbf x_{\mathbf i}-\mathbf x_b)\,d\ell(\mathbf x_b)=\frac{1}{|\square_{\mathbf x_{\mathbf i}}|}\int_{\partial\Omega\cap\square_{\mathbf x_{\mathbf i}}}\partial_{\boldsymbol\theta}\mathbf x_b^{\mathsf T}\,\mathbf n(\mathbf x_b)\,d\ell(\mathbf x_b)$$
+<div class="legend"><div>\(k_\square\)</div><div>Box-Kern: \(1/|\square|\) im Voxel, sonst 0 (Bezeichnung von mir)</div><div>\(\partial\Omega\cap\square_{\mathbf x_{\mathbf i}}\)</div><div>das Stück Haut, das im Voxel liegt</div></div>
+<span class="src">Djuren, Gl. 20–21</span></div>
+<div class="box mind"><span class="lbl">🧠 Bild im Kopf: Gl. 21</span>
+Ein Voxel <b>spürt nur die Haut in seinem Inneren</b>. Schiebt man die Haut, überstreicht sie ein dünnes Volumen. Das Voxel wird um genau dieses Volumen voller (oder leerer), geteilt durch sein eigenes Volumen. Haut außerhalb des Voxels ist ihm egal. Deshalb ist der Gradient so lokal und billig.</div>
+<div class="box derive"><span class="lbl">🧮 Herleitung von Gl. 22: woher kommt das ⅓?</span><ol>
+<li>Ein Punkt im Dreieck \(t\) mit Ecken \(\mathbf v_1,\mathbf v_2,\mathbf v_3\) ist \(\mathbf x_b=\lambda_1\mathbf v_1+\lambda_2\mathbf v_2+\lambda_3\mathbf v_3\) mit baryzentrischen Koordinaten \(\lambda_j\ge0\), \(\sum\lambda_j=1\).</li>
+<li>Bewegt man die Ecken, bewegt sich der Punkt mit: \(\partial_{\boldsymbol\theta}\mathbf x_b=\sum_j\lambda_j\,\partial_{\boldsymbol\theta}\mathbf v_j\).</li>
+<li>Die Normale \(\mathbf n_t\) ist auf dem ganzen Dreieck konstant, also: \(\int_t\partial_{\boldsymbol\theta}\mathbf x_b^{\mathsf T}\mathbf n_t\,d\ell=\sum_j\partial_{\boldsymbol\theta}\mathbf v_j^{\mathsf T}\mathbf n_t\int_t\lambda_j\,d\ell\).</li>
+<li>\(\lambda_j\) ist eine lineare „Hutfunktion“ (hat function): 1 an Ecke \(j\), 0 an der Gegenkante. Das Integral einer linearen Funktion über ein Dreieck ist Wert im Schwerpunkt × Fläche, und im Schwerpunkt ist \(\lambda_j=\tfrac13\). Also ist \(\int_t\lambda_j\,d\ell=\tfrac13\,\mathrm{Area}(t)\) <span class="src">Abschn. 3.3</span>.</li></ol></div>
+<div class="box mind"><span class="lbl">🧠 Bild im Kopf: das Zeltdach</span>
+Über dem Dreieck steht ein <b>Zelt</b>: an der bewegten Ecke 1 hoch, an der gegenüberliegenden Kante flach auf dem Boden. Wie stark ein Hautpunkt mitbewegt wird, ist die Zelthöhe über ihm. Das Zeltvolumen ist eine Pyramide mit dreieckiger Grundfläche: <b>Grundfläche × Höhe / 3 = Fläche × 1/3</b>. Daher das ⅓ in Gl. 22.</div>
+<div class="demo" data-demo="hat"><span class="lbl">② Interaktiv · Hutfunktion \(\lambda_j\) und \(\int_t\lambda_j=\mathrm{Area}/3\) numerisch geprüft</span>
+<canvas width="760" height="360"></canvas>
+<div class="readout" data-out></div>
+<p class="cap">Zieh die Ecken. Ein Klick auf eine Ecke macht sie zur „bewegten“ Ecke \(j\). Die Farbe zeigt \(\lambda_j\), die Linien sind \(\lambda_j=\tfrac14,\tfrac12,\tfrac34\). Der Readout integriert \(\lambda_j\) numerisch mit der Mittelpunktsregel auf einem 240×240-Raster und vergleicht mit Fläche / 3.</p></div>
+<div class="box formula"><span class="lbl">③ Formel (Gl. 22 und 23)</span>
+$$\partial_{\boldsymbol\theta}\tilde w(\mathbf x_{\mathbf i})=\frac{1}{|\square_{\mathbf x_{\mathbf i}}|}\sum_{t\subset\square_{\mathbf x_{\mathbf i}}}\ \sum_{\mathbf v_j\in t}\tfrac13\,\partial_{\boldsymbol\theta}\mathbf v_j^{\mathsf T}\,\mathbf n_t\,\mathrm{Area}(t)\qquad(22)$$
+$$\partial_{\boldsymbol\theta}\tilde w(\mathbf x_{\mathbf i})=\frac{1}{|\square_{\mathbf x_{\mathbf i}}|}\sum_{t_i}\ \sum_{s_j\in t_i\cap\square_{\mathbf x_{\mathbf i}}}\ \sum_{\mathbf w_k\in s_j}\tfrac13\,\partial_{\boldsymbol\theta}\mathbf w_k^{\mathsf T}\,\mathbf n_{t_i}\,\mathrm{Area}(s_j)\qquad(23)$$
+<div class="legend">
+<div>\(t\)</div><div>ein Dreieck, das ganz im Voxel liegt (Gl. 22)</div>
+<div>\(\mathbf n_t\)</div><div>seine (konstante) Einheitsnormale</div>
+<div>\(t_i,\ s_j\)</div><div>beliebiges Dreieck und seine Teildreiecke im Voxel aus Schritt (2) (Gl. 23)</div>
+<div>\(\mathbf w_k\)</div><div>Ecken der Teildreiecke: lineare Kombinationen der Original-Ecken; ihre Ableitung geht über baryzentrische Koordinaten</div>
+</div><span class="src">Djuren, Gl. 22–23</span></div>
+<div class="box mind"><span class="lbl">🧠 Bild im Kopf: Teildreiecke auf einem Gummituch</span>
+Die Ecken der Teildreiecke sind wie Punkte, die auf das <b>Gummituch</b> des Originaldreiecks gemalt sind. Zieht man an einer Originalecke, bewegen sie sich mit, gewichtet mit ihren baryzentrischen Koordinaten. Genau genommen gleiten die Schnittpunkte mit der Voxelwand zusätzlich entlang der Fläche. Das ist aber eine tangentiale Bewegung, und die zählt nach Gl. 8 nicht (Lineal-Bild oben). <span class="tag-hyp">meine Begründung</span></div>
+<p>Die Implementierung der Ableitung hat dieselbe Struktur wie die Voxelisierung, nur ohne den Beitrag nach unten, weil Gl. 21 nur das eigene Voxel betrifft. Das Supplement enthält den Pseudocode (Alg. 1–3) <span class="src">Abschn. 3.3</span>.</p>
+<div class="box fact"><span class="lbl">📄 Größere Box-Filter</span>
+Voxelisieren und danach eine diskrete Box-Faltung ergibt dasselbe wie <i>ein</i> Box-Filter mit ganzzahlig vergrößertem Träger <span class="src">Abschn. 3.3</span>. Bild: Erst über jedes Voxel mitteln, dann über 3×3×3 Voxel mitteln, ist dasselbe wie gleich über einen dreimal so breiten Würfel mitteln. Abb. 2 nutzt so einen Filter mit Durchmesser 3 und zeigt, dass die analytischen Ableitungen mit finiten Differenzen übereinstimmen.</div>
+
+<h3 id="k10-eval">Abschn. 4.1: Laufzeit und der Vergleich mit DOPH</h3>
+<div class="row">
+<div class="box fact"><span class="lbl">📄 Was gemessen wurde</span>
+C++ mit Python-Bindings für PyTorch, 32-Bit-Gleitkomma, Intel i9-12900K, <b>nicht parallelisiert</b>. Gitter von \(16^3\) bis \(1024^3\), jede Messung 30-mal. Für Meshes mit über 100 000 Dreiecken auf \(1024^3\) brauchen Voxelisierung und Gradient jeweils <b>unter 1 Sekunde</b> <span class="src">Abb. 5</span>. Beim David-Mesh verschwindet der Mehraufwand durch die Mesh-Größe bei großen Gittern. Eine naive GPU-Portierung brachte 3,6× (Voxelisierung) und 14,5× (Gradient) <span class="src">Abschn. 4.1</span>.</div>
+<svg class="figsvg" viewBox="0 0 420 230" style="flex:1 1 320px"><g font-size="12">
+<text x="10" y="18" font-weight="700">Anzahl Voxel (log. Skala): Auflösung verdoppeln = 8× mehr</text>
+<g fill="#3b82f6"><rect x="70" y="30" width="44" height="18"/><rect x="70" y="56" width="66" height="18"/><rect x="70" y="82" width="88" height="18"/><rect x="70" y="108" width="110" height="18"/><rect x="70" y="134" width="132" height="18"/><rect x="70" y="160" width="155" height="18"/><rect x="70" y="186" width="178" height="18"/></g>
+<g text-anchor="end"><text x="62" y="44">16³</text><text x="62" y="70">32³</text><text x="62" y="96">64³</text><text x="62" y="122">128³</text><text x="62" y="148">256³</text><text x="62" y="174">512³</text><text x="62" y="200">1024³</text></g>
+<g><text x="120" y="44">4 096</text><text x="142" y="70">32 768</text><text x="164" y="96">262 144</text><text x="186" y="122">2,1 Mio.</text><text x="208" y="148">16,8 Mio.</text><text x="231" y="174">134 Mio.</text><text x="254" y="200">1,07 Mrd. → &lt; 1 s</text></g>
+</g></svg></div>
+<p><b>DOPH</b> <span class="src">Luo et al. 2024</span> tastet die <i>ungeglättete</i> Winding Number punktweise ab, interpoliert trilinear und leitet mit automatischer Differenzierung ab. Das ist „Discretize-then-Differentiate“ <span class="src">Bangaru et al. 2021</span>. Die Ableitungen sind fast überall null und nur ganz nah an der Fläche fälschlich ungleich null. DVX (dieses Paper) stimmt dagegen mit finiten Differenzen überein <span class="src">Abb. 6</span>. In Abb. 6 stehen außerdem die Laufzeiten 418,4 ms und 2,2 ms bei \(32^3\). Aus dem Textlayout lässt sich nicht sicher ablesen, welche Zahl zu welchem Verfahren gehört; bitte im Bild nachsehen.</p>
+<div class="box mind"><span class="lbl">🧠 Bild im Kopf: „Discretize-then-Differentiate“</span>
+Erst ein <b>Foto</b> machen (Punktproben), dann aus dem Foto ablesen wollen, wie schnell sich etwas bewegt. Das Foto ist pixelig und unscharf in der Zeit: Zwischen zwei Pixeln passiert nichts, also misst man Geschwindigkeit 0. Djuren macht es umgekehrt: erst ableiten (Gl. 14, exakt), dann diskretisieren (Gl. 22–23). Die Treppe aus der Demo <a href="#k10-ae">oben</a> zeigt den Unterschied.</div>
+
+<h3 id="k10-sect">Abschn. 4.2: Selbstüberschneidungen auflösen, Energie und ARAP (Gl. 24)</h3>
+<div class="box formula"><span class="lbl">③ Formel (Abschn. 4.2)</span>
+$$E_{\text{sect}}=\sum_{\mathbf W_{ijk}\gt1}\mathbf W_{ijk}^2,\qquad E=E_{\text{sect}}+\alpha\,E_{\text{arap}}$$
+<div class="legend"><div>\(\mathbf W_{ijk}\gt1\)</div><div>nur „übervolle“ Voxel zählen; praktisch Schwelle \(1+\varepsilon\), \(\varepsilon=0{,}001\)</div><div>\(\alpha\)</div><div>Gewicht der Formerhaltung, hier \(0{,}005\)</div></div>
+<span class="src">Djuren, Abschn. 4.2</span></div>
+<div class="box mind"><span class="lbl">🧠 Bild im Kopf: \(E_{\text{sect}}\)</span>
+Jedes Voxel mit \(\mathbf W\gt1\) enthält <b>doppelte Knete</b>: Dort liegen zwei Teile der Figur ineinander. Nur diese Voxel zahlen Strafe. Ihr Zettel (die Adjungierte) ist \(2\mathbf W\gt0\), heißt also „werde leerer“. Gl. 22–23 verwandeln das in „schieb die Hautstücke in diesem Voxel nach innen“, und die beiden Teile ziehen sich auseinander.</div>
+<div class="box formula"><span class="lbl">③ Formel (Gl. 24)</span>
+$$E_{\text{arap}}(\bar{\mathbf V})=\min_{R_i\in SO(3)}\sum_i\sum_{(j,k)\in\mathcal N(i)}w_{jk}\,\big\|\mathbf e_{jk}-R_i\,\bar{\mathbf e}_{jk}\big\|^2$$
+<div class="legend">
+<div>\(\bar{\mathbf V}\)</div><div>die verformten Vertex-Positionen</div>
+<div>\(\mathbf e_{jk},\ \bar{\mathbf e}_{jk}\)</div><div>die Halbkante \(\mathbf v_k-\mathbf v_j\), einmal im Original- und einmal im verformten Netz</div>
+<div>\(\mathcal N(i)\)</div><div>Nachbarschaft von Vertex \(i\): Speichen (spokes) und Felge (rims) <span class="src">Chao et al. 2010</span></div>
+<div>\(R_i\in SO(3)\)</div><div>beste Rotation pro Nachbarschaft, per SVD berechnet</div>
+<div>\(w_{jk}\)</div><div>Kantengewichte</div>
+</div><span class="src">Djuren, Gl. 24</span></div>
+<div class="row">
+<div class="box mind"><span class="lbl">🧠 Bild im Kopf: ARAP</span>
+Jede Vertex-Nachbarschaft ist ein kleines <b>Fahrradrad aus Holz</b>: Die <b>Speichen</b> gehen vom Vertex zu den Nachbarn, die <b>Felge</b> verbindet die Nachbarn im Kreis. Das Rad darf sich frei <b>drehen</b> (\(R_i\)) und verschieben, aber nicht verbiegen. \(E_{\text{arap}}\) misst, wie stark man jedes Rad <i>nach</i> der bestmöglichen Drehung noch verbiegen muss. \(SO(3)\) heißt: echte Drehungen, keine Spiegelungen.</div>
+<svg class="figsvg" viewBox="0 0 420 200" style="flex:1 1 300px"><g stroke-width="2.5">
+<g transform="translate(105,100)"><polygon points="70,0 35,61 -35,61 -70,0 -35,-61 35,-61" fill="none" stroke="#f97316"/><g stroke="#3b82f6"><line x1="0" y1="0" x2="70" y2="0"/><line x1="0" y1="0" x2="35" y2="61"/><line x1="0" y1="0" x2="-35" y2="61"/><line x1="0" y1="0" x2="-70" y2="0"/><line x1="0" y1="0" x2="-35" y2="-61"/><line x1="0" y1="0" x2="35" y2="-61"/></g><circle r="6" fill="#7c3aed" stroke="none"/></g>
+<path d="M190,100H232" stroke="#7c3aed" marker-end="url(#m10a)"/>
+<g transform="translate(315,100) rotate(25)"><polygon points="70,0 35,61 -35,61 -70,0 -35,-61 35,-61" fill="none" stroke="#f97316"/><g stroke="#3b82f6"><line x1="0" y1="0" x2="70" y2="0"/><line x1="0" y1="0" x2="35" y2="61"/><line x1="0" y1="0" x2="-35" y2="61"/><line x1="0" y1="0" x2="-70" y2="0"/><line x1="0" y1="0" x2="-35" y2="-61"/><line x1="0" y1="0" x2="35" y2="-61"/></g><circle r="6" fill="#7c3aed" stroke="none"/></g></g>
+<g font-size="12.5" text-anchor="middle"><text x="105" y="192">blau: Speichen, orange: Felge</text><text x="315" y="192">nur gedreht: E_arap = 0</text></g></svg></div>
+<p>Optimiert wird mit Adam (Lernrate \(10^{-2}\)), bis kein Voxel mehr \(\mathbf W\gt1\) hat <span class="src">Abschn. 4.2</span>. Das Paper nennt zwei Grenzen. Halb leere Voxel, in denen sich zwei Teile nur teilweise überlappen, werden nicht bestraft, solange \(\mathbf W\le1\) bleibt. Und negative Winding Numbers durch umgestülpte Volumina können Überschneidungen „verstecken“, weil sich +1 und −1 aufheben.</p>
+
+<h3 id="k10-band">Abschn. 4.3: Bandsägen-Formen, mellowmax und Extrusionen</h3>
+<p>Eine Bandsäge schneidet aus einem Block eine Silhouette entlang einer Richtung heraus; das Ergebnis ist eine <b>Extrusion</b>. Drei Schnitte aus drei Richtungen ergeben die <b>Schnittmenge dreier Extrusionen</b>. Naiv nimmt man die Silhouetten des Eingabe-Meshes, dann bleibt aber überflüssiges Material stehen. Das Paper verformt das Mesh so, dass es besser zu seiner eigenen Extrusions-Schnittmenge passt <span class="src">Abschn. 4.3</span>.</p>
+<div class="box mind"><span class="lbl">🧠 Bild im Kopf: Silhouette und Schnittmenge</span>
+<b>Silhouette entlang \(x\)</b>: Leuchte mit einer Taschenlampe entlang der \(x\)-Achse durch den Voxelblock. Ein Pixel der Silhouette ist dunkel, wenn <i>irgendwo</i> in der Säule Material ist. Das ist ein <b>Maximum</b> über die Säule.<br>
+<b>Schnittmenge der Extrusionen</b>: Ein Voxel bleibt nur stehen, wenn er in <i>allen drei</i> Silhouetten liegt, ein logisches UND. Bei Werten zwischen 0 und 1 ist das UND ein <b>Produkt</b>.</div>
+<div class="box formula"><span class="lbl">③ Formel (Abschn. 4.3)</span>
+$$(\mathbf S_x)_{ij}=\frac1w\ln\Big(\frac1d\sum_k e^{\,w\,\mathbf W_{kij}}\Big),\qquad \mathbf S_{ijk}=(\mathbf S_x)_{jk}\,(\mathbf S_y)_{ik}\,(\mathbf S_z)_{ij},\qquad E_{\text{cut}}=\frac1{d^3}\sum_{ijk}\big(\mathbf S_{ijk}-\mathbf W_{ijk}\big)^2$$
+<div class="legend">
+<div>\(\mathbf S_x\)</div><div>weiche Silhouette entlang \(x\) (mellowmax über die Säule \(k\))</div>
+<div>\(w\)</div><div>Schärfe; \(w\to\infty\) ergibt das Maximum, im Paper \(w=1000\)</div>
+<div>\(\mathbf S\)</div><div>die Schnittmenge der drei Extrusionen als Voxelgitter</div>
+<div>\(E_{\text{cut}}\)</div><div>mittlere quadratische Abweichung zwischen Form und ihrer Extrusions-Schnittmenge</div>
+</div><span class="src">Djuren, Abschn. 4.3</span></div>
+<div class="demo" data-demo="mellow"><span class="lbl">② Interaktiv · mellowmax: ein Maximum mit runden Ecken, sein Gradient ist softmax</span>
+<canvas width="760" height="320"></canvas>
+<div class="controls"><label>Schärfe \(\log_{10}w\) <input type="range" min="0" max="3" step="0.01" value="1" data-opt="lw"></label></div>
+<div class="readout" data-out></div>
+<p class="cap">Die blauen Säulen sind die Voxelwerte \(\mathbf W_{k}\) einer Säule; zieh sie hoch und runter. Violett unten sieht man die Softmax-Gewichte, also den Gradienten \(\partial\,\mathrm{mm}/\partial\mathbf W_k\). Bei kleinem \(w\) liegt mellowmax nahe am Mittelwert, bei \(w=1000\) praktisch auf dem Maximum. Gleich große Werte bekommen gleich viel Gradient. Das ist der Grund, warum das Paper mellowmax statt eines harten Maximums nimmt <span class="src">Abschn. 4.3</span>.</p></div>
+<p>Gewollt ist, dass \(E_{\text{cut}}\) auch \(\mathbf W\gt1\) bestraft, also auch Selbstüberschneidungen. Regularisiert wird mit ARAP, \(\alpha=0{,}05\), Lernrate \(10^{-3}\), \(d=128\). Bei einem 10-cm-Block entspricht das einer Voxelgröße unter 0,8 mm. Die relative Verbesserung \(1-E_{\text{cut}}(\bar{\mathbf V})/E_{\text{cut}}(\mathbf V)\) beträgt in Abb. 10 76,0 %, 69,9 %, 58,7 % und 62,8 %. Getestet wurde auf dem TOSCA-Datensatz; Hausdorff- und mittlere Flächendistanz wurden mit METRO gemessen; dazu kommen echte Holz- und Styroporschnitte <span class="src">Abb. 10–11, Tab. 1 (Suppl.)</span>.</p>
+
+<h3 id="k10-tile">Abschn. 4.4: Kachelbare Formen</h3>
+<div class="box formula"><span class="lbl">③ Formel (Abschn. 4.4)</span>
+$$E_{\text{fill}}=\sum_{klm}\Big(\sum_{i,j}\bar{\mathbf C}_{ji,klm}-1\Big)^2,\qquad E=E_{\text{fill}}+\alpha\sum_j E_{\text{arap}}(\bar{\mathbf V}_j)$$
+<div class="legend">
+<div>\(\mathbf C_j\)</div><div>Voxelisierung aller Instanzen von Form \(j\) im Würfel \([-1,1]^3\), \(d^3\) Voxel</div>
+<div>\(\bar{\mathbf C}_{ji}\)</div><div>der \(i\)-te von \(3^3=27\) Teilwürfeln (je \((d/3)^3\) Voxel)</div>
+<div>\(\sum_{i,j}\)</div><div>alle Teilwürfel aller Formen übereinanderlegen</div>
+<div>\(klm\)</div><div>Voxel-Index innerhalb eines Teilwürfels</div>
+</div><span class="src">Djuren, Abschn. 4.4</span></div>
+<div class="box mind"><span class="lbl">🧠 Bild im Kopf: falten wie bei Pac-Man</span>
+Bei einer periodischen Kachelung kommt alles, was rechts aus der Kachel ragt, links wieder herein (wie Pac-Man am Bildschirmrand). Das Paper legt die 27 Teilwürfel des großen Würfels <b>übereinander</b> und faltet damit alles in eine einzige Kachelzelle. \(E_{\text{fill}}=0\) heißt: Jedes Voxel der Zelle ist genau einmal bedeckt, ohne Lücke und ohne Überlappung. Die 2D-Version mit 9 Teilquadraten findest du in <a href="#k1-apps">Kapitel 1</a>.</div>
+<p>Parameter <span class="src">Abschn. 4.4</span>: Jede Instanz hat eigene Translation und Rotation (Gier-, Nick-, Rollwinkel, yaw/pitch/roll). Die Vertex-Mittelwerte starten in \([-1/3,1/3]^3\). \(\alpha=0{,}005\), Lernrate \(10^{-3}\), \(d=192\) (Kachelauflösung 64). Abbruch, wenn sich die Vertices um weniger als \(10^{-3}\) ändern; ARAP wird pro Formklasse einmal vorberechnet. Beispiele sind 27 Spots, 27 Hände sowie 14 Tweety + 14 Spot. Die Ergebnisse sind <i>nahezu</i> kachelbar: nicht unbedingt lückenlos und nicht unbedingt überschneidungsfrei.</p>
+<div class="box note"><span class="lbl">⚠️ Kleine Unstimmigkeit beim Lesen</span>Der Text nennt für die Teilwürfel die „side length 1/3“. Ein Drittel von \([-1,1]\) hat aber die Länge 2/3. Vermutlich ist die halbe Seitenlänge gemeint, denn die Kachelzelle \([-1/3,1/3]^3\) passt dazu. Das ist meine Lesart, im Zweifel beim Autor nachfragen.</div>
+
+<h3 id="k10-future">Abschn. 5: Ausblick, und die ganze Herleitung auf einen Blick</h3>
+<p>Das Paper nennt als nächste Schritte <span class="src">Abschn. 5</span>: Mengenoperationen (CSG) und morphologische Operatoren, die auf Gittern einfach sind; Machine Learning, etwa Formen im \(\mathbb R^3\) differenzierbar vergleichen statt über Bild-Losses; die Schleife zur Gegenrichtung schließen (Mesh aus Voxeln) für selbstüberwachtes Lernen; Parallelisierung; andere Flächendarstellungen; andere Filter, z. B. Polynome wie bei Manson &amp; Schaefer 2013. Offene Flächen werden nicht erwähnt. Diese Lücke behandelt <a href="#k7">Kapitel 7</a>.</p>
+<div class="box formula"><span class="lbl">③ Die ganze Herleitung in sechs Zeilen</span>
+$$\begin{aligned}
+&\text{Problem:} && \mathbf W_{\mathbf i}=w(\mathbf x_{\mathbf i})\ \Rightarrow\ \partial_{\boldsymbol\theta}\mathbf W_{\mathbf i}\in\{0,\text{undef.}\} && \text{(Gl. 2)}\\
+&\text{Glätten:} && \tilde w=k*w && \text{(Gl. 4)}\\
+&\text{Reynolds:} && \partial_{\boldsymbol\theta}\tilde w=\textstyle\sum_i\int_{\partial D_i}v_n\,k\,w_i && \text{(Gl. 9)}\\
+&\text{geschlossen:} && w_i-w_j=1\ \Rightarrow\ \partial_{\boldsymbol\theta}\tilde w=\int_{\partial\Omega}v_n\,k && \text{(Gl. 14)}\\
+&\text{Box + Dreiecke:} && \tilde w(\mathbf x_{\mathbf i})=\textstyle\sum_t \mathrm{Vol}(\text{Schatten}_t\cap\square)/|\square| && \text{(Gl. 18, Abschn. 3.3)}\\
+&\text{Ableitung:} && \partial_{\boldsymbol\theta}\tilde w(\mathbf x_{\mathbf i})=\tfrac1{|\square|}\textstyle\sum_t\sum_j\tfrac13\,\partial_{\boldsymbol\theta}\mathbf v_j^{\mathsf T}\mathbf n_t\,\mathrm{Area}(t) && \text{(Gl. 22)}
+\end{aligned}$$
+<div class="legend"><div>\(v_n\)</div><div>Abkürzung von mir für die Normalgeschwindigkeit \(\partial_{\boldsymbol\theta}\mathbf x_b^{\mathsf T}\mathbf n\)</div></div></div>
+
+<div class="onesent"><b class="lbl">In einem Satz</b>Djuren glättet die Winding Number mit einer Box, zeigt mit dem Reynolds-Transporttheorem, dass bei geschlossenen Flächen nur die Normalgeschwindigkeit der Haut zählt, und rechnet beides für Dreiecksnetze exakt aus: den Füllgrad mit Schattenkörpern, die Ableitung mit dem Faktor ⅓ · Fläche.</div>
+<div class="quiz"><b>Verständnisfragen</b>
+<details><summary>1. Warum verschwindet der Innen-Term in Gl. 8, und was wäre bei einer offenen Fläche anders?</summary><div>Der Integrand \(k(\mathbf x-\mathbf x')\,w_i\) hängt an festen Orten nicht von \(\boldsymbol\theta\) ab: Der Kern bewegt sich nicht, und \(w_i\) ist pro Region konstant. Bei offenen Flächen ist \(w\) außerhalb der Haut nicht stückweise konstant und hängt selbst von \(\boldsymbol\theta\) ab, also bleibt ein Innen-Term übrig.</div></details>
+<details><summary>2. Woher kommt das ⅓ in Gl. 22?</summary><div>Ein Punkt im Dreieck bewegt sich mit \(\lambda_j\,\partial_{\boldsymbol\theta}\mathbf v_j\), wenn Ecke \(j\) bewegt wird. \(\lambda_j\) ist eine lineare Hutfunktion mit Wert ⅓ im Schwerpunkt, also gilt \(\int_t\lambda_j=\tfrac13\mathrm{Area}(t)\) (Zelt- bzw. Pyramidenvolumen).</div></details>
+<details><summary>3. Warum ist das Volumen eines Schattenkörpers „projizierte Fläche × Schwerpunkthöhe“?</summary><div>Die Höhe des Dreiecks über der Grundebene ist über dem Schatten eine lineare Funktion. Volumen = Fläche × mittlere Höhe, und der Mittelwert einer linearen Funktion über einem Dreieck ist ihr Wert im Schwerpunkt, \((z_1+z_2+z_3)/3\).</div></details>
 </div>
 </div></section>
 
@@ -1869,6 +2394,219 @@ registerDemo('radar', el=>{
 /* =====================================================================
    Seiten-UI: Pipeline, Inhaltsverzeichnis, Ein-/Ausklappen, Scrollspy, KaTeX
    ===================================================================== */
+/* =====================================================================
+   KAPITEL 10 – Djuren im Detail
+   ===================================================================== */
+function distSeg(p,a,b){ const dx=b[0]-a[0],dy=b[1]-a[1],L2=dx*dx+dy*dy; const t=L2?clamp(((p[0]-a[0])*dx+(p[1]-a[1])*dy)/L2,0,1):0; return Math.hypot(p[0]-a[0]-t*dx,p[1]-a[1]-t*dy); }
+function dedupPoly(q){ const o=[]; for(const p of q){ const l=o[o.length-1]; if(!l||Math.hypot(p[0]-l[0],p[1]-l[1])>1e-9) o.push(p); } while(o.length>1&&Math.hypot(o[0][0]-o[o.length-1][0],o[0][1]-o[o.length-1][1])<=1e-9) o.pop(); return o; }
+const SUBD='₀₁₂₃₄₅₆₇₈₉', idxSub=n=>String(n).split('').map(ch=>SUBD[+ch]??ch).join('');
+
+registerDemo('omega', el=>{
+  const c=el.querySelector('canvas'); const v=new View(c,0,10,0,5); const ctx=v.ctx;
+  const P=[[2.2,1.0],[4.6,0.7],[6.9,1.1],[8.3,2.2],[7.6,3.8],[5.6,4.2],[4.2,3.3],[2.6,4.0],[1.3,2.6]];
+  const X=[5.0,2.3]; const M=opt(el,'mode'); const G={x0:0,y0:0,h:0.25,nx:40,ny:20};
+  function draw(){ ctx.clearRect(0,0,c.lw,c.lh); const m=M.value; let nin=0;
+    if(m==='vol'){ const vals=new Float64Array(G.nx*G.ny); for(let j=0;j<G.ny;j++)for(let i=0;i<G.nx;i++){ const inn=wn2(G.x0+(i+.5)*G.h,G.y0+(j+.5)*G.h,P,true)>0.5?1:0; vals[j*G.nx+i]=inn; nin+=inn; }
+      cells(v,G,vals,w=>w?[96,150,240]:[243,244,246],1); gridLines(v,G,'rgba(100,116,139,.3)');
+      drawPoly(v,P,true,{stroke:'rgba(31,41,55,.35)',width:1.2,dash:[4,4]});
+      txt(ctx,'gespeichert: 1 Bit pro Pixel (blau = innen, grau = außen)',10,20,{font:'12.5px system-ui',bg:'rgba(255,255,255,.9)'}); }
+    else if(m==='surf'){ drawPoly(v,P,true,{stroke:C.bnd,width:3}); drawArrows(v,P,true,{color:C.bnd}); P.forEach(p=>disc(v,p,5,C.ink));
+      txt(ctx,'gespeichert: nur die Eckpunkte und ihre Reihenfolge',10,20,{font:'12.5px system-ui',bg:'rgba(255,255,255,.9)'});
+      txt(ctx,'Innen? Muss man erst ausrechnen (z. B. mit der Winding Number)',v.X(4.85),v.Y(2.55),{align:'center',font:'12.5px system-ui',color:'#6b7280'}); }
+    else { ctx.fillStyle='#f3f4f6'; ctx.fillRect(0,0,c.lw,c.lh); drawPoly(v,P,true,{fill:'rgba(59,130,246,.35)',stroke:C.bnd,width:3.5}); P.forEach(p=>disc(v,p,4,C.bnd));
+      txt(ctx,'Ω',v.X(4.6),v.Y(2.0),{font:'bold 22px system-ui',color:'#1e40af'}); txt(ctx,'∂Ω',v.X(8.45),v.Y(2.95),{font:'bold 16px system-ui',color:'#9a3412'}); txt(ctx,'ℝ² ∖ Ω',12,22,{font:'14px system-ui',color:'#6b7280'}); }
+    disc(v,X,7,C.grad,'#fff',2); txt(ctx,'x',v.X(X[0])+9,v.Y(X[1])-8,{font:'bold 14px system-ui',color:C.grad});
+    const w=wn2(X[0],X[1],P,true); let dmin=1e9; for(let i=0;i<P.length;i++) dmin=Math.min(dmin,distSeg(X,P[i],P[(i+1)%P.length]));
+    const st=dmin<0.06?'x ∈ ∂Ω (liegt auf dem Rand)':(w>0.5?'x ∈ Ω (innen)':'x ∉ Ω (außen)');
+    out(el).textContent=`x = (${de(X[0])}; ${de(X[1])})  →  ${st}      Winding Number w(x) = ${de(w,3)}\n`+(m==='vol'?`Volumendarstellung: ${G.nx*G.ny} Pixel gespeichert, davon ${nin} innen. Die Antwort auf „innen?“ steht direkt im Speicher.`:m==='surf'?`Oberflächendarstellung: ${P.length} Eckpunkte = ${2*P.length} Zahlen. Kompakt, aber „innen?“ muss man ausrechnen.`:`Abstand von x zum Rand ∂Ω: ${de(dmin,3)}`); }
+  M.addEventListener('change',draw);
+  draggable(c,v,()=>[{x:X[0],y:X[1],r:16,move:(x,y)=>{X[0]=clamp(x,0.1,9.9);X[1]=clamp(y,0.1,4.9);}},...ptH(P)],draw);
+  draw();
+});
+
+registerDemo('theta', el=>{
+  const c=el.querySelector('canvas'); const v=new View(c,0,6,0,4.5,{x:10,y:10,w:420,h:315}); const ctx=v.ctx;
+  const T0=[[1,1],[5,1.4],[2.6,3.8]]; let T=T0.map(p=>p.slice()); const tg=opt(el,'target'); const eta=0.02;
+  const dA=()=>[0,1,2].map(i=>{ const ip=T[(i+1)%3],im=T[(i+2)%3]; return [0.5*(ip[1]-im[1]),0.5*(im[0]-ip[0])]; });
+  function draw(){ ctx.clearRect(0,0,c.lw,c.lh); const A=polyArea(T),As=+tg.value,dE=2*(A-As),g=dA(),E=(A-As)**2;
+    ctx.save(); ctx.strokeStyle='rgba(100,116,139,.18)'; ctx.beginPath(); for(let x=0;x<=6;x++){ ctx.moveTo(v.X(x),v.Y(0)); ctx.lineTo(v.X(x),v.Y(4.5)); } for(let y=0;y<=4;y++){ ctx.moveTo(v.X(0),v.Y(y)); ctx.lineTo(v.X(6),v.Y(y)); } ctx.stroke(); ctx.strokeStyle='#e5e7eb'; ctx.strokeRect(10,10,420,315); ctx.restore();
+    drawPoly(v,T,true,{fill:A>0?'rgba(59,130,246,.28)':'rgba(220,38,38,.25)',stroke:C.bnd,width:3});
+    let mx=1e-9; g.forEach(q=>mx=Math.max(mx,Math.abs(dE)*Math.hypot(q[0],q[1]))); const s=Math.min(70/mx,30);
+    T.forEach((p,i)=>{ const X=v.X(p[0]),Y=v.Y(p[1]); const gx=-dE*g[i][0],gy=-dE*g[i][1]; if(Math.abs(dE)>1e-3) arrowPx(ctx,X,Y,X+gx*s,Y-gy*s,C.grad,2.5,9); disc(v,p,6,C.ink,'#fff',2); txt(ctx,'v'+idxSub(i+1),X+9,Y-9,{font:'bold 13px system-ui'}); });
+    const bx=455, th=[T[0][0],T[0][1],T[1][0],T[1][1],T[2][0],T[2][1]], nm=['x₁','y₁','x₂','y₂','x₃','y₃'];
+    txt(ctx,'θ ∈ ℝ⁶: die 6 Regler des Mischpults',bx,28,{font:'bold 13px system-ui'});
+    th.forEach((val,k)=>{ const y=42+k*27; txt(ctx,`θ${idxSub(k+1)} = ${nm[k]}`,bx,y+13,{font:'12.5px system-ui'}); ctx.fillStyle='#e5e7eb'; ctx.fillRect(bx+82,y+2,170,14); ctx.fillStyle=C.inside; ctx.fillRect(bx+82,y+2,170*clamp(val/6,0,1),14); txt(ctx,de(val),bx+258,y+13,{font:'12px system-ui'}); });
+    txt(ctx,`Fläche A(θ) = ${de(A,2)}   Ziel A* = ${de(As,1)}`,bx,42+6*27+18,{font:'13px system-ui'});
+    txt(ctx,`E(θ) = (A − A*)² = ${de(E,3)}`,bx,42+6*27+40,{font:'bold 14px system-ui',color:C.grad});
+    const gr=[]; g.forEach(q=>gr.push(q[0],q[1]));
+    out(el).textContent=`Zahnrad 2 (hängt von der Energie ab):  ∂E/∂A = 2(A − A*) = ${de(dE,3)}\nZahnrad 1 (nur Geometrie):            ∂A/∂θ = (${gr.map(x=>de(x,2)).join('; ')})\nGl. 1:  ∂E/∂θ = ∂E/∂A · ∂A/∂θ = (${gr.map(x=>de(dE*x,2)).join('; ')})${Math.abs(dE)<0.02?'\n✔ Minimum erreicht: Die Fläche passt, der Gradient ist (fast) null.':''}`; }
+  act(el,'step',()=>{ const A=polyArea(T),dE=2*(A-(+tg.value)),g=dA(); T.forEach((p,i)=>{ p[0]-=eta*dE*g[i][0]; p[1]-=eta*dE*g[i][1]; }); draw(); });
+  act(el,'reset',()=>{ T=T0.map(p=>p.slice()); draw(); });
+  tg.addEventListener('input',draw);
+  draggable(c,v,()=>T.map(p=>({x:p[0],y:p[1],move:(x,y)=>{p[0]=clamp(x,0.1,5.9);p[1]=clamp(y,0.1,4.4);}})),draw);
+  draw();
+});
+
+registerDemo('sample', el=>{
+  const c=el.querySelector('canvas'); const v=new View(c,0,8,0,6,{x:10,y:10,w:440,h:330}); const ctx=v.ctx;
+  const pv=new View(c,-1,1,-0.12,1.12,{x:500,y:40,w:240,h:230});
+  const P0=[[2.0,1.3],[5.4,1.0],[6.3,3.1],[5.0,4.9],[2.6,4.6],[1.5,2.9]];
+  const oT=opt(el,'t'),oR=opt(el,'res'),oB=opt(el,'box'); let sel=null;
+  const grid=()=>{ const h=+oR.value; return {x0:0,y0:0,h,nx:Math.round(8/h),ny:Math.round(6/h)}; };
+  const shifted=t=>P0.map(p=>[p[0]+t,p[1]]);
+  const fill=(P,G,i,j)=>{ const q=clipPoly(P,G.x0+i*G.h,G.y0+j*G.h,G.x0+(i+1)*G.h,G.y0+(j+1)*G.h); return q.length>2?polyArea(q)/(G.h*G.h):0; };
+  const pt=(P,G,i,j)=>wn2(G.x0+(i+.5)*G.h,G.y0+(j+.5)*G.h,P,true)>0.5?1:0;
+  function draw(){ ctx.clearRect(0,0,c.lw,c.lh); const G=grid(),t=+oT.value,P=shifted(t); if(!sel) sel=[Math.floor(6.2/G.h),Math.floor(3/G.h)]; const [si,sj]=sel;
+    const vals=new Float64Array(G.nx*G.ny); for(let j=0;j<G.ny;j++)for(let i=0;i<G.nx;i++) vals[j*G.nx+i]=oB.checked?fill(P,G,i,j):pt(P,G,i,j);
+    cells(v,G,vals,wnRGB,0.9,oB.checked&&G.h>=1,2); gridLines(v,G,'rgba(100,116,139,.35)');
+    drawPoly(v,P,true,{stroke:C.bnd,width:2.5}); drawArrows(v,P,true,{color:C.bnd,size:5});
+    if(!oB.checked) for(let j=0;j<G.ny;j++)for(let i=0;i<G.nx;i++) disc(v,[G.x0+(i+.5)*G.h,G.y0+(j+.5)*G.h],2.6,vals[j*G.nx+i]?'#1e3a8a':'#9ca3af');
+    ctx.save(); ctx.strokeStyle=C.grad; ctx.lineWidth=3; ctx.strokeRect(v.X(si*G.h),v.Y((sj+1)*G.h),G.h*v.sx,G.h*v.sy); ctx.restore();
+    const r=pv.rect; ctx.save(); ctx.strokeStyle='#cbd5e1'; ctx.strokeRect(r.x,r.y,r.w,r.h); ctx.setLineDash([3,3]); ctx.beginPath(); for(const yy of [0,1]){ ctx.moveTo(r.x,pv.Y(yy)); ctx.lineTo(r.x+r.w,pv.Y(yy)); } ctx.stroke(); ctx.restore();
+    txt(ctx,`Voxel i = (${si+1}, ${sj+1}): Wert über t`,r.x,r.y-12,{font:'bold 12.5px system-ui'}); txt(ctx,'1',r.x-6,pv.Y(1)+4,{align:'right',font:'11px system-ui'}); txt(ctx,'0',r.x-6,pv.Y(0)+4,{align:'right',font:'11px system-ui'});
+    txt(ctx,'−1',r.x,r.y+r.h+14,{font:'11px system-ui'}); txt(ctx,'+1',r.x+r.w,r.y+r.h+14,{align:'right',font:'11px system-ui'}); txt(ctx,'Verschiebung t',r.x+r.w/2,r.y+r.h+14,{align:'center',font:'11.5px system-ui'});
+    const N=200; for(const [fn,col,w] of [[pt,'#6b7280',3],[fill,C.inside,2.5]]){ ctx.save(); ctx.strokeStyle=col; ctx.lineWidth=w; ctx.beginPath(); for(let s=0;s<=N;s++){ const tt=-1+2*s/N, val=fn(shifted(tt),G,si,sj); s?ctx.lineTo(pv.X(tt),pv.Y(val)):ctx.moveTo(pv.X(tt),pv.Y(val)); } ctx.stroke(); ctx.restore(); }
+    ctx.save(); ctx.strokeStyle=C.grad; ctx.setLineDash([4,3]); ctx.beginPath(); ctx.moveTo(pv.X(t),r.y); ctx.lineTo(pv.X(t),r.y+r.h); ctx.stroke(); ctx.restore();
+    txt(ctx,'grau: Punktprobe w(xᵢ)',r.x,r.y+r.h+34,{font:'12px system-ui',color:'#4b5563'}); txt(ctx,'blau: Füllgrad w̃(xᵢ)',r.x,r.y+r.h+52,{font:'12px system-ui',color:'#1d4ed8'});
+    const d=1e-3, p0=pt(P,G,si,sj), f0=fill(P,G,si,sj), dp=(pt(shifted(t+d),G,si,sj)-pt(shifted(t-d),G,si,sj))/(2*d), df=(fill(shifted(t+d),G,si,sj)-fill(shifted(t-d),G,si,sj))/(2*d);
+    out(el).textContent=`Voxel i = (${si+1}, ${sj+1}) (Zählung ab 1 wie im Paper):  Punktprobe w(xᵢ) = ${p0}    Füllgrad w̃(xᵢ) = ${de(f0,3)}\nAbleitung nach t (finite Differenzen):  Punktprobe ${dp===0?'0':'undefiniert (Sprung genau hier)'}    Füllgrad ${de(df,3)}`; }
+  c.addEventListener('pointerdown',e=>{ const [x,y,px,py]=v.evt(e); if(!v.inside(px,py)) return; const G=grid(); sel=[clamp(Math.floor(x/G.h),0,G.nx-1),clamp(Math.floor(y/G.h),0,G.ny-1)]; draw(); });
+  oT.addEventListener('input',draw); oB.addEventListener('change',draw); oR.addEventListener('change',()=>{ sel=null; draw(); });
+  draw();
+});
+
+registerDemo('window', el=>{
+  const c=el.querySelector('canvas'); const v=new View(c,0,9,0,9*360/760); const ctx=v.ctx;
+  const P=[[1.4,0.8],[4.2,0.6],[5.4,1.9],[7.6,1.4],[7.9,3.4],[4.6,3.9],[2.0,3.6]];
+  const X=[5.3,1.9]; const oK=opt(el,'k'),oS=opt(el,'s'),oF=opt(el,'field'); let off=null;
+  const boxVal=(x,y,s)=>{ const q=clipPoly(P,x-s/2,y-s/2,x+s/2,y+s/2); return q.length>2?polyArea(q)/(s*s):0; };
+  const gauVal=(x,y,sg)=>{ const n=41; let S=0,W=0; for(let b=0;b<n;b++)for(let a=0;a<n;a++){ const u=-3*sg+6*sg*(a+.5)/n,w_=-3*sg+6*sg*(b+.5)/n; const wt=Math.exp(-(u*u+w_*w_)/(2*sg*sg)); W+=wt; if(wn2(x+u,y+w_,P,true)>0.5) S+=wt; } return S/W; };
+  function draw(){ ctx.clearRect(0,0,c.lw,c.lh); const s=+oS.value,isBox=oK.value==='box';
+    if(oF.checked){ const F=computeField(v,6,(x,y)=>boxVal(x,y,s)); off=fieldImg(F,wnRGB,off); drawImg(v,off,F); } else { ctx.fillStyle='#f3f4f6'; ctx.fillRect(0,0,c.lw,c.lh); drawPoly(v,P,true,{fill:'rgba(59,130,246,.35)',stroke:null}); }
+    drawPoly(v,P,true,{stroke:C.bnd,width:3}); drawArrows(v,P,true,{color:C.bnd});
+    let val,txtK;
+    if(isBox){ const q=clipPoly(P,X[0]-s/2,X[1]-s/2,X[0]+s/2,X[1]+s/2); if(q.length>2) drawPoly(v,q,true,{fill:'rgba(124,58,237,.35)',stroke:null});
+      ctx.save(); ctx.fillStyle='rgba(124,58,237,.10)'; ctx.strokeStyle=C.grad; ctx.lineWidth=2.5; const x0=v.X(X[0]-s/2),y0=v.Y(X[1]+s/2); ctx.fillRect(x0,y0,s*v.sx,s*v.sy); ctx.strokeRect(x0,y0,s*v.sx,s*v.sy); ctx.restore();
+      const a=q.length>2?polyArea(q):0; val=a/(s*s); txtK=`Kern: Box mit Seitenlänge s = ${de(s)}  →  w̃(x) = Fläche(Ω ∩ Fenster) / Fensterfläche = ${de(a,3)} / ${de(s*s,3)} = ${de(val,3)}`; }
+    else { const sg=s/2, R=3*sg*v.sx; const gx=v.X(X[0]),gy=v.Y(X[1]); const gd=ctx.createRadialGradient(gx,gy,0,gx,gy,R); gd.addColorStop(0,'rgba(124,58,237,.55)'); gd.addColorStop(0.33,'rgba(124,58,237,.25)'); gd.addColorStop(1,'rgba(124,58,237,0)'); ctx.save(); ctx.fillStyle=gd; ctx.beginPath(); ctx.arc(gx,gy,R,0,TAU); ctx.fill(); ctx.strokeStyle='rgba(124,58,237,.5)'; ctx.setLineDash([4,4]); ctx.beginPath(); ctx.arc(gx,gy,sg*v.sx,0,TAU); ctx.stroke(); ctx.restore();
+      val=gauVal(X[0],X[1],sg); txtK=`Kern: Gauß mit σ = s/2 = ${de(sg)} (gestrichelt: 1σ, Schein bis 3σ)  →  w̃(x) = Σ k·w / Σ k = ${de(val,3)}  (41×41 Stützstellen)`; }
+    disc(v,X,6,C.grad,'#fff',2); txt(ctx,'x',v.X(X[0])+8,v.Y(X[1])-8,{font:'bold 14px system-ui',color:C.grad});
+    if(oF.checked) txt(ctx,'Farbe = w̃ mit Box-Kern der Größe s (blau = 1, weiß = 0)',10,20,{font:'12.5px system-ui',bg:'rgba(255,255,255,.9)'});
+    out(el).textContent=`${txtK}\nzum Vergleich die Punktprobe w(x) = ${wn2(X[0],X[1],P,true)>0.5?1:0}: entweder 0 oder 1, nichts dazwischen`; }
+  [oK,oS,oF].forEach(o=>o.addEventListener('input',draw)); oK.addEventListener('change',draw);
+  draggable(c,v,()=>[{x:X[0],y:X[1],r:16,move:(x,y)=>{X[0]=clamp(x,0,9);X[1]=clamp(y,0,4.26);}},...ptH(P)],draw);
+  draw();
+});
+
+registerDemo('regions', el=>{
+  const c=el.querySelector('canvas'); const v=new View(c,-4.2,4.2,-2.32,2.32); const ctx=v.ctx;
+  const P=[]; for(let i=0;i<20;i++){ const t=TAU*i/20, r=0.5+1.8*Math.cos(t); P.push([1.3*r*Math.cos(t)-0.9,1.3*r*Math.sin(t)]); }
+  const M=opt(el,'mode'); let off=null; const res=5;
+  function regions(){ const F=computeField(v,res,(x,y)=>Math.round(wn2(x,y,P,true))); const {w,h,vals}=F; const lab=new Int32Array(w*h).fill(-1); const comps=[];
+    for(let s=0;s<w*h;s++){ if(lab[s]>=0) continue; const id=comps.length,val=vals[s]; const st=[s]; lab[s]=id; let n=0,sx=0,sy=0; const cellsL=[];
+      while(st.length){ const q=st.pop(); n++; const qi=q%w,qj=(q/w)|0; sx+=qi; sy+=qj; cellsL.push(q); for(const [di,dj] of [[1,0],[-1,0],[0,1],[0,-1]]){ const ni=qi+di,nj=qj+dj; if(ni<0||nj<0||ni>=w||nj>=h) continue; const nq=nj*w+ni; if(lab[nq]<0&&vals[nq]===val){ lab[nq]=id; st.push(nq); } } }
+      let best=cellsL[0],bd=-1; const stp=Math.max(1,Math.floor(cellsL.length/400)); for(let u=0;u<cellsL.length;u+=stp){ const q=cellsL[u]; const qx=(q%w+.5)*res,qy=(((q/w)|0)+.5)*res; if(qx<80||qx>v.rect.w-80||qy<40||qy>v.rect.h-20) continue; const p=[v.wx(v.rect.x+(q%w+.5)*res),v.wy(v.rect.y+(((q/w)|0)+.5)*res)]; let dm=1e9; for(let r=0;r<P.length;r++) dm=Math.min(dm,distSeg(p,P[r],P[(r+1)%P.length])); if(dm>bd){bd=dm;best=q;} } comps.push({val,n,rep:[best%w,(best/w)|0]}); }
+    return {F,comps:comps.filter(cp=>cp.n>=8).sort((a,b)=>b.n-a.n)}; }
+  function draw(){ ctx.clearRect(0,0,c.lw,c.lh); const wall=M.value==='wall'; const {F,comps}=regions();
+    off=fieldImg(F,val=>{ const c0=wnRGB(val); return wall?c0.map(x=>255-(255-x)*0.45):c0; },off); drawImg(v,off,F);
+    drawPoly(v,P,true,{stroke:C.bnd,width:3}); drawArrows(v,P,true,{color:C.bnd});
+    let lines=[];
+    if(!wall){ comps.forEach((cp,k)=>{ const px=v.rect.x+(cp.rep[0]+.5)*res, py=v.rect.y+(cp.rep[1]+.5)*res; txt(ctx,`D${idxSub(k+1)}: w = ${cp.val}`,px,py,{align:'center',base:'middle',font:'bold 13px system-ui',bg:'rgba(255,255,255,.88)'}); });
+      const tot=comps.reduce((s,cp)=>s+cp.n,0); lines.push(`${comps.length} Regionen D_i gefunden:  `+comps.map((cp,k)=>`D${idxSub(k+1)}: w = ${cp.val} (${de(100*cp.n/tot,0)} % des Bildes)`).join(' · '));
+      lines.push('In jeder Region ist w konstant. Bewegt man die Kurve, verschieben sich nur die Grenzen (Gl. 7).'); }
+    else { const n=P.length, eps=0.03; let ok=0,bad=0,skip=0; const placed=[];
+      for(let s=0;s<n;s++){ const a=P[s],b=P[(s+1)%n],dx=b[0]-a[0],dy=b[1]-a[1],L=Math.hypot(dx,dy); if(L<1e-9) continue; const nx_=dy/L,ny_=-dx/L;
+        for(let m=1;m<=6;m++){ const t=m/7, p=[a[0]+t*dx,a[1]+t*dy]; let near=false; for(let r=0;r<n;r++){ if(r===s) continue; if(distSeg(p,P[r],P[(r+1)%n])<3*eps){ near=true; break; } } if(near){ skip++; continue; }
+          const wl=Math.round(wn2(p[0]-eps*nx_,p[1]-eps*ny_,P,true)), wr=Math.round(wn2(p[0]+eps*nx_,p[1]+eps*ny_,P,true)); if(wl-wr===1) ok++; else bad++;
+          const X=v.X(p[0]),Y=v.Y(p[1]),lx=X-nx_*24,ly=Y+ny_*24;
+          if(m===4&&L*v.sx>46&&placed.every(([a,b])=>Math.hypot(a-lx,b-ly)>40)){ placed.push([lx,ly]); arrowPx(ctx,X,Y,X+nx_*26,Y-ny_*26,C.grad,2,7); txt(ctx,`${wl} | ${wr}`,lx,ly,{align:'center',base:'middle',font:'bold 12px system-ui',bg:'rgba(255,255,255,.92)'}); } } }
+      txt(ctx,'Beschriftung „Innenseite | Normalenseite“, violett = Normale n',10,20,{font:'12.5px system-ui',bg:'rgba(255,255,255,.9)'});
+      lines.push(`Geprüft an ${ok+bad} Stellen der Kurve (${skip} Stellen direkt an Kreuzungen übersprungen):`);
+      lines.push(bad===0?`überall gilt w(Innenseite) − w(Normalenseite) = 1 ✔  →  Faktor (w_i − w_j) = 1 in Gl. 13, daher Gl. 14`:`${bad} Stellen weichen ab (meist nahe einer Kreuzung)`); }
+    out(el).textContent=lines.join('\n'); }
+  M.addEventListener('change',draw);
+  draggable(c,v,()=>ptH(P,{r:11}),draw);
+  draw();
+});
+
+registerDemo('normalvel', el=>{
+  const c=el.querySelector('canvas'); const v=new View(c,0,10,0,5); const ctx=v.ctx;
+  const P=[[1.5,1.0],[5.0,0.7],[8.4,1.3],[8.0,3.9],[5.2,4.3],[2.0,3.6]]; let k=3; const oA=opt(el,'ang'),oT=opt(el,'tan');
+  function draw(){ ctx.clearRect(0,0,c.lw,c.lh); const n=P.length, ang=(+oA.value)*PI/180, e=[Math.cos(ang),Math.sin(ang)], eps=0.45;
+    drawPoly(v,P,true,{fill:'rgba(59,130,246,.25)',stroke:null});
+    const Q=P.map((p,i)=>i===k?[p[0]+eps*e[0],p[1]+eps*e[1]]:p); let rey=0; const parts=[];
+    for(const [i0,i1] of [[(k-1+n)%n,k],[k,(k+1)%n]]){ const a=P[i0],b=P[i1],dx=b[0]-a[0],dy=b[1]-a[1],L=Math.hypot(dx,dy); const nx_=dy/L,ny_=-dx/L, en=e[0]*nx_+e[1]*ny_;
+      const other=i0===k?b:a; drawPoly(v,[other,P[k],Q[k]],true,{fill:en>=0?'rgba(22,163,74,.28)':'rgba(220,38,38,.28)',stroke:null});
+      rey+=en*L/2; parts.push(en*L/2);
+      for(let m=0;m<=8;m++){ const t=m/8, lam=i1===k?t:1-t; if(lam<0.02) continue; const p=[a[0]+t*dx,a[1]+t*dy], vx=lam*e[0], vy=lam*e[1], vn=vx*nx_+vy*ny_; const X=v.X(p[0]),Y=v.Y(p[1]),S=70;
+        arrowPx(ctx,X,Y,X+vn*nx_*S,Y-vn*ny_*S,vn>=0?C.pos:C.neg,2.4,7);
+        if(oT.checked){ const tx=vx-vn*nx_, ty=vy-vn*ny_; ctx.save(); ctx.globalAlpha=.6; arrowPx(ctx,X,Y,X+tx*S,Y-ty*S,'#6b7280',1.6,6); ctx.restore(); } } }
+    drawPoly(v,Q,true,{stroke:'#6b7280',width:1.4,dash:[5,4]});
+    drawPoly(v,P,true,{stroke:C.bnd,width:3});
+    P.forEach((p,i)=>disc(v,p,i===k?7:5,i===k?C.grad:C.ink,'#fff',2));
+    const X=v.X(P[k][0]),Y=v.Y(P[k][1]); arrowPx(ctx,X,Y,X+e[0]*70,Y-e[1]*70,C.grad,3.5,11); txt(ctx,'∂θ v_k',X+e[0]*78,Y-e[1]*78,{align:'center',base:'middle',font:'bold 13px system-ui',color:C.grad,bg:'rgba(255,255,255,.85)'});
+    const d=1e-5, Pp=P.map((p,i)=>i===k?[p[0]+d*e[0],p[1]+d*e[1]]:p), Pm=P.map((p,i)=>i===k?[p[0]-d*e[0],p[1]-d*e[1]]:p), fd=(polyArea(Pp)-polyArea(Pm))/(2*d);
+    out(el).textContent=`Rand-Term (Gl. 8 mit k·w = 1):  Σ ∫ (∂θ x_b)ᵀ n dℓ = Σ über die 2 Kanten (eᵀn)·L/2 = ${de(parts[0],4)} ${parts[1]>=0?'+':'−'} ${de(Math.abs(parts[1]),4)} = ${de(rey,4)}\nFinite Differenzen der Polygonfläche:  (A(θ+δ) − A(θ−δ)) / 2δ = ${de(fd,4)}     Differenz ${Math.abs(rey-fd).toExponential(1).replace('.',',')}\nDer graue Tangential-Anteil ändert die Fläche nicht; er kommt in der Formel gar nicht vor.`; }
+  oA.addEventListener('input',draw); oT.addEventListener('change',draw);
+  draggable(c,v,()=>P.map((p,i)=>({x:p[0],y:p[1],idx:i,move:(x,y)=>{p[0]=clamp(x,0.2,9.8);p[1]=clamp(y,0.2,4.8);}})),draw,null,(e,h)=>{ if(h){ k=h.idx; draw(); } });
+  draw();
+});
+
+registerDemo('clip', el=>{
+  const c=el.querySelector('canvas'); const v=new View(c,0,8,0,8*400/760); const ctx=v.ctx;
+  const G={x0:0,y0:0,h:1,nx:8,ny:4}; const T=[[0.6,0.45],[7.1,1.5],[2.8,3.75]];
+  const pal=[[219,234,254],[220,252,231],[254,243,199],[252,231,243],[237,233,254],[207,250,254],[254,226,226],[236,252,203]];
+  function draw(){ ctx.clearRect(0,0,c.lw,c.lh); let n=0,maxK=0,nsub=0,sum=0; const A=Math.abs(polyArea(T));
+    for(let j=0;j<G.ny;j++)for(let i=0;i<G.nx;i++){ const q=dedupPoly(clipPoly(T,i,j,i+1,j+1)); if(q.length<3) continue; const a=Math.abs(polyArea(q)); if(a<1e-9) continue; n++; maxK=Math.max(maxK,q.length); nsub+=q.length-2; sum+=a;
+      drawPoly(v,q,true,{fill:rgb(pal[(i+3*j)%8]),stroke:'#334155',width:1.4});
+      ctx.save(); ctx.setLineDash([4,3]); ctx.strokeStyle=C.grad; ctx.lineWidth=1.4; ctx.beginPath(); for(let m=2;m<q.length-1;m++){ ctx.moveTo(v.X(q[0][0]),v.Y(q[0][1])); ctx.lineTo(v.X(q[m][0]),v.Y(q[m][1])); } ctx.stroke(); ctx.restore();
+      q.forEach(p=>disc(v,p,2.6,'#334155')); disc(v,q[0],4.2,C.grad);
+      const cx=q.reduce((s,p)=>s+p[0],0)/q.length, cy=q.reduce((s,p)=>s+p[1],0)/q.length; if(a>0.06) txt(ctx,`${q.length}`,v.X(cx),v.Y(cy),{align:'center',base:'middle',font:'bold 12px system-ui',bg:'rgba(255,255,255,.85)'}); }
+    gridLines(v,G,'rgba(100,116,139,.6)',1.2); drawPoly(v,T,true,{stroke:C.bnd,width:3}); T.forEach(p=>disc(v,p,6,C.ink,'#fff',2));
+    txt(ctx,'Zahl = Ecken des Teilpolygons · violett gestrichelt = Fächer ab der violetten Ecke',10,v.Y(4.21)+18,{font:'12.5px system-ui',bg:'rgba(255,255,255,.9)'});
+    out(el).textContent=`${n} Teilpolygone (eins pro getroffenem Voxel), das größte hat ${maxK} Ecken (Draufsicht: max. 3 + 4 = 7)\nFächer-Triangulierung: k − 2 Teildreiecke pro k-Eck  →  ${nsub} Teildreiecke insgesamt\nSumme der Teilflächen = ${de(sum,5)}   Dreiecksfläche = ${de(A,5)}   ${Math.abs(sum-A)<1e-9?'✔ nichts fehlt, nichts doppelt':''}`; }
+  draggable(c,v,()=>T.map(p=>({x:p[0],y:p[1],move:(x,y)=>{p[0]=clamp(x,0.02,7.98);p[1]=clamp(y,0.02,4.19);}})),draw);
+  draw();
+});
+
+registerDemo('hat', el=>{
+  const c=el.querySelector('canvas'); const v=new View(c,0,8,0,8*360/760); const ctx=v.ctx;
+  const T=[[1.0,0.5],[6.8,1.0],[3.2,3.4]]; let k=2, off=null;
+  const lam=(x,y,j)=>polyArea([[x,y],T[(j+1)%3],T[(j+2)%3]])/polyArea(T);
+  function draw(){ ctx.clearRect(0,0,c.lw,c.lh); const A=polyArea(T);
+    const F=computeField(v,4,(x,y)=>lam(x,y,k)); off=fieldImg(F,val=>{ const t=clamp(val,0,1); return [255+(22-255)*t,255+(163-255)*t,255+(74-255)*t]; },off);
+    ctx.save(); ctx.beginPath(); T.forEach((p,i)=>i?ctx.lineTo(v.X(p[0]),v.Y(p[1])):ctx.moveTo(v.X(p[0]),v.Y(p[1]))); ctx.closePath(); ctx.clip(); drawImg(v,off,F); for(const l of [0.25,0.5,0.75]) drawIso(v,F,l,'rgba(20,83,45,.7)',1.3); ctx.restore();
+    drawPoly(v,T,true,{stroke:C.bnd,width:3});
+    const g=[(T[0][0]+T[1][0]+T[2][0])/3,(T[0][1]+T[1][1]+T[2][1])/3]; disc(v,g,5,C.grad,'#fff',2); txt(ctx,`Schwerpunkt: λ = ${de(lam(g[0],g[1],k),3)}`,v.X(g[0])+9,v.Y(g[1])+18,{font:'bold 12.5px system-ui',color:C.grad,bg:'rgba(255,255,255,.85)'});
+    const a=T[(k+1)%3],b=T[(k+2)%3]; txt(ctx,'λ = 0 (Gegenkante)',v.X((a[0]+b[0])/2),v.Y((a[1]+b[1])/2)+18,{align:'center',font:'12px system-ui',bg:'rgba(255,255,255,.85)'});
+    T.forEach((p,i)=>{ disc(v,p,i===k?8:5,i===k?C.pos:C.ink,'#fff',2); if(i===k) txt(ctx,'λ = 1',v.X(p[0])+10,v.Y(p[1])-10,{font:'bold 13px system-ui',color:'#166534',bg:'rgba(255,255,255,.85)'}); });
+    const xs=T.map(p=>p[0]),ys=T.map(p=>p[1]),x0=Math.min(...xs),x1=Math.max(...xs),y0=Math.min(...ys),y1=Math.max(...ys),N=240,hx=(x1-x0)/N,hy=(y1-y0)/N; let I=0;
+    for(let j=0;j<N;j++)for(let i=0;i<N;i++){ const x=x0+(i+.5)*hx,y=y0+(j+.5)*hy; const l0=lam(x,y,0),l1=lam(x,y,1),l2=lam(x,y,2); if(l0>=0&&l1>=0&&l2>=0) I+=[l0,l1,l2][k]; } I*=hx*hy;
+    const Aa=Math.abs(A);
+    out(el).textContent=`Bewegte Ecke v${idxSub(k+1)}    Fläche(t) = ${de(Aa,4)}\n∫ λ dA numerisch (240×240, Mittelpunktsregel) = ${de(I,4)}\nFläche / 3                                     = ${de(Aa/3,4)}     relativer Unterschied ${de(100*Math.abs(I-Aa/3)/(Aa/3),2)} %\n→ Gl. 22: Beitrag von v${idxSub(k+1)} = (1/|□|) · ⅓ · (∂θ v${idxSub(k+1)})ᵀ n_t · Fläche(t)`; }
+  draggable(c,v,()=>T.map((p,i)=>({x:p[0],y:p[1],idx:i,move:(x,y)=>{p[0]=clamp(x,0.1,7.9);p[1]=clamp(y,0.1,3.7);}})),draw,null,(e,h)=>{ if(h){ k=h.idx; draw(); } });
+  draw();
+});
+
+registerDemo('mellow', el=>{
+  const c=el.querySelector('canvas'); const v=new View(c,0,8,-0.62,1.32,{x:10,y:6,w:555,h:308}); const ctx=v.ctx;
+  const W=[0.05,0.3,0.92,1.0,0.6,0.15,0.0,0.4]; const d=W.length; const oL=opt(el,'lw');
+  const mm=w=>{ const m=Math.max(...W); let s=0; for(const x of W) s+=Math.exp(w*(x-m)); return m+Math.log(s/d)/w; };
+  const smx=w=>{ const m=Math.max(...W); const e=W.map(x=>Math.exp(w*(x-m))); const s=e.reduce((a,b)=>a+b,0); return e.map(x=>x/s); };
+  function draw(){ ctx.clearRect(0,0,c.lw,c.lh); const w=Math.pow(10,+oL.value), m=mm(w), sm=smx(w), mx=Math.max(...W), mean=W.reduce((a,b)=>a+b,0)/d;
+    ctx.save(); ctx.strokeStyle='#cbd5e1'; ctx.beginPath(); ctx.moveTo(v.X(0),v.Y(0)); ctx.lineTo(v.X(8),v.Y(0)); ctx.stroke(); ctx.restore();
+    W.forEach((x,k)=>{ const X0=v.X(k+0.2),X1=v.X(k+0.8); ctx.fillStyle='rgba(59,130,246,.85)'; ctx.fillRect(X0,v.Y(x),X1-X0,v.Y(0)-v.Y(x)); txt(ctx,de(x,2),(X0+X1)/2,v.Y(x)-6,{align:'center',font:'12px system-ui'});
+      const hgt=0.5*sm[k]; ctx.fillStyle='rgba(124,58,237,.8)'; ctx.fillRect(X0,v.Y(0),X1-X0,v.Y(-hgt)-v.Y(0)); txt(ctx,de(100*sm[k],0)+' %',(X0+X1)/2,v.Y(-hgt)+14,{align:'center',font:'11.5px system-ui',color:'#5b21b6'}); disc(v,[k+0.5,x],5,'#1e3a8a','#fff',1.5); });
+    const line=(y,col,dash,wd)=>{ ctx.save(); ctx.strokeStyle=col; ctx.lineWidth=wd; if(dash) ctx.setLineDash(dash); ctx.beginPath(); ctx.moveTo(v.X(0),v.Y(y)); ctx.lineTo(v.X(8),v.Y(y)); ctx.stroke(); ctx.restore(); };
+    line(mean,'#6b7280',[5,4],1.6); line(mx,C.ink,null,1.4); line(m,C.grad,null,3);
+    const lx=585; txt(ctx,`w = ${w<10?de(w,2):de(w,0)}`,lx,30,{font:'bold 14px system-ui'}); txt(ctx,`━ max = ${de(mx,3)}`,lx,58,{font:'13px system-ui',color:C.ink}); txt(ctx,`━ mellowmax = ${de(m,3)}`,lx,80,{font:'bold 13px system-ui',color:C.grad}); txt(ctx,`┅ Mittelwert = ${de(mean,3)}`,lx,102,{font:'13px system-ui',color:'#6b7280'});
+    txt(ctx,'unten violett:',lx,v.Y(-0.15),{font:'12px system-ui',color:'#5b21b6'}); txt(ctx,'Softmax-Gewichte',lx,v.Y(-0.15)+16,{font:'12px system-ui',color:'#5b21b6'}); txt(ctx,'= Gradient',lx,v.Y(-0.15)+32,{font:'12px system-ui',color:'#5b21b6'});
+    out(el).textContent=`mellowmax_w(W) = (1/w)·ln((1/d)·Σ exp(w·W_k)) = ${de(m,4)}    (max = ${de(mx,4)}, Mittelwert = ${de(mean,4)}, d = ${d})\nGradient ∂mellowmax/∂W_k = softmax: (${sm.map(x=>de(x,3)).join('; ')})   Summe = ${de(sm.reduce((a,b)=>a+b,0),3)}`; }
+  oL.addEventListener('input',draw);
+  draggable(c,v,()=>W.map((x,k)=>({x:k+0.5,y:x,move:(_,y)=>{W[k]=clamp(y,0,1.2);}})),draw);
+  draw();
+});
+
 function initUI(){
   fillSmallSvgs();
   const ps=document.getElementById('pipeSvg'), ptx=document.getElementById('pipeTxt');
@@ -1895,7 +2633,7 @@ if(document.readyState==='loading') document.addEventListener('DOMContentLoaded'
 /* =====================================================================
    3D-Demos (Three.js): Raumwinkel (Kap. 3) und Antipodal-Methode (Kap. 6)
    ===================================================================== */
-const els3=[...document.querySelectorAll('[data-demo="solid"],[data-demo="antipodal"]')];
+const els3=[...document.querySelectorAll('[data-demo="solid"],[data-demo="antipodal"],[data-demo="prism"]')];
 let THREE=null, OrbitControls=null;
 try{ THREE=await import('three'); ({OrbitControls}=await import('three/addons/controls/OrbitControls.js')); }
 catch(err){ console.warn('Three.js konnte nicht geladen werden:',err); els3.forEach(el=>{ const m=el.querySelector('.msg'); if(m) m.textContent='Die 3D-Demo braucht Internet: Three.js konnte nicht vom CDN geladen werden.'; }); }
@@ -1926,13 +2664,13 @@ function waveMesh(n=10){ const V=[],F=[]; const id=(i,j)=>i*(n+1)+j; for(let i=0
 const MESHES={cube:()=>cubeMesh(false),opencube:()=>cubeMesh(true),hemi:()=>hemiMesh(),wave:()=>waveMesh()};
 
 /* Three.js-Bausteine */
-function setup(el){ const box=el.querySelector('.three'); const msg=box.querySelector('.msg'); if(msg) msg.remove();
+function setup(el,op={}){ const box=el.querySelector('.three'); const msg=box.querySelector('.msg'); if(msg) msg.remove();
   const renderer=new THREE.WebGLRenderer({antialias:true}); renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,2)); box.appendChild(renderer.domElement); renderer.domElement.style.display='block';
   const scene=new THREE.Scene(); scene.background=new THREE.Color(0xffffff);
-  const cam=new THREE.PerspectiveCamera(38,1,0.05,100); cam.position.set(3.4,2.5,4.3);
-  const ctr=new OrbitControls(cam,renderer.domElement); ctr.enableDamping=true;
+  const cam=new THREE.PerspectiveCamera(38,1,0.05,100); cam.position.set(...(op.cam||[3.4,2.5,4.3]));
+  const ctr=new OrbitControls(cam,renderer.domElement); ctr.enableDamping=true; if(op.target){ ctr.target.set(...op.target); ctr.update(); }
   scene.add(new THREE.AmbientLight(0xffffff,1.6)); const dl=new THREE.DirectionalLight(0xffffff,2.2); dl.position.set(3,5,4); scene.add(dl);
-  const grid=new THREE.GridHelper(4,8,0xcbd5e1,0xe2e8f0); grid.position.y=-1.4; scene.add(grid);
+  const grid=new THREE.GridHelper(4,8,0xcbd5e1,0xe2e8f0); grid.position.y=op.gridY??-1.4; scene.add(grid);
   const resize=()=>{ const w=box.clientWidth||600,h=box.clientHeight||440; renderer.setSize(w,h); cam.aspect=w/h; cam.updateProjectionMatrix(); };
   new ResizeObserver(resize).observe(box); resize();
   const dyn=new THREE.Group(); scene.add(dyn);
@@ -1986,6 +2724,37 @@ window.registerDemo('antipodal', el=>{
     S.dyn.add(ball(add(p,sc(x0,rs)),0.035,0x2563eb)); S.dyn.add(ball(add(p,sc(x1,rs)),0.045,0x111827));
     if(BE.length){ const segs=[]; for(const [a,b] of BE) segs.push(...projCurve(M.V[a],M.V[b],p,rs)); S.dyn.add(tubes(segs,0.007,ORANGE)); if(o.aux.checked) S.dyn.add(sphPatches(aux,p,rs)); }
     out.textContent=`(a) Strahl zählen: χ(x₀) = ${chi>0?'+':''}${chi}   Treffer: ${hits.length?hits.map(h=>h[1]>0?'+1':'−1').join(', '):'keine'}\n(b) Randterm: (1/4π)·Σ Area(a,b,x₁) über ${BE.length} Randkanten = ${de(term,4)}\nw = χ + Randterm = ${de(w,4)}     Referenz Jacobson ΣΩ_f/4π = ${de(ref,4)}     Differenz ${Math.abs(w-ref).toExponential(1).replace('.',',')}`; }
+  Object.values(o).forEach(i=>i.addEventListener('input',update)); update();
+});
+
+/* Kap. 10: Schattenkörper eines Dreiecks (Djuren Abschn. 3.3, Schritte 3.1/3.2). Paper-z = three-y. */
+function prismMesh(foot,y0,tops,color,opacity){ const V=[],F=[[0,2,1],[3,4,5]]; for(let i=0;i<3;i++) V.push([foot[i][0],y0,foot[i][1]]); for(let i=0;i<3;i++) V.push([foot[i][0],tops[i],foot[i][1]]);
+  for(let i=0;i<3;i++){ const j=(i+1)%3; F.push([i,j,3+j],[i,3+j,3+i]); } return triMesh(V,F,()=>color,opacity); }
+function boxEdges(x,y,z,color,opacity){ const g=new THREE.EdgesGeometry(new THREE.BoxGeometry(1,1,1)); const l=new THREE.LineSegments(g,new THREE.LineBasicMaterial({color,transparent:true,opacity})); l.position.set(x,y,z); return l; }
+window.registerDemo('prism', el=>{
+  const S=setup(el,{cam:[3.4,3.3,4.4],target:[0.5,1.55,0.5],gridY:0}); const o={z1:optv(el,'z1'),z2:optv(el,'z2'),z3:optv(el,'z3'),flip:optv(el,'flip')}; const out=el.querySelector('[data-out]');
+  const foot=[[0.12,0.18],[0.88,0.32],[0.38,0.86]];
+  function update(){ S.clear(); const z=[+o.z1.value,+o.z2.value,+o.z3.value];
+    const P3=foot.map((f,i)=>[f[0],z[i],f[1]]); const ord=o.flip.checked?[0,1,2]:[0,2,1];
+    const A=P3[ord[0]],B=P3[ord[1]],Cc=P3[ord[2]]; const cr=cross(sub(B,A),sub(Cc,A)); const nrm=nz(cr); const up=nrm[1]>0;
+    const Ap=0.5*cr[1], zb=(z[0]+z[1]+z[2])/3, vol=Ap*zb, top=Ap*(zb-2), below=Ap*1;
+    const col=up?GREEN:RED;
+    const plate=new THREE.Mesh(new THREE.PlaneGeometry(2.2,2.2),new THREE.MeshBasicMaterial({color:0xe5e7eb,transparent:true,opacity:0.55,side:THREE.DoubleSide,depthWrite:false})); plate.rotation.x=-PI/2; plate.position.set(0.5,0,0.5); S.dyn.add(plate);
+    for(let k=0;k<3;k++) S.dyn.add(boxEdges(0.5,k+0.5,0.5,0x334155,k===2?0.75:0.45));
+    S.dyn.add(prismMesh(foot,0.002,[2,2,2],col,0.16));
+    S.dyn.add(prismMesh(foot,2,z,col,0.5));
+    S.dyn.add(triMesh(foot.map(f=>[f[0],0.004,f[1]]),[[0,1,2]],()=>0x6b7280,0.6));
+    S.dyn.add(triMesh([A,B,Cc],[[0,1,2]],()=>0x3b82f6,1));
+    S.dyn.add(tubes([[A,B],[B,Cc],[Cc,A]],0.012,ORANGE));
+    const ctrd=[(A[0]+B[0]+Cc[0])/3,(A[1]+B[1]+Cc[1])/3,(A[2]+B[2]+Cc[2])/3];
+    S.dyn.add(new THREE.ArrowHelper(new THREE.Vector3(...nrm),new THREE.Vector3(...ctrd),0.55,VIOLET,0.14,0.08));
+    S.dyn.add(ball(ctrd,0.025,VIOLET));
+    out.textContent=`Normale n zeigt ${up?'nach oben, weg von der Grundebene: dᵀn > 0 → positiver Beitrag (grün)':'nach unten, zur Grundebene: dᵀn < 0 → negativer Beitrag (rot)'}\n`+
+      `signierte Schattenfläche A = ${de(Ap,4)}    Schwerpunkthöhe z̄ = (z₁+z₂+z₃)/3 = ${de(zb,4)}\n`+
+      `Volumen des Schattenkörpers = A · z̄ = ${de(vol,4)}\n`+
+      `Voxel k = 2 (enthält das Dreieck):  A · (z̄ − 2) = ${de(top,4)}   [Schritt 3.1: Volumen minus Beiträge darunter]\n`+
+      `Voxel k = 1 und k = 0:              je A · 1   = ${de(below,4)}   [Schritt 3.2: Fläche × Seitenlänge]\n`+
+      `Summe = ${de(top+2*below,4)} = A · z̄ ✔   (Voxelvolumen 1, also sind das direkt die Beiträge zum Füllgrad)`; }
   Object.values(o).forEach(i=>i.addEventListener('input',update)); update();
 });
 }
