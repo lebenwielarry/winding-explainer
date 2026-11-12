@@ -86,6 +86,27 @@ table.mx.lex td:first-child{white-space:nowrap;font-size:15.5px}
 .school{background:#f0fdf4;border-left:5px solid #16a34a}
 .school>.lbl{color:#166534}
 .mind>.demo{margin:10px 0 4px}
+.pack{margin:16px 0;border:1.5px solid #cbd5e1;border-radius:12px;padding:12px 16px;background-color:#fffef9;background-image:linear-gradient(#e6eef8 1px,transparent 1px),linear-gradient(90deg,#e6eef8 1px,transparent 1px);background-size:20px 20px}
+.pack .plbl{display:block;font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:#0e7490}
+.pack .ptitle{font-size:17px;font-weight:700;color:#0f172a;margin:2px 0 4px}
+.pack .pf,.pack .pex{font-size:14.5px;background:rgba(255,255,255,.9);border-radius:8px;padding:5px 10px;margin:4px 0}
+.pack .pex{border:1px dashed #94a3b8} .pack .pexw{font-size:13.5px;color:#475569;margin-top:2px}
+.pack .tasks{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:8px 14px;margin-top:8px}
+.pack .tk{background:#fff;border:1.5px solid #e2e8f0;border-radius:8px;padding:6px 10px}
+.pack .tk.ok{border-color:#16a34a;background:#f0fdf4} .pack .tk.no{border-color:#dc2626;background:#fef2f2}
+.pack .tq{font-size:15px;line-height:1.7} .pack .tn{color:#0e7490;margin-right:2px}
+.pack .ti{width:74px;font:inherit;font-size:15px;text-align:center;border:none;border-bottom:2px solid #475569;background:transparent;padding:0 2px;margin:0 2px}
+.pack .ti.t2{width:54px} .pack .tup{white-space:nowrap}
+.pack .ti:focus{outline:none;border-bottom-color:#0e7490;background:#ecfeff}
+.pack .chb{font:inherit;font-size:14px;border:1.5px solid #94a3b8;background:#fff;border-radius:6px;padding:1px 10px;margin:0 3px;cursor:pointer}
+.pack .chb.sel{border-color:#0e7490;background:#cffafe;font-weight:700}
+.pack .tfoot{display:flex;justify-content:space-between;align-items:center;gap:6px;margin-top:2px;min-height:22px}
+.pack .tm{font-size:13px;font-weight:600} .pack .tk.ok .tm{color:#15803d} .pack .tk.no .tm{color:#b91c1c}
+.pack .tl{font-size:12px;border:1px solid #cbd5e1;background:#f8fafc;border-radius:6px;padding:1px 8px;cursor:pointer;color:#475569;margin-left:auto}
+.pack .th{display:none;font-size:13.5px;color:#334155;margin-top:4px;padding-top:4px;border-top:1px dashed #cbd5e1}
+.pack .tk.show .th{display:block}
+.pack .pbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:10px}
+.pack .phint{font-size:12.5px;color:#64748b} .pack .pscore{margin-left:auto;font-size:14px;font-weight:600;color:#334155}
 .onesent{background:linear-gradient(135deg,#1d4ed8,#4f46e5);color:#fff;border-radius:12px;padding:14px 18px;margin:26px 0 12px;font-size:17px}
 .onesent b.lbl{display:block;font-size:12px;text-transform:uppercase;letter-spacing:.06em;opacity:.85;margin-bottom:4px}
 .quiz{margin:10px 0 0}
@@ -697,6 +718,7 @@ $$E_{\text{fill}}=\sum_{klm}\Big(\sum_{ij}(\bar{\mathbf C}_{ji})_{klm}-1\Big)^2,
 $$w(p)=\frac{1}{2\pi}\oint_C d\theta\;=\;\frac{1}{2\pi}\sum_{i=1}^{n}\theta_i,\qquad \theta_i=\operatorname{atan2}\big(\mathbf a_i\times\mathbf b_i,\;\mathbf a_i\cdot\mathbf b_i\big)$$
 <div class="legend"><div>\(C\)</div><div>die Kurve (Polygon mit \(n\) Segmenten)</div><div>\(d\theta\)</div><div>kleiner Drehwinkel des Blicks von p aus</div><div>\(\theta_i\)</div><div>vorzeichenbehafteter Winkel, unter dem Segment \(i\) von p aus erscheint (gegen den Uhrzeigersinn positiv)</div><div>\(\mathbf a_i,\mathbf b_i\)</div><div>Vektoren von p zu Anfang und Ende von Segment \(i\)</div><div>\(2\pi\)</div><div>eine volle Umdrehung</div></div>
 <span class="src">Jacobson, Folien 34–37</span> „Naive discretization is simple and exact.“</div>
+<div class="pack" data-pack="wnwinkel"></div>
 
 <h3 id="k3-open">Geschlossen vs. offen</h3>
 <p>Mach im Demo oben den Haken bei <b>„Kurve öffnen“</b>. Die Kurve verliert ein Segment. Jetzt gibt es keine sauberen 0/1-Regionen mehr, sondern ein stetiges Feld mit Kommazahlen wie 0,73 oder 0,41. Je kleiner die Lücke, desto näher liegt das Feld an 0/1:</p>
@@ -735,6 +757,7 @@ $$\Delta w=0\ \text{abseits der Kurve/Fläche},\qquad w^+-w^-=\pm1\ \text{beim D
 $$w(p)=\frac{1}{4\pi}\iint_S\sin\varphi\,d\theta\,d\varphi=\frac{1}{4\pi}\sum_{f=1}^{m}\Omega_f,\qquad \Omega_f=2\operatorname{atan2}\big(\mathbf v_0\cdot(\mathbf v_1\times\mathbf v_2),\;1+\mathbf v_0\!\cdot\!\mathbf v_1+\mathbf v_0\!\cdot\!\mathbf v_2+\mathbf v_1\!\cdot\!\mathbf v_2\big)$$
 <div class="legend"><div>\(\Omega_f\)</div><div>vorzeichenbehafteter Raumwinkel von Dreieck \(f\) = Fläche seines Abbilds auf der Einheitskugel um p</div><div>\(4\pi\)</div><div>Fläche der ganzen Einheitskugel</div><div>\(\mathbf v_0,\mathbf v_1,\mathbf v_2\)</div><div>die Dreiecksecken, von p aus gesehen und auf Länge 1 normiert</div></div>
 <span class="src">Jacobson, Folie 38</span> <span class="src">Antipodal, Gl. 1–2, 6</span> (Formel nach Van Oosterom &amp; Strackee 1983)</div>
+<div class="pack" data-pack="raumwinkel"></div>
 
 <h3 id="k3-seg">Anwendung: Innen/Außen-Segmentierung mit Graph Cut</h3>
 <svg class="figsvg" viewBox="0 0 960 200">
@@ -790,6 +813,7 @@ $$E=\sum_{i=1}^{m}\Big[u(x_i)+\lambda\,\tfrac12\!\sum_{j\in\mathcal N(i)}v(x_i,x
 <div class="box formula"><span class="lbl">③ Formel</span>
 $$A(x)=x^2,\qquad \frac{A(x+dx)-A(x)}{dx}=2x+dx\;\xrightarrow{dx\to0}\;\frac{dA}{dx}=2x$$
 <div class="legend"><div>\(dA/dx\)</div><div>Ableitung: Fläche pro zusätzlichem Meter Seitenlänge</div><div>\(dx\to0\)</div><div>Grenzwert: Das Eckquadrat verschwindet.</div></div></div>
+<div class="pack" data-pack="diffq"></div>
 
 <h3 id="k4-gd">Gradientenabstieg: Wanderer im Nebel</h3>
 <div class="box analogy"><span class="lbl">① Alltagsanalogie</span>Du stehst im Nebel auf einem Berg und siehst nur deine Füße. Du spürst, wo der Boden am steilsten abfällt (der negative Gradient), und machst einen Schritt dorthin. Das wiederholst du. So landest du im Tal, aber vielleicht nur in einem <i>lokalen</i> Tal.</div>
@@ -800,6 +824,7 @@ $$A(x)=x^2,\qquad \frac{A(x+dx)-A(x)}{dx}=2x+dx\;\xrightarrow{dx\to0}\;\frac{dA}
 <div class="box formula"><span class="lbl">③ Formel</span>
 $$\boldsymbol\theta_{k+1}=\boldsymbol\theta_k-\eta\,\nabla E(\boldsymbol\theta_k)$$
 <div class="legend"><div>\(\boldsymbol\theta_k\)</div><div>Position nach \(k\) Schritten (bei uns: alle Vertex-Positionen)</div><div>\(\nabla E\)</div><div>Gradient: zeigt bergauf (violetter Pfeil)</div><div>\(\eta\)</div><div>Schrittweite. Zu groß: Man springt über das Tal. Zu klein: Es dauert ewig.</div></div></div>
+<div class="pack" data-pack="gdstep"></div>
 
 <h3 id="k4-switch">Das Lichtschalter-Problem</h3>
 <div class="box analogy"><span class="lbl">① Alltagsanalogie</span>Ein <b>Lichtschalter</b> kennt nur aus/an. Drehst du ihn ein bisschen, passiert nichts, bis es plötzlich klick macht. Ein <b>Dimmer</b> wird stufenlos heller. Gradientenabstieg braucht einen Dimmer: Er muss spüren, ob „ein bisschen mehr“ besser oder schlechter ist.</div>
@@ -811,6 +836,7 @@ $$\boldsymbol\theta_{k+1}=\boldsymbol\theta_k-\eta\,\nabla E(\boldsymbol\theta_k
 $$\underbrace{w(\mathbf x_{\mathbf i})\in\{0,1\}}_{\text{Schalter}}\;\Rightarrow\;\partial_\theta w(\mathbf x_{\mathbf i})=0\ \text{oder undefiniert};\qquad \underbrace{\tilde w(\mathbf x_{\mathbf i})=\tfrac{1}{|\square|}\!\int_\square w}_{\text{Dimmer}}\;\Rightarrow\;\partial_\theta\tilde w=\tfrac{1}{h}\,v_n$$
 <div class="legend"><div>\(w(\mathbf x_{\mathbf i})\)</div><div>Winding Number am Voxelzentrum (Punktabtastung)</div><div>\(\tilde w\)</div><div>Mittelwert über das Voxel (Box-Filter) = Füllgrad</div><div>\(h\)</div><div>Voxelbreite (in 1D)</div><div>\(v_n\)</div><div>Normalgeschwindigkeit der Wand (hier 1)</div></div>
 <span class="src">Djuren, Abschn. 3</span> „the derivative is zero almost everywhere … either zero or undefined“ <span class="src">Sun, Abschn. 1</span> „either trivially zero or infinity“</div>
+<div class="pack" data-pack="dimmer"></div>
 
 <h3 id="k4-chain">Kettenregel und Gl. 15</h3>
 <svg class="figsvg" viewBox="0 0 960 260">
@@ -857,6 +883,7 @@ $$\frac{d}{d\theta}\int_{D(\theta)} f\,dA=\underbrace{\int_{D}\partial_\theta f\
 $$\partial_\theta \tilde w_{\mathbf i}\approx\frac{\tilde w_{\mathbf i}(\theta+\varepsilon)-\tilde w_{\mathbf i}(\theta-\varepsilon)}{2\varepsilon}\qquad(\text{zentrale Differenz, Fehler}\sim\varepsilon^2)$$
 <div class="legend"><div>\(\varepsilon\)</div><div>kleine Verschiebung des Vertex. Zu groß: Nichtlinearität. Zu klein: Rundungsfehler (bei Monte Carlo: Rauschen).</div></div>
 <span class="src">Djuren, Abb. 2</span> zeigt genau diesen Vergleich, dort mit Monte-Carlo-Integration und Box-Filter der Breite 3.</div>
+<div class="pack" data-pack="fdiff"></div>
 <div class="onesent"><b class="lbl">In einem Satz</b>Gradientenabstieg braucht Ableitungen. Harte 0/1-Voxel liefern keine, gemittelte Voxel (Box-Filter) schon. Das Reynolds-Theorem sagt, dass sich das Mittel nur über den bewegten Rand ändert.</div>
 <div class="quiz"><b>Verständnisfragen</b>
 <details><summary>1. Warum hilft es nicht, einfach die 0/1-Voxelisierung mit Autograd abzuleiten?</summary><div>Weil die Funktion stückweise konstant ist. Autograd liefert dann fast überall 0. Genau das passiert bei DOPH (Djuren, Abb. 6: „Discretize-then-Differentiate“).</div></details>
@@ -1218,7 +1245,8 @@ Barill et al. 2018 „Fast winding numbers for soups and clouds“ · Feng, Gill
 <b>Kurz gesagt:</b> ein Satz vorab mit der Aussage des Abschnitts.<br>
 <b>🧠 Bild im Kopf:</b> eine Grafik, die aus der Formel <i>berechnet</i> ist, keine Skizze. Achsen, Kurven und Zahlen stimmen. Fast alle kannst du anfassen. Ein Prüfwert im grauen Kasten darunter zeigt, dass die Rechnung aufgeht.<br>
 <b>③ Funktions-Steckbrief:</b> Der Titel ist der Name der Funktion. Darunter steht, was die Funktion ist, was hineingeht und was herauskommt. Dann folgen die Formel, die Formel <b>als Satz gelesen</b> und die Bedeutung jedes Symbols.<br>
-<b>🎓 Brücke zur Schule:</b> Überall, wo Ableitungen vorkommen, steht die Übersetzung in die Strich-Schreibweise \(f'(x)\).</div>
+<b>🎓 Brücke zur Schule:</b> Überall, wo Ableitungen vorkommen, steht die Übersetzung in die Strich-Schreibweise \(f'(x)\).<br>
+<b>✏️ Übungspäckchen:</b> fünf kleine Aufgaben zum Selberrechnen, wie im Rechenheft. Tippe dein Ergebnis ein (Komma oder Punkt, auch Brüche wie 1/3) und drück Enter. „Lösung“ zeigt Ergebnis und Rechenweg, „🎲 Neue Zahlen“ gibt ein frisches Päckchen.</div>
 <div class="where" data-on="theta,mesh,omega,w,wt,W,E,grad"></div>
 <p>Diese Leiste ist die Kette des ganzen Papers. Die Regler \(\boldsymbol\theta\) legen das Mesh \(\partial\Omega\) fest. Das Mesh legt das Innere \(\Omega\) fest. Daraus folgt die Winding Number \(w\), daraus geglättet \(\tilde w\), daraus abgetastet das Voxelgitter \(\mathbf W\) und daraus die Energie \(E\). Der Gradient \(\partial E/\partial\boldsymbol\theta\) läuft dieselbe Kette rückwärts, vom \(E\) zurück zu den Reglern.</p>
 <div class="demo"><span class="lbl">Überblick · Der rote Faden des Papers in acht Schritten</span>
@@ -1325,6 +1353,7 @@ $$\Omega\subset\mathbb R^n,\qquad \partial\Omega=\text{Rand von }\Omega,\qquad \
 </div><span class="src">Djuren, Abschn. 1</span></div>
 <div class="box note"><span class="lbl">⚠️ Achtung: \(\partial\) hat im Paper zwei Bedeutungen</span>
 Vor einer <b>Menge</b> heißt \(\partial\) „Rand von“: \(\partial\Omega\), \(\partial D_i\). Vor einem Index oder in einem Bruch heißt es „<b>Ableitung</b>“: \(\partial_{\boldsymbol\theta}\), \(\frac{\partial E}{\partial\boldsymbol\theta}\). In Gl. 8 stehen beide nebeneinander. Das ist kein Zufall: Die Ableitung des Volumens lebt genau auf dem Rand.</div>
+<div class="pack" data-pack="menge"></div>
 
 <h3 id="k10-notation">Ableitungen lesen: von f′(x) zu ∂E/∂θ</h3>
 <div class="where" data-on="E,grad"></div>
@@ -1344,6 +1373,7 @@ Beispiel: ein Dreieck, bei dem \(\mathbf v_1\) und \(\mathbf v_2\) fest sind und
 <canvas width="760" height="380"></canvas>
 <div class="readout" data-out></div>
 <p class="cap">Zieh \(\mathbf v_3\). Die Höhenlinien laufen parallel zur Kante \(\mathbf v_1\mathbf v_2\): \(\mathbf v_3\) parallel zur Gegenkante zu schieben ändert die Fläche nicht. Die grüne Linie ist das Minimum \(A=A^\star\). Hier ist der \(\arg\min\) also nicht ein Punkt, sondern eine ganze Linie.</p></div></div>
+<div class="pack" data-pack="partiell"></div>
 
 <h3 id="k10-theta">Abschn. 1: Parameter θ, Energie E und die Kettenregel (Gl. 1)</h3>
 <div class="where" data-on="theta,omega,E,grad"></div>
@@ -1358,7 +1388,7 @@ Das Dreieck hat 3 Vertices, also \(m=6\) Regler: \(\boldsymbol\theta=(x_1,y_1,x_
 <p class="cap">Hier ist „das Volumen“ eine einzige Zahl, die Fläche \(A\). Das ist ein Spielzeug zur Kettenregel, nicht die Energie des Papers.</p></div></div>
 <div class="box mind"><span class="lbl">🧠 Bild im Kopf: Kettenregel = Steigungen multiplizieren</span>
 Jetzt wird nur ein Regler bewegt, \(t=y_3\). Grafik ① zeigt die Fläche \(A(t)\); sie ist eine Gerade, ihre Steigung ist \(dA/dt\). Grafik ② zeigt die Energie als Funktion der Fläche, \(E(A)=(A-4)^2\), eine Parabel mit Steigung \(dE/dA=2(A-4)\). Grafik ③ zeigt die Verkettung \(E(A(t))\). Ihre Steigung ist genau das <b>Produkt</b> der beiden anderen Steigungen. Das ist Gl. 1 mit einer einzigen Zahl als „Volumen“.
-<div class="demo" data-demo="chain"><span class="lbl">② Interaktiv · Gl. 1 als drei Graphen</span>
+<div class="demo" data-demo="chain3"><span class="lbl">② Interaktiv · Gl. 1 als drei Graphen</span>
 <canvas width="760" height="300"></canvas>
 <div class="controls"><label>Regler \(t=y_3\) <input type="range" min="0.5" max="5" step="0.01" value="3.8" data-opt="t"></label></div>
 <div class="readout" data-out></div></div></div>
@@ -1374,6 +1404,7 @@ $$\frac{\partial E(\Omega(\boldsymbol\theta))}{\partial\boldsymbol\theta}=\frac{
 <div>\(\frac{\partial\Omega}{\partial\boldsymbol\theta}\)</div><div>allgemein und schwer: <b>Das löst das Paper</b> (Gl. 4–23)</div>
 </div><span class="src">Djuren, Gl. 1</span></div>
 <div class="box school"><span class="lbl">🎓 Brücke zur Schule</span>Das ist die Kettenregel \(\big(f(g(x))\big)'=f'(g(x))\cdot g'(x)\) mit \(f=E\), \(g=\Omega\), \(x=\boldsymbol\theta\). Weil \(\Omega\) in der Praxis keine einzelne Zahl ist, sondern viele Voxelwerte, wird aus dem „mal“ eine Summe über alle Voxel. Das schreibt Gl. 15 aus.</div>
+<div class="pack" data-pack="kette"></div>
 <div class="box fact"><span class="lbl">📄 Woher die Idee kam</span>Ursprünglich wollten die Autoren Formen optimieren, die man mit einer Bandsäge schneiden kann. Solche Formen sind Schnittmengen von Extrusionen (extrusions) und lassen sich auf einem Voxelgitter leicht ausdrücken <span class="src">Abschn. 1</span>. Daraus wurde Anwendung 4.3.</div>
 
 <h3 id="k10-sample">Abschn. 3: Voxelisieren heißt abtasten (Gl. 2 und 3)</h3>
@@ -1397,12 +1428,14 @@ $$w_{\partial\Omega}(\mathbf x_{\mathbf i}),\qquad \mathbf i=(i_1,\dots,i_n),\qu
 <div>\(\mathbf i=(i_1,\dots,i_n)\)</div><div>Multi-Index: die „Hausnummer“ (Spalte, Reihe, Etage)</div>
 <div>\(d_k\)</div><div>Anzahl Voxel entlang Achse \(k\); \(128^3\) heißt \(d_1=d_2=d_3=128\)</div>
 </div><span class="src">Djuren, Gl. 2</span></div>
+<div class="pack" data-pack="wn1d"></div>
 <div class="box formula"><span class="lbl">③ Steckbrief · Gl. 3</span>
 <div class="fnhead">Indikatorfunktion \(\chi_\Omega(\mathbf x)\)</div>
 <div class="fnwhat"><b>Was sie ist:</b> eine Ja/Nein-Funktion. <b>Eingabe → Ausgabe:</b> ein Punkt → 1 oder 0. <b>Was sie macht:</b> sagt nur, ob ein Punkt innen liegt. Ohne Selbstüberschneidung ist \(w\) genau \(\chi_\Omega\) (im 1D-Bild: ein Stück, Werte nur 0 und 1).</div>
 $$w_{\partial\Omega}(\mathbf x)=\chi_\Omega(\mathbf x)=\begin{cases}1,&\mathbf x\in\Omega\\0,&\mathbf x\notin\Omega\end{cases}\qquad\text{(nur ohne Selbstüberschneidung)}$$
 <div class="say">🗣 <b>Als Satz gelesen:</b> „Hat die Fläche keine Selbstüberschneidung, ist die Winding Number 1 für Punkte innen und 0 für Punkte außen.“</div>
 <span class="src">Djuren, Gl. 3</span></div>
+<div class="pack" data-pack="chi"></div>
 
 <h3 id="k10-ae">Abschn. 3: Warum Punktproben keine brauchbare Ableitung haben</h3>
 <div class="where" data-on="W,grad"></div>
@@ -1452,6 +1485,7 @@ $$k_\square(\mathbf u)=\begin{cases}\dfrac1{|\square|},&\mathbf u\in\square_{\ma
 <div class="say">🗣 <b>Als Satz gelesen:</b> „Der Box-Kern gibt jedem Punkt im Fenster dasselbe Gewicht, eins durch das Fenstervolumen, und allen anderen null. Der Gauß-Kern gibt nahen Punkten viel und fernen wenig Gewicht.“</div>
 <div class="legend"><div>\(\square_{\mathbf 0}\)</div><div>ein Voxel-großes Fenster mit Mittelpunkt im Ursprung</div><div>\(\sigma\)</div><div>Breite des Gauß-Kerns</div></div>
 <span class="src">Box: Djuren Gl. 18–19; Gauß: Sun et al. 2024</span> <span class="src">Formeln für \(k\) hier ausgeschrieben</span></div>
+<div class="pack" data-pack="kern"></div>
 <div class="box formula"><span class="lbl">③ Steckbrief · Gl. 4</span>
 <div class="fnhead">Geglättete Winding Number \(\tilde w(\mathbf x)\) (Faltung)</div>
 <div class="fnwhat"><b>Was sie ist:</b> die Winding Number, durch ein Fenster gemittelt. <b>Eingabe → Ausgabe:</b> ein Punkt \(\mathbf x\) → eine Zahl. <b>Was sie macht:</b> macht aus der Treppe \(w\) eine stetige Funktion. Mit Box-Kern in Voxelgröße ist \(\tilde w(\mathbf x_{\mathbf i})\) der Füllgrad des Voxels.</div>
@@ -1461,6 +1495,7 @@ $$\tilde w(\mathbf x)=\int_{\mathbb R^n}k(\mathbf x-\mathbf x')\,w(\mathbf x')\,
 <div>\(\mathbf x'\)</div><div>Integrationsvariable, läuft über den ganzen Raum</div>
 <div>\(dA(\mathbf x')\)</div><div>Flächen- bzw. Volumenelement um \(\mathbf x'\) (das Paper schreibt auch im 3D \(dA\))</div>
 </div><span class="src">Djuren, Gl. 4</span></div>
+<div class="pack" data-pack="falt"></div>
 
 <h3 id="k10-energy">Abschn. 3: Das eigentliche Optimierungsproblem (Gl. 5)</h3>
 <div class="where" data-on="W,E"></div>
@@ -1477,6 +1512,7 @@ Die Kurve hat eine innere Schleife; dort ist \(w=2\). Jede Zelle zeigt ihren exa
 $$\boldsymbol\theta^\star=\arg\min_{\boldsymbol\theta}E(\mathbf W),\qquad \mathbf W\in\mathbb R^{d_1\times\dots\times d_n},\qquad \mathbf W_{\mathbf i}=\tilde w(\mathbf x_{\mathbf i})$$
 <div class="say">🗣 <b>Als Satz gelesen:</b> „Die besten Regler θ* sind die, bei denen die Energie des Voxelgitters am kleinsten ist. Das Gitter hat d₁ mal … mal dₙ Einträge, und Eintrag i ist die geglättete Winding Number am Mittelpunkt von Voxel i.“</div>
 <span class="src">Djuren, Gl. 5</span></div>
+<div class="pack" data-pack="energie"></div>
 
 <h3 id="k10-moving">Abschn. 3.1: Warum man nicht einfach „unter dem Integral“ ableiten darf (Gl. 6–7)</h3>
 <div class="where" data-on="wt,grad"></div>
@@ -1491,6 +1527,7 @@ Links ist \(f(\theta)=\int_0^\theta g(x)\,dx\), die blaue Fläche unter \(g\) bi
 <label>Schritt \(\Delta\theta\) <input type="range" min="0.02" max="0.6" step="0.01" value="0.3" data-opt="dt"></label></div>
 <div class="readout" data-out></div></div></div>
 <div class="box school"><span class="lbl">🎓 Brücke zur Schule</span>Das ist der Hauptsatz der Differential- und Integralrechnung: \(\big(\int_0^\theta g(x)\,dx\big)'=g(\theta)\). Die Ableitung ist der Integrand <b>am wandernden Rand</b>. Das Reynolds-Transporttheorem (Gl. 8) ist dieselbe Aussage für Regionen in 2D und 3D, deren Rand sich bewegt.</div>
+<div class="pack" data-pack="hauptsatz"></div>
 <div class="box mind"><span class="lbl">🧠 Bild im Kopf: die Regionen \(D_i\) einer echten Kurve</span>
 Die Kurve überlappt sich selbst. Das Winding-Number-Feld wird auf einem Pixelraster berechnet, und zusammenhängende Gebiete mit gleichem Wert werden zu Regionen \(D_i\) zusammengefasst. In jeder Region ist \(w\) konstant, \(w=w_i\). Bewegt man die Kurve, verschieben sich nur die Grenzen der Regionen.
 <div class="demo" data-demo="regions"><span class="lbl">② Interaktiv · Regionen \(D_i\) und ihre Werte \(w_i\)</span>
@@ -1504,6 +1541,7 @@ $$\partial_{\boldsymbol\theta}\tilde w(\mathbf x)=\partial_{\boldsymbol\theta}\i
 $$\partial_{\boldsymbol\theta}\tilde w(\mathbf x)=\sum_i\partial_{\boldsymbol\theta}\int_{D_i}k(\mathbf x-\mathbf x')\,w_i\,dA(\mathbf x')\qquad(7)$$
 <div class="say">🗣 <b>Als Satz gelesen:</b> „Die Ableitung des geglätteten Werts ist die Summe über alle Regionen: Ableitung des Integrals über die Region, in der w den festen Wert w_i hat.“</div>
 <span class="src">Djuren, Gl. 6–7</span></div>
+<div class="pack" data-pack="regionen"></div>
 
 <h3 id="k10-reynolds">Abschn. 3.1: Reynolds-Transporttheorem, nur der wandernde Rand zählt (Gl. 8–9)</h3>
 <div class="where" data-on="wt,grad"></div>
@@ -1520,6 +1558,7 @@ $$\partial_{\boldsymbol\theta}\!\int_{D_i}\!k(\mathbf x-\mathbf x')w_i\,dA(\math
 <div>\(d\ell(\mathbf x_b)\)</div><div>Längenelement (2D) bzw. Flächenelement (3D) des Randes</div>
 </div><span class="src">Djuren, Gl. 8</span></div>
 <p><b>Warum der Innen-Term null ist:</b> \(k(\mathbf x-\mathbf x')\) hängt nicht von \(\boldsymbol\theta\) ab, und \(w_i\) ist eine feste Zahl. An einem festen Ort ändert sich der Integrand also nicht, wenn man an den Reglern dreht.</p>
+<div class="pack" data-pack="reynolds"></div>
 <div class="box formula"><span class="lbl">③ Steckbrief · Teil von Gl. 8 und 14</span>
 <div class="fnhead">Normalgeschwindigkeit \(v_n(\mathbf x_b)=\partial_{\boldsymbol\theta}\mathbf x_b^{\mathsf T}\,\mathbf n(\mathbf x_b)\)</div>
 <div class="fnwhat"><b>Was sie ist:</b> eine Zahl pro Randpunkt (und pro Regler). <b>Eingabe → Ausgabe:</b> ein Randpunkt → wie schnell sich der Rand dort senkrecht zu sich selbst bewegt. <b>Was sie macht:</b> Das Skalarprodukt mit \(\mathbf n\) wirft den Anteil entlang des Randes weg, denn eine Bewegung entlang des Randes überstreicht keine neue Fläche.</div>
@@ -1533,6 +1572,7 @@ Ein Vertex wird in Richtung \(\mathbf e\) bewegt (dicker violetter Pfeil). Entla
 <div class="controls"><label>Richtung, in die der Vertex bewegt wird <input type="range" min="0" max="360" step="1" value="60" data-opt="ang"></label><label><input type="checkbox" data-opt="tan" checked> Tangential-Anteil zeigen (grau)</label></div>
 <div class="readout" data-out></div>
 <p class="cap">Klick auf einen Eckpunkt, um ihn auszuwählen.</p></div></div>
+<div class="pack" data-pack="vn"></div>
 <p>Setzt man den Innen-Term null, bleibt nur der Rand-Term, summiert über alle Regionen <span class="src">Djuren, Gl. 9</span>:</p>
 <div class="box formula"><span class="lbl">③ Steckbrief · Gl. 9</span>
 <div class="fnhead">\(\partial_{\boldsymbol\theta}\tilde w(\mathbf x)\) als Summe von Rand-Integralen</div>
@@ -1588,6 +1628,7 @@ $$w_i=w_j+1\ \Longrightarrow\ \boxed{\ \partial_{\boldsymbol\theta}\tilde w(\mat
 <div>\(\partial D_{i,j}\)</div><div>gemeinsame Wand von \(D_i\) und \(D_j\), ein Teil der Fläche \(\partial\Omega\)</div>
 <div>\(w_i-w_j\)</div><div>Sprung der Winding Number über die Wand; für geschlossene Flächen immer 1</div>
 </div><span class="src">Djuren, Gl. 11–14</span> <span class="src">Notation von Gl. 13 hier vereinfacht</span></div>
+<div class="pack" data-pack="sprung"></div>
 <div class="box fact"><span class="lbl">📄 Fußnote 3: zwei Hautstücke exakt aufeinander</span>Eine Selbstüberschneidung mit Maß ungleich null (zwei Flächenstücke liegen deckungsgleich aufeinander) erzeugt eine Region \(D_i\) mit Volumen null, aber passender Winding Number. Die Herleitung gilt weiter <span class="src">Djuren, Fußnote 3</span>.</div>
 <div class="box note"><span class="lbl">⚠️ Genau hier steckt „geschlossen“</span>Schritt 4 braucht zweierlei: \(w\) ist pro Region konstant, und der Sprung ist überall 1. Bei einer <b>offenen</b> Fläche ändert sich \(w\) außerhalb der Haut stetig und hängt selbst von \(\boldsymbol\theta\) ab. Dann verschwindet schon der Innen-Term in Gl. 8 nicht mehr. Mehr dazu in <a href="#k7">Kapitel 7</a>.</div>
 
@@ -1609,6 +1650,7 @@ $$\partial_{\boldsymbol\theta}E=\sum_{\mathbf i}\frac{\partial E}{\partial\tilde
 <div class="say">🗣 <b>Als Satz gelesen:</b> „Der Gradient ist die Summe über alle Voxel: Empfindlichkeit der Energie für dieses Voxel mal Empfindlichkeit des Voxels für die Regler.“</div>
 <div class="legend"><div>\(\frac{\partial E}{\partial\tilde w(\mathbf x_{\mathbf i})}\)</div><div>Adjungierte: Empfindlichkeit der Energie für Voxel \(\mathbf i\)</div><div>\(\partial_{\boldsymbol\theta}\tilde w(\mathbf x_{\mathbf i})\)</div><div>Empfindlichkeit des Voxels für die Regler (Gl. 14, konkret Gl. 22–23)</div></div>
 <span class="src">Djuren, Gl. 15</span></div>
+<div class="pack" data-pack="adjungiert"></div>
 
 <h3 id="k10-mc">Abschn. 3.2: Monte-Carlo-Schätzer, Divergenzsatz und „Splatting“ (Gl. 16)</h3>
 <div class="where" data-on="wt,grad"></div>
@@ -1621,6 +1663,7 @@ $$\tilde w(\mathbf x)=\int_{\partial\Omega}\mathbf F_{\mathbf x}(\mathbf x_b)^{\
 <div class="say">🗣 <b>Als Satz gelesen:</b> „Der geglättete Wert ist der Fluss eines Feldes durch die Haut, wobei das Feld so gewählt ist, dass seine Quellstärke überall der Kern ist.“</div>
 <div class="legend"><div>\(\nabla\cdot\mathbf F\)</div><div>Divergenz: \(\partial F_1/\partial x_1+\dots+\partial F_n/\partial x_n\)</div></div>
 <span class="src">Djuren, Gl. 16</span> <span class="src">Fußnote 4: Suns Beweis gilt in jeder Dimension</span></div>
+<div class="pack" data-pack="div"></div>
 <div class="box mind"><span class="lbl">🧠 Bild im Kopf: Fluss durch die Haut = Füllgrad</span>
 Für den Box-Kern ist hier ein konkretes \(\mathbf F\) eingezeichnet (Herleitung in der gelben Box darunter). Es zeigt senkrecht nach oben: Unterhalb der Box ist es null, innerhalb wächst es linear, und oberhalb bleibt es konstant. Nur in der Box ist \(\nabla\cdot\mathbf F\ne0\), dort ist die „Quelle“. Wo die Haut von \(\mathbf F\) getroffen wird, ist der Fluss grün (oben, Normale zeigt hoch) oder rot (unten). Der Prüfwert vergleicht den numerisch berechneten Fluss mit dem exakten Füllgrad.
 <div class="demo" data-demo="flux"><span class="lbl">② Interaktiv · \(\int_{\partial\Omega}\mathbf F^{\mathsf T}\mathbf n\,d\ell\) gegen Fläche(Ω ∩ □)/|□|</span>
@@ -1648,6 +1691,7 @@ Vom violetten Punkt \(\mathbf x\) geht ein Strahl aus. Jeder Treffer ist grün (
 <canvas width="760" height="380"></canvas>
 <div class="controls"><label>Richtung des Strahls <input type="range" min="0" max="360" step="1" value="30" data-opt="ang"></label></div>
 <div class="readout" data-out></div></div></div>
+<div class="pack" data-pack="sgnint"></div>
 <p>Das Paper trifft zwei Entscheidungen <span class="src">Abschn. 3.3</span>. <b>(1)</b> \(\mathbf d_{\mathbf x}\) ist für alle \(\mathbf x\) dieselbe Richtung. <b>(2)</b> Jeder Patch wird von jedem Strahl höchstens einmal getroffen. Das gilt für Dreiecke; Grenzfälle tragen später null bei <span class="src">Fußnote 5</span>. Dann ist \(w_i\in\{-1,0,1\}\) und stückweise konstant <span class="src">Abb. 3</span>. Praktisch nimmt man eine <b>Grundebene</b> und die zwei Richtungen \(\mathbf d\) und \(-\mathbf d\), jeweils von der Ebene weg. Die Punkte, in denen ein Dreieck +1 oder −1 beiträgt, bilden seinen <b>Schattenkörper</b> (shadow solid): den Raum zwischen dem Dreieck und seiner senkrechten Projektion auf die Grundebene. In 3D zeigt das die Grafik in „Der Algorithmus“ weiter unten.</p>
 
 <h3 id="k10-box">Abschn. 3.3: Box-Filter und halboffene Boxen (Gl. 18–19)</h3>
@@ -1676,11 +1720,13 @@ In jeder Richtung ist ein Voxel ein Intervall \([x_i-\tfrac l2,\ x_i+\tfrac l2)\
 <text x="270" y="90">xᵢ</text><text x="200" y="90" fill="#6b7280">xᵢ − l/2</text><text x="340" y="90" fill="#6b7280">xᵢ + l/2</text>
 <path d="M340,105V70" stroke="#7c3aed" stroke-width="1.5" marker-end="url(#m10a)"/><text x="340" y="122" fill="#5b21b6">dieser Punkt gehört zu Voxel i+1, nicht zu Voxel i</text>
 </g></svg></div>
+<div class="pack" data-pack="halboffen"></div>
 <div class="box derive"><span class="lbl">🧮 Herleitung: Füllgrad = Summe der Schattenvolumen</span><ol>
 <li>Gl. 17 in Gl. 18 einsetzen: \(\tilde w(\mathbf x_{\mathbf i})=\frac1{|\square|}\int_\square\sum_p w_p\,dA=\sum_p\frac1{|\square|}\int_\square w_p\,dA\).</li>
 <li>\(w_p\) ist ±1 im Schattenkörper von Patch \(p\) und 0 sonst. Das Integral ist also das <b>signierte Volumen von (Schattenkörper ∩ Voxel)</b>.</li>
 <li>Ergebnis: Füllgrad = Σ über Dreiecke (signiertes Schattenvolumen im Voxel) / Voxelvolumen <span class="src">Abschn. 3.3</span>. Es gibt keine Strahlen und kein Monte Carlo mehr, nur noch Prismen-Geometrie.</li></ol></div>
 
+<div class="pack" data-pack="fuellgrad"></div>
 <h3 id="k10-algo">Abschn. 3.3: Der Algorithmus für Dreiecksnetze, Schritt für Schritt</h3>
 <div class="where" data-on="mesh,W"></div>
 <p class="kurz"><b>Kurz gesagt:</b> Jedes Dreieck wird am Gitter zerschnitten. Jedes Stück gibt sein Schattenvolumen an das eigene Voxel und an alle Voxel darunter ab.</p>
@@ -1702,11 +1748,13 @@ Der Schattenkörper ist ein <b>schräg abgeschnittenes Prisma</b>: unten der Sch
 <label><input type="checkbox" data-opt="flip"> Dreieck umdrehen (Normale nach unten)</label></div>
 <div class="readout" data-out></div>
 <p class="cap">Voxel mit Seitenlänge 1, das Dreieck liegt im Voxel \(k=2\). Grün = positiver, rot = negativer Beitrag. Mit der Maus drehbar.</p></div></div>
+<div class="pack" data-pack="schatten"></div>
 <div class="box mind"><span class="lbl">🧠 Bild im Kopf: Schritt (2), das Zerschneiden</span>
 Draufsicht auf ein Dreieck, das in einer einzigen Voxelschicht liegt. Jede Zelle schneidet ein konvexes Polygon heraus; die Zahl ist seine Eckenzahl. Gestrichelt ist der Fächer ab der violetten Ecke. Jede Schnittebene fügt einem konvexen Polygon höchstens eine Ecke hinzu: In der Draufsicht schneiden 4 Ebenen (maximal 3 + 4 = 7 Ecken), beim Würfel in 3D 6 Ebenen (maximal 3 + 6 = 9, wie im Paper). Ein \(k\)-Eck ergibt \(k-2\) Teildreiecke.
 <div class="demo" data-demo="clip"><span class="lbl">② Interaktiv · Dreieck ∩ Gitter → konvexe Polygone → Fächer-Triangulierung</span>
 <canvas width="760" height="400"></canvas>
 <div class="readout" data-out></div></div></div>
+<div class="pack" data-pack="fan"></div>
 <p>Die 2D-Version des ganzen Algorithmus (Abb. 4) kannst du in <a href="#k1-shadow">Kapitel 1</a> Schritt für Schritt abspielen. Das Verfahren ist ein Sonderfall der Scanline-Rasterisierung von Manson &amp; Schaefer 2013, erweitert auf 3D <span class="src">Abschn. 3.3</span>.</p>
 <div class="box fact"><span class="lbl">📄 Zwei Beschleunigungen aus dem Paper</span>(a) Die Grundebene in die <b>Mitte</b> des Gitters legen, mit \(\mathbf d\) für die obere und \(-\mathbf d\) für die untere Hälfte. Das halbiert die mittlere Strecke, die Beiträge nach unten wandern. (b) Die Beiträge nach unten erst <b>sammeln</b> und in einem zweiten Durchgang verteilen <span class="src">Abschn. 3.3</span>.</div>
 
@@ -1719,6 +1767,7 @@ Draufsicht auf ein Dreieck, das in einer einzigen Voxelschicht liegt. Jede Zelle
 $$\partial_{\boldsymbol\theta}\tilde w(\mathbf x_{\mathbf i})=\int_{\partial\Omega}\partial_{\boldsymbol\theta}\mathbf x_b^{\mathsf T}\mathbf n(\mathbf x_b)\,k_\square(\mathbf x_{\mathbf i}-\mathbf x_b)\,d\ell(\mathbf x_b)=\frac{1}{|\square_{\mathbf x_{\mathbf i}}|}\int_{\partial\Omega\cap\square_{\mathbf x_{\mathbf i}}}\partial_{\boldsymbol\theta}\mathbf x_b^{\mathsf T}\,\mathbf n(\mathbf x_b)\,d\ell(\mathbf x_b)$$
 <div class="say">🗣 <b>Als Satz gelesen:</b> „Wie stark sich der Füllgrad eines Voxels ändert, ist: das Volumen, das die Haut im Voxel beim Verschieben überstreicht, geteilt durch das Voxelvolumen.“</div>
 <span class="src">Djuren, Gl. 20–21</span></div>
+<div class="pack" data-pack="ableitvoxel"></div>
 <div class="box formula"><span class="lbl">③ Steckbrief · Abschn. 3.3, Erklärung zu Gl. 22</span>
 <div class="fnhead">Baryzentrische Koordinate \(\lambda_j(\mathbf p)\) (Hutfunktion)</div>
 <div class="fnwhat"><b>Was sie ist:</b> eine lineare Funktion auf dem Dreieck. <b>Eingabe → Ausgabe:</b> ein Punkt \(\mathbf p\) im Dreieck → eine Zahl zwischen 0 und 1. <b>Was sie macht:</b> sagt, wie stark der Punkt mitbewegt wird, wenn man Ecke \(j\) verschiebt: 1 an der Ecke, 0 an der gegenüberliegenden Kante.</div>
@@ -1735,6 +1784,7 @@ Die Farbe ist der Wert von \(\lambda_j\): dunkelgrün = 1 an der gewählten Ecke
 <canvas width="760" height="360"></canvas>
 <div class="readout" data-out></div>
 <p class="cap">Zieh die Ecken. Ein Klick auf eine Ecke macht sie zur Ecke \(j\).</p></div></div>
+<div class="pack" data-pack="lambda"></div>
 <div class="box formula"><span class="lbl">③ Steckbrief · Gl. 22–23</span>
 <div class="fnhead">Ableitung des Füllgrads pro Dreieck</div>
 <div class="fnwhat"><b>Eingabe → Ausgabe:</b> die Dreiecke im Voxel, ihre Normalen, Flächen und die Bewegungen ihrer Ecken → die Ableitung des Füllgrads. <b>Was sie macht:</b> macht aus dem Integral in Gl. 21 eine endliche Summe. Gl. 22 gilt für Dreiecke ganz im Voxel, Gl. 23 für Teildreiecke aus Schritt (2).</div>
@@ -1746,6 +1796,7 @@ $$\partial_{\boldsymbol\theta}\tilde w(\mathbf x_{\mathbf i})=\frac{1}{|\square_
 <div>\(t_i,\ s_j\)</div><div>Originaldreieck und seine Teildreiecke im Voxel</div>
 <div>\(\mathbf w_k\)</div><div>Ecken der Teildreiecke: lineare Kombinationen der Originalecken (über \(\lambda\))</div>
 </div><span class="src">Djuren, Gl. 22–23</span></div>
+<div class="pack" data-pack="gl22"></div>
 <p>Die Ecken \(\mathbf w_k\) der Teildreiecke bewegen sich mit den Originalecken mit, gewichtet mit ihren baryzentrischen Koordinaten. Dass die Schnittpunkte an der Voxelwand zusätzlich entlang der Fläche gleiten, spielt keine Rolle: Diese Bewegung ist tangential und zählt nach Gl. 8 nicht <span class="tag-hyp">meine Begründung</span>. Die Implementierung hat dieselbe Struktur wie die Voxelisierung, nur ohne den Beitrag nach unten (Supplement, Alg. 1–3) <span class="src">Abschn. 3.3</span>.</p>
 <div class="box fact"><span class="lbl">📄 Größere Box-Filter</span>Voxelisieren und danach eine diskrete Box-Faltung ergibt dasselbe wie <i>ein</i> Box-Filter mit ganzzahlig vergrößertem Träger <span class="src">Abschn. 3.3</span>. Abb. 2 nutzt einen Filter mit Durchmesser 3 und zeigt, dass die analytischen Ableitungen mit finiten Differenzen übereinstimmen.</div>
 
@@ -1765,6 +1816,7 @@ Jede Verdopplung der Auflösung macht \(2^3=8\)-mal so viele Voxel. Auf einer lo
 <g text-anchor="middle" fill="#64748b"><text x="70" y="228">10²</text><text x="96" y="228">10³</text><text x="122" y="228">10⁴</text><text x="148" y="228">10⁵</text><text x="174" y="228">10⁶</text><text x="200" y="228">10⁷</text><text x="226" y="228">10⁸</text><text x="252" y="228">10⁹</text></g>
 <text x="160" y="245" text-anchor="middle" fill="#334155">Anzahl Voxel (logarithmisch)</text>
 </g></svg></div></div>
+<div class="pack" data-pack="voxzahl"></div>
 <p><b>DOPH</b> <span class="src">Luo et al. 2024</span> tastet die <i>ungeglättete</i> Winding Number punktweise ab, interpoliert trilinear und leitet mit automatischer Differenzierung ab. Das ist „Discretize-then-Differentiate“ <span class="src">Bangaru et al. 2021</span>: erst diskretisieren, dann ableiten. Die Ableitungen sind fast überall null und nur ganz nah an der Fläche fälschlich ungleich null. DVX (dieses Paper) stimmt mit finiten Differenzen überein <span class="src">Abb. 6</span>. Das ist dieselbe Treppe wie in der Grafik zu „Warum Punktproben keine brauchbare Ableitung haben“: Die graue Kurve hat Steigung 0. In Abb. 6 stehen außerdem die Laufzeiten 418,4 ms und 2,2 ms bei \(32^3\). Aus dem Textlayout lässt sich nicht sicher ablesen, welche Zahl zu welchem Verfahren gehört; bitte im Bild nachsehen.</p>
 
 <h3 id="k10-sect">Abschn. 4.2: Selbstüberschneidungen auflösen, Energie und ARAP (Gl. 24)</h3>
@@ -1777,6 +1829,7 @@ $$E_{\text{sect}}=\sum_{\mathbf W_{ijk}\gt1}\mathbf W_{ijk}^2,\qquad E=E_{\text{
 <div class="say">🗣 <b>Als Satz gelesen:</b> „Für jedes Voxel, das mehr als voll ist, wird sein Wert quadriert und aufsummiert. Dazu kommt α mal die ARAP-Energie.“</div>
 <div class="legend"><div>\(\mathbf W_{ijk}\gt1\)</div><div>nur übervolle Voxel; praktisch Schwelle \(1+\varepsilon\), \(\varepsilon=0{,}001\)</div><div>\(\alpha\)</div><div>Gewicht der Formerhaltung, hier \(0{,}005\)</div></div>
 <span class="src">Djuren, Abschn. 4.2</span></div>
+<div class="pack" data-pack="esect"></div>
 <div class="box formula"><span class="lbl">③ Steckbrief · Gl. 24</span>
 <div class="fnhead">ARAP-Energie \(E_{\text{arap}}(\bar{\mathbf V})\) („as rigid as possible“)</div>
 <div class="fnwhat"><b>Eingabe → Ausgabe:</b> die verformten Vertex-Positionen → eine Zahl. <b>Was sie macht:</b> sucht für jede Vertex-Nachbarschaft die beste Drehung \(R_i\) und misst, wie stark die Kanten danach noch abweichen. Reine Drehung und Verschiebung kosten 0.</div>
@@ -1796,6 +1849,7 @@ Links ist eine Nachbarschaft im Original: Speichen (blau) vom Vertex zu seinen N
 <div class="controls"><label>ganzes Rad drehen (setzt die Verformung zurück) <input type="range" min="-180" max="180" step="1" value="25" data-opt="rot"></label></div>
 <div class="readout" data-out></div>
 <p class="cap">In 2D gibt es für die beste Drehung eine geschlossene Formel; in 3D braucht man eine SVD. Gewichte hier alle 1.</p></div></div>
+<div class="pack" data-pack="arap"></div>
 <p>Optimiert wird mit Adam (Lernrate \(10^{-2}\)), bis kein Voxel mehr \(\mathbf W\gt1\) hat <span class="src">Abschn. 4.2</span>. Das Paper nennt zwei Grenzen: Halb leere Voxel, in denen sich zwei Teile nur teilweise überlappen, werden nicht bestraft, solange \(\mathbf W\le1\) bleibt. Und negative Winding Numbers durch umgestülpte Volumina können Überschneidungen „verstecken“, weil sich +1 und −1 aufheben.</p>
 
 <h3 id="k10-band">Abschn. 4.3: Bandsägen-Formen, mellowmax und Extrusionen</h3>
@@ -1816,12 +1870,14 @@ Die blauen Säulen sind die Werte \(\mathbf W_k\) einer Voxelsäule. Waagerecht 
 <div class="controls"><label>Schärfe \(\log_{10}w\) <input type="range" min="0" max="3" step="0.01" value="1" data-opt="lw"></label></div>
 <div class="readout" data-out></div>
 <p class="cap">Zieh die Säulen hoch und runter.</p></div></div>
+<div class="pack" data-pack="mellow"></div>
 <div class="box formula"><span class="lbl">③ Steckbrief · Abschn. 4.3</span>
 <div class="fnhead">Extrusions-Schnittmenge \(\mathbf S_{ijk}\) und Schnitt-Energie \(E_{\text{cut}}\)</div>
 <div class="fnwhat"><b>Eingabe → Ausgabe:</b> das Voxelgitter → ein zweites Gitter \(\mathbf S\) bzw. eine Zahl. <b>Was sie machen:</b> \(\mathbf S\) ist „was eine Bandsäge aus drei Richtungen übrig lässt“: Ein Voxel bleibt nur, wenn es in allen drei Silhouetten liegt (logisches UND = Produkt). \(E_{\text{cut}}\) misst, wie weit Form und Bandsägen-Version auseinanderliegen.</div>
 $$\mathbf S_{ijk}=(\mathbf S_x)_{jk}\,(\mathbf S_y)_{ik}\,(\mathbf S_z)_{ij},\qquad E_{\text{cut}}=\frac1{d^3}\sum_{ijk}\big(\mathbf S_{ijk}-\mathbf W_{ijk}\big)^2$$
 <div class="say">🗣 <b>Als Satz gelesen:</b> „Das Bandsägen-Gitter ist pro Voxel das Produkt der drei Silhouetten, die durch dieses Voxel gehen. Die Energie ist die mittlere quadrierte Abweichung zwischen Bandsägen-Gitter und Form.“</div>
 <span class="src">Djuren, Abschn. 4.3</span></div>
+<div class="pack" data-pack="ecut"></div>
 <p>Gewollt ist, dass \(E_{\text{cut}}\) auch \(\mathbf W\gt1\) bestraft, also Selbstüberschneidungen. Regularisiert wird mit ARAP, \(\alpha=0{,}05\), Lernrate \(10^{-3}\), \(d=128\). Bei einem 10-cm-Block sind das unter 0,8 mm pro Voxel. Die relative Verbesserung \(1-E_{\text{cut}}(\bar{\mathbf V})/E_{\text{cut}}(\mathbf V)\) beträgt in Abb. 10 76,0 %, 69,9 %, 58,7 % und 62,8 %. Getestet wurde auf dem TOSCA-Datensatz; Hausdorff- und mittlere Flächendistanz wurden mit METRO gemessen; dazu kommen echte Holz- und Styroporschnitte <span class="src">Abb. 10–11, Tab. 1 (Suppl.)</span>.</p>
 
 <h3 id="k10-tile">Abschn. 4.4: Kachelbare Formen</h3>
@@ -1844,6 +1900,7 @@ Das Intervall \([-1,1]\) ist in 3 Teile geteilt (statt 27 Würfel in 3D). Drei I
 <div class="controls"><button class="b" data-act="solve">Eine Lösung zeigen</button><button class="b sec" data-act="reset">↺</button></div>
 <div class="readout" data-out></div>
 <p class="cap">Zieh die farbigen Balken oben. Eine 2D-Version mit Optimierung steht in <a href="#k1-apps">Kapitel 1</a>.</p></div></div>
+<div class="pack" data-pack="efill"></div>
 <p>Parameter <span class="src">Abschn. 4.4</span>: Jede Instanz hat eigene Translation und Rotation (Gier-, Nick-, Rollwinkel; yaw/pitch/roll). Die Vertex-Mittelwerte starten in \([-1/3,1/3]^3\). \(\alpha=0{,}005\), Lernrate \(10^{-3}\), \(d=192\) (Kachelauflösung 64). Abbruch, wenn sich die Vertices um weniger als \(10^{-3}\) ändern; ARAP wird pro Formklasse einmal vorberechnet. Beispiele: 27 Spots, 27 Hände, 14 Tweety + 14 Spot. Die Ergebnisse sind <i>nahezu</i> kachelbar: nicht unbedingt lückenlos und nicht unbedingt überschneidungsfrei.</p>
 <div class="box note"><span class="lbl">⚠️ Kleine Unstimmigkeit beim Lesen</span>Der Text nennt für die Teilwürfel „side length 1/3“. Ein Drittel von \([-1,1]\) hat aber die Länge 2/3 (so auch in der Grafik). Vermutlich ist die halbe Seitenlänge gemeint, denn die Kachelzelle \([-1/3,1/3]^3\) passt dazu. Das ist meine Lesart; im Zweifel beim Autor nachfragen.</div>
 
@@ -2831,7 +2888,7 @@ registerDemo('partial', el=>{
   draw();
 });
 
-registerDemo('chain', el=>{
+registerDemo('chain3', el=>{
   const c=el.querySelector('canvas'); const oT=opt(el,'t');
   const v1=new View(c,0.5,5,-2,8,{x:42,y:34,w:200,h:190}), v2=new View(c,-2,8,0,36,{x:298,y:34,w:200,h:190}), v3=new View(c,0.5,5,0,36,{x:552,y:34,w:200,h:190}); const ctx=v1.ctx;
   const Af=t=>2*t-2.32, Ef=a=>(a-4)**2, EAf=t=>Ef(Af(t)), BL='#2563eb';
@@ -3090,6 +3147,564 @@ registerDemo('fold1d', el=>{
   draw();
 });
 
+/* =====================================================================
+   ÜBUNGSPÄCKCHEN: je fünf Aufgaben zum Selberrechnen, mit Lösung und Rechenweg
+   ===================================================================== */
+const KOPT={delimiters:[{left:'$$',right:'$$',display:true},{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false}],throwOnError:false,ignoredTags:['script','noscript','style','textarea','pre','code','option','canvas','svg']};
+function initPacks(){
+  const T=String.raw;
+  const mkR=seed=>{ let s=seed>>>0; const R=()=>{ s=(s+0x6D2B79F5)|0; let t=Math.imul(s^(s>>>15),1|s); t=(t+Math.imul(t^(t>>>7),61|t))^t; return ((t^(t>>>14))>>>0)/4294967296; };
+    R.int=(lo,hi)=>lo+Math.floor(R()*(hi-lo+1));
+    R.pick=a=>a[Math.floor(R()*a.length)];
+    R.st=(lo,hi,st)=>+(lo+st*R.int(0,Math.round((hi-lo)/st))).toFixed(6);
+    R.sg=()=>R()<0.5?-1:1;
+    return R; };
+  const nf=(x,d=4)=>{ let v=+(+x).toFixed(d); if(v===0) v=0; const neg=v<0; let [i,f]=Math.abs(v).toString().split('.'); if(i.length>4) i=i.replace(/\B(?=(\d{3})+(?!\d))/g,'\u202F'); return (neg?'−':'')+i+(f?','+f:''); };
+  const lx=(x,d)=>nf(x,d).replace(',','{,}').replace('−','-').replace(/\u202F/g,'\\,');
+  const lp=(x,d=4)=>(+(+x).toFixed(d)<0?'('+lx(x,d)+')':lx(x,d));
+  const sum=a=>a.reduce((p,q)=>p+q,0);
+  const vec=a=>'('+a.map(v=>lx(v)).join(';\\ ')+')';
+  const ls=a=>a.map((v,k)=>k===0?lx(v):(v<0?'-'+lx(-v):'+'+lx(v))).join('');
+  const deg=r=>r*180/Math.PI;
+  const sq=v=>(+(+v).toFixed(6)>=0&&Number.isInteger(+(+v).toFixed(6))?lx(v):'('+lx(v)+')')+'^2';
+  const wAt=(P,x)=>P.reduce((s,[a,b])=>s+(x>a&&x<b?1:0),0);
+  const intW=(P,l,r)=>P.reduce((s,[a,b])=>s+Math.max(0,Math.min(r,b)-Math.max(l,a)),0);
+  const iv=P=>P.map(([a,b])=>`[${lx(a)},${lx(b)}]`).join('\\text{ und }');
+  const two=R=>{ const a1=R.int(0,2), b1=a1+R.int(4,5), a2=R.int(a1+2,b1-2), b2=b1+R.int(2,3); return [[a1,b1],[a2,b2]]; };
+  const PK={};
+
+  PK.wnwinkel={t:T`Winding Number als Winkelsumme \(w(p)\)`,
+    f:T`\(w(p)=\frac{1}{2\pi}\sum_i\theta_i\), in Grad: \(w(p)=(\theta_1+\dots+\theta_n)/360^\circ\). Gegen den Uhrzeigersinn zählt ein Winkel positiv, im Uhrzeigersinn negativ.`,
+    gen:(R,i)=>{
+      const fmt=a=>a.map(x=>nf(x)+'°').join(', ');
+      const parts=(tot,n)=>{ for(let k=0;k<500;k++){ const c=new Set(); while(c.size<n-1) c.add(10*R.int(1,tot/10-1)); const s=[0,...[...c].sort((a,b)=>a-b),tot]; const p=s.slice(1).map((v,j)=>v-s[j]); if(Math.max(...p)<180) return p; } return Array(n).fill(tot/n); };
+      if(i===1){ const a=5*R.int(4,16), b=5*R.int(4,16), c=-5*R.int(2,(a+b)/5-2), d=-(a+b+c), L=[a,b,c,d];
+        return {q:T`Winkel \(\theta_i\): ${fmt(L)}. \(w(p)\)`, a:0, how:T`Summe \(=${ls(L)}=0^\circ\), also \(w=0\): \(p\) liegt außen. Der Blick dreht sich hin und wieder zurück.`}; }
+      if(i===4){ let A,B,cr,dt; do{ A=R.pick([[1,0],[2,0],[3,0],[0,1],[0,2]]); B=R.pick([[1,1],[0,1],[-1,1],[1,-1],[0,-1],[-1,-1],[2,1],[1,2],[1,0],[-1,0]]); cr=A[0]*B[1]-A[1]*B[0]; dt=A[0]*B[0]+A[1]*B[1]; }while(cr===0);
+        const ang=deg(Math.atan2(cr,dt));
+        return {q:T`\(\theta=\operatorname{atan2}(\mathbf a\times\mathbf b,\ \mathbf a\cdot\mathbf b)\) für \(\mathbf a=${vec(A)}\), \(\mathbf b=${vec(B)}\), in Grad`, a:ang, u:'°',
+          how:T`\(\mathbf a\times\mathbf b=a_xb_y-a_yb_x=${lx(cr)}\), \(\mathbf a\cdot\mathbf b=a_xb_x+a_yb_y=${lx(dt)}\). \(\operatorname{atan2}(y,x)\) ist der Winkel des Punktes \((x;y)\), hier \((${lx(dt)};${lx(cr)})\): \(${lx(ang,2)}^\circ\).`}; }
+      const tot=i===2?720:360, n=i===2?R.int(5,6):R.int(3,5); let L=parts(tot,n); if(i===3) L=L.map(x=>-x); const s=sum(L);
+      return {q:T`Winkel \(\theta_i\): ${fmt(L)}. \(w(p)\)`, a:s/360, how:T`Summe \(=${ls(L)}=${lx(s)}^\circ\), \(w=${lx(s)}^\circ/360^\circ=${lx(s/360)}\).`+(i===2?' Die Kurve läuft zweimal um \\(p\\) herum.':i===3?' Die Kurve läuft im Uhrzeigersinn, also „falsch herum“.':'')};
+    }};
+
+  PK.raumwinkel={t:T`Winding Number in 3D über Raumwinkel \(\Omega_f\)`,
+    f:T`\(w(p)=\frac{1}{4\pi}\sum_f\Omega_f\). Die ganze Einheitskugel hat die Fläche \(4\pi\approx12{,}566\) (Einheit Steradiant, sr).`,
+    gen:(R,i)=>{
+      if(i===0){ const [nm,m]=R.pick([['Tetraeder',4],['Würfel',6],['Oktaeder',8],['Ikosaeder',20]]), a=4*Math.PI/m;
+        return {q:T`Regelmäßiger ${nm} (${m} gleiche Flächen), \(p\) im Mittelpunkt: Raumwinkel \(\Omega_f\) einer Fläche`, a, u:'sr', how:T`Alle ${m} Flächen zusammen bedecken die ganze Kugel, \(4\pi\). Eine Fläche: \(4\pi/${m}\approx${lx(a)}\).`}; }
+      if(i===1){ const k=R.int(1,3), a=(6-k)/6;
+        return {q:T`Würfel, ${k===1?'eine Fläche fehlt':k+' Flächen fehlen'}, \(p\) im Mittelpunkt: \(w(p)\)`, a, how:T`Jede Fläche bedeckt \(\tfrac16\) der Kugel. Es bleiben ${6-k} von 6: \(w=${6-k}/6\approx${lx(a)}\). Offen heißt: keine ganze Zahl.`}; }
+      if(i===2){ const a=R.st(0.4,1.6,0.1), b=R.st(0.2,1,0.1), c=-R.st(0.1,+(a+b-0.1).toFixed(1),0.1), d=-(+(a+b+c).toFixed(1)), L=[a,b,c,d];
+        return {q:T`Raumwinkel der Dreiecke: ${L.map(v=>nf(v)).join('; ')}. \(w(p)\)`, a:0, how:T`Summe \(=${ls(L)}=0\), also \(w=0/(4\pi)=0\): \(p\) liegt außen, Grün und Rot heben sich auf.`}; }
+      if(i===3){ const k=R.pick([1,2,3,6,8]), a=k/4;
+        return {q:T`\(\sum_f\Omega_f=${k}\pi\). \(w(p)\)`, a, how:T`\(w=\frac{${k}\pi}{4\pi}=${lx(a)}\)`+(k===2?' (so sieht es für einen Punkt genau auf einer glatten Fläche aus)':k===8?' (doppelt umschlossen)':k===6?' (teils doppelt umschlossen oder offen)':' (offene Fläche)')}; }
+      const k=R.int(1,3), a=(8-k)/8;
+      return {q:T`Regelmäßiger Oktaeder, ${k===1?'eine Fläche fehlt':k+' Flächen fehlen'}, \(p\) im Mittelpunkt: \(w(p)\)`, a, how:T`Jede der 8 Flächen bedeckt \(\tfrac18\) der Kugel: \(w=${8-k}/8=${lx(a)}\)`};
+    }};
+
+  PK.diffq={t:T`Differenzenquotient und Ableitung \(\frac{dA}{dx}\)`,
+    f:T`Für \(A(x)=x^2\) gilt \(\frac{A(x+dx)-A(x)}{dx}=2x+dx\). Lässt man \(dx\to0\) gehen, bleibt die Ableitung \(\frac{dA}{dx}=2x\).`,
+    gen:(R,i)=>{ const x=R.int(1,5);
+      if(i===0){ const dx=R.pick([0.5,0.2,0.1]), a=2*x+dx, B=(x+dx)**2;
+        return {q:T`\(x=${x},\ dx=${lx(dx)}\): \(\frac{A(x+dx)-A(x)}{dx}\)`, a, how:T`\(\frac{${lx(B)}-${x*x}}{${lx(dx)}}=\frac{${lx(B-x*x)}}{${lx(dx)}}=${lx(a)}\), genau \(2x+dx\).`}; }
+      if(i===1) return {q:T`\(\frac{dA}{dx}\) bei \(x=${x}\)`, a:2*x, how:T`\(2x=2\cdot${x}=${2*x}\)`};
+      if(i===2){ const dx=R.pick([0.5,0.1,0.2]), a=2*x*dx+dx*dx;
+        return {q:T`Zuwachs \(A(x+dx)-A(x)\) für \(x=${x},\ dx=${lx(dx)}\)`, a, how:T`zwei Streifen \(2x\,dx=${lx(2*x*dx)}\) plus Eckquadrat \(dx^2=${lx(dx*dx)}\): zusammen \(${lx(a)}\)`}; }
+      if(i===3) return {q:T`\(f(x)=x^3\): \(f'(${x})\)`, a:3*x*x, how:T`\(f'(x)=3x^2=3\cdot${x*x}=${3*x*x}\)`};
+      const F=R.pick([['5x',()=>5,'5'],['x^2+3x',v=>2*v+3,'2x+3'],['4x^2',v=>8*v,'8x'],['x^3-x',v=>3*v*v-1,'3x^2-1']]);
+      return {q:T`\(f(x)=${F[0]}\): \(f'(${x})\)`, a:F[1](x), how:T`\(f'(x)=${F[2]}\), bei \(x=${x}\): \(${F[1](x)}\)`};
+    }};
+
+  PK.gdstep={t:T`Gradientenabstieg \(\theta_{k+1}=\theta_k-\eta\,\nabla E(\theta_k)\)`,
+    f:T`Ein Schritt geht gegen den Gradienten: neue Stelle = alte Stelle − Schrittweite × Gradient.`,
+    gen:(R,i)=>{
+      if(i===0){ const th=R.int(1,8), g=R.pick([-6,-4,-3,-2,2,3,4,6,8]), eta=R.pick([0.1,0.25,0.5]), a=th-eta*g;
+        return {q:T`\(\theta_k=${th},\ \nabla E=${lx(g)},\ \eta=${lx(eta)}\): \(\theta_{k+1}\)`, a, how:T`\(${th}-${lx(eta)}\cdot${lp(g)}=${lx(a)}\)`+(g<0?'. Der Gradient ist negativ, also geht der Schritt nach rechts.':'')}; }
+      if(i===1){ const c=R.int(1,6), th=c+R.pick([-4,-3,-2,2,3,4]), eta=R.pick([0.1,0.25]), g=2*(th-c), a=th-eta*g;
+        return {q:T`\(E(\theta)=(\theta-${c})^2,\ \theta_k=${th},\ \eta=${lx(eta)}\): \(\theta_{k+1}\)`, a, how:T`\(\nabla E=2(\theta-${c})=2\cdot${lp(th-c)}=${lx(g)}\), dann \(${th}-${lx(eta)}\cdot${lp(g)}=${lx(a)}\). Der Schritt geht auf \(${c}\) zu.`}; }
+      if(i===2){ const c=R.int(0,4), t0=c+R.pick([-8,-4,4,8]), t1=t0-0.5*(t0-c), t2=t1-0.5*(t1-c);
+        return {q:T`\(E(\theta)=(\theta-${c})^2,\ \theta_0=${t0},\ \eta=0{,}25\): zwei Schritte, \(\theta_2\)`, a:t2, how:T`\(\theta_1=${t0}-0{,}25\cdot2\cdot${lp(t0-c)}=${lx(t1)}\), \(\theta_2=${lx(t1)}-0{,}25\cdot2\cdot${lp(t1-c)}=${lx(t2)}\). Jeder Schritt halbiert den Abstand zum Minimum \(${c}\).`}; }
+      if(i===3){ const th=[R.int(0,6),R.int(0,6)], g=[R.pick([-4,-2,2,4,6]),R.pick([-6,-2,2,4])], a=[th[0]-0.5*g[0],th[1]-0.5*g[1]];
+        return {q:T`\(\boldsymbol\theta_k=${vec(th)},\ \nabla E=${vec(g)},\ \eta=0{,}5\): \(\boldsymbol\theta_{k+1}\)`, a, how:T`jede Koordinate einzeln: \(${th[0]}-0{,}5\cdot${lp(g[0])}=${lx(a[0])}\) und \(${th[1]}-0{,}5\cdot${lp(g[1])}=${lx(a[1])}\)`}; }
+      const t0=R.pick([2,3,4,5])*R.sg(), a=-t0;
+      return {q:T`\(E(\theta)=\theta^2,\ \theta_0=${lx(t0)},\ \eta=1\): \(\theta_1\)`, a, how:T`\(\nabla E=2\theta=${lx(2*t0)}\), \(\theta_1=${lx(t0)}-1\cdot${lp(2*t0)}=${lx(a)}\). Mit \(\eta=1\) springt man genau über das Tal auf die andere Seite und kommt nie an: Die Schrittweite ist zu groß.`};
+    }};
+
+  PK.dimmer={t:T`Füllgrad \(\tilde w\) eines 1D-Voxels und seine Ableitung`,
+    f:T`Das Voxel ist \([0,h)\), die Form füllt alles links der Wand \(s\). Füllgrad \(\tilde w\) = gefüllte Länge \(/\,h\). Die Punktprobe \(w\) ist der Wert in der Voxelmitte \(h/2\).`,
+    gen:(R,i)=>{ const h=R.pick([1,0.5,2]);
+      if(i===0){ const s=+(h*R.st(0.1,0.9,0.1)).toFixed(4);
+        return {q:T`\(h=${lx(h)},\ s=${lx(s)}\): \(\tilde w\)`, a:s/h, how:T`gefüllt ist \([0;\ ${lx(s)}]\), also \(\tilde w=${lx(s)}/${lx(h)}=${lx(s/h)}\)`}; }
+      if(i===1){ const s=+(h*R.pick([0.2,0.3,0.4,0.6,0.7,0.8])).toFixed(4), inn=s>h/2;
+        return {q:T`\(h=${lx(h)},\ s=${lx(s)}\): Punktprobe \(w(h/2)\)`, a:inn?'1':'0', ch:['0','1'], how:T`Die Mitte \(h/2=${lx(h/2)}\) liegt ${inn?'links der Wand, also innen: 1':'rechts der Wand, also außen: 0'}. Ein kleines Verschieben der Wand ändert daran nichts, die Ableitung ist 0.`}; }
+      if(i===2){ const hh=R.pick([0.5,0.25,2,1]);
+        return {q:T`\(h=${lx(hh)}\), Wand im Voxel: \(\partial\tilde w/\partial s\)`, a:1/hh, how:T`\(\tilde w=s/h\), also \(\partial\tilde w/\partial s=1/h=1/${lx(hh)}=${lx(1/hh)}\). Kleine Voxel reagieren stärker.`}; }
+      if(i===3){ const s=+(h*R.pick([1.2,1.5,2])).toFixed(4);
+        return {q:T`\(h=${lx(h)},\ s=${lx(s)}\) (Wand rechts außerhalb): \(\partial\tilde w/\partial s\)`, a:0, how:T`Das Voxel ist schon ganz voll, \(\tilde w=1\). Ein bisschen Schieben ändert nichts: Ableitung 0.`}; }
+      const c=R.pick([2,3,0.5]);
+      return {q:T`\(h=${lx(h)}\), Wand bei \(s=${lx(c)}\,\theta\) (im Voxel): \(\partial\tilde w/\partial\theta\)`, a:c/h, how:T`Kettenregel: \(\frac{\partial\tilde w}{\partial s}\cdot\frac{ds}{d\theta}=\frac1{${lx(h)}}\cdot${lx(c)}=${lx(c/h)}\). Das ist \(\tfrac1h v_n\) mit \(v_n=${lx(c)}\).`};
+    }};
+
+  PK.fdiff={t:T`Zentrale Differenz \(\frac{f(\theta+\varepsilon)-f(\theta-\varepsilon)}{2\varepsilon}\)`,
+    f:T`Man schiebt \(\theta\) ein kleines Stück \(\varepsilon\) nach links und nach rechts und teilt den Unterschied durch \(2\varepsilon\). Das nähert die Ableitung an. So prüft man analytische Formeln.`,
+    gen:(R,i)=>{
+      if(i===0){ const t=R.int(1,4), e=R.pick([0.1,0.5]), fp=(t+e)**2, fm=(t-e)**2, a=(fp-fm)/(2*e);
+        return {q:T`\(f(\theta)=\theta^2,\ \theta=${t},\ \varepsilon=${lx(e)}\): zentrale Differenz`, a, how:T`\(\frac{${lx(fp)}-${lx(fm)}}{${lx(2*e)}}=${lx(a)}\). Exakt ist \(f'(${t})=${2*t}\): Bei Parabeln ist die zentrale Differenz sogar genau.`}; }
+      if(i===1){ const t=R.pick([1,2]), fp=(t+0.1)**3, fm=(t-0.1)**3, a=(fp-fm)/0.2;
+        return {q:T`\(f(\theta)=\theta^3,\ \theta=${t},\ \varepsilon=0{,}1\): zentrale Differenz`, a, how:T`\(\frac{${lx(fp)}-${lx(fm)}}{0{,}2}=${lx(a)}\). Exakt: \(f'(${t})=3\cdot${t*t}=${3*t*t}\), Fehler \(\varepsilon^2=0{,}01\).`}; }
+      if(i===2){ const e=R.pick([0.1,0.2,0.01]), a=e*e;
+        return {q:T`\(f(\theta)=\theta^3,\ \varepsilon=${lx(e)}\): Fehler (zentrale Differenz − exakte Ableitung)`, a, tol:Math.max(1e-7,a*0.02), how:T`\(\frac{(\theta+\varepsilon)^3-(\theta-\varepsilon)^3}{2\varepsilon}=3\theta^2+\varepsilon^2\). Der Fehler ist \(\varepsilon^2=${lx(a)}\), egal bei welchem \(\theta\). Zehnmal kleineres \(\varepsilon\) ergibt einen hundertmal kleineren Fehler.`}; }
+      if(i===3){ const lo=R.st(0.2,0.6,0.01), sl=R.pick([1,2,3,-1,-2]), e=R.pick([0.01,0.05]), hi=+(lo+sl*2*e).toFixed(4), a=(hi-lo)/(2*e);
+        return {q:T`\(\tilde w(\theta-\varepsilon)=${lx(lo)},\ \tilde w(\theta+\varepsilon)=${lx(hi)},\ \varepsilon=${lx(e)}\): Näherung für \(\partial_\theta\tilde w\)`, a, how:T`\(\frac{${lx(hi)}-${lx(lo)}}{2\cdot${lx(e)}}=\frac{${lx(hi-lo)}}{${lx(2*e)}}=${lx(a)}\)`}; }
+      const t=R.int(1,4), e=R.pick([0.1,0.2]), a=((t+e)**2-t*t)/e;
+      return {q:T`\(f(\theta)=\theta^2,\ \theta=${t},\ \varepsilon=${lx(e)}\): Vorwärtsdifferenz \(\frac{f(\theta+\varepsilon)-f(\theta)}{\varepsilon}\)`, a, how:T`\(\frac{${lx((t+e)**2)}-${t*t}}{${lx(e)}}=${lx(a)}=2\theta+\varepsilon\). Der Fehler ist \(\varepsilon\), viel größer als bei der zentralen Differenz (dort 0).`};
+    }};
+
+  PK.menge={t:T`Teilmenge \(\Omega\subset\mathbb R^n\) und Rand \(\partial\Omega\)`,
+    f:T`\(\mathbf x\in\Omega\) heißt „liegt drin“. Bei \([a,b]\) gehören die Endpunkte dazu. \(\partial\Omega\) ist der Rand. Er hat eine Dimension weniger als der Raum.`,
+    gen:(R,i)=>{
+      if(i===0){ const a=R.int(0,3), b=a+R.int(3,6), inn=R()<0.5, x=inn?R.int(a,b-1)+0.5:R.pick([a-1.5,a-0.5,b+0.5,b+1.5]);
+        return {q:T`\(\Omega=[${a},${b}]\). Liegt \(x=${lx(x)}\) in \(\Omega\)?`, a:inn?'ja':'nein', ch:['ja','nein'], how:T`Prüfe \(${a}\le ${lx(x)}\le ${b}\): ${inn?'stimmt, also \\(x\\in\\Omega\\).':'stimmt nicht, also \\(x\\notin\\Omega\\).'}`}; }
+      if(i===1){ const a=R.int(0,3), b=a+R.int(3,6), onB=R()<0.5, x=onB?R.pick([a,b]):R.int(a,b-1)+0.5;
+        return {q:T`\(\Omega=[${a},${b}]\). Liegt \(x=${lx(x)}\) auf dem Rand \(\partial\Omega\)?`, a:onB?'ja':'nein', ch:['ja','nein'], how:T`\(\partial\Omega=\{${a};\ ${b}\}\), nur die zwei Endpunkte. ${onB?'\\(x\\) ist einer davon.':'\\(x\\) liegt dazwischen, also im Inneren.'}`}; }
+      if(i===2){ const r=R.pick([2,3,5]); let p,q; do{ p=R.int(-r-1,r+1); q=R.int(-r-1,r+1); }while(p*p+q*q===r*r); const inn=p*p+q*q<r*r;
+        return {q:T`\(\Omega=\{\mathbf x\in\mathbb R^2:\ |\mathbf x|\le ${r}\}\) (Kreisscheibe). Liegt \(\mathbf x=(${lx(p)};${lx(q)})\) in \(\Omega\)?`, a:inn?'ja':'nein', ch:['ja','nein'], how:T`\(|\mathbf x|^2=${lp(p)}^2+${lp(q)}^2=${p*p+q*q}\) ist ${inn?'kleiner':'größer'} als \(${r}^2=${r*r}\), also ${inn?'drin':'nicht drin'}.`}; }
+      if(i===3){ const n=R.int(1,3);
+        return {q:T`\(n=${n}\): Dimension von \(\partial\Omega\)`, a:n-1, how:T`immer \(n-1=${n-1}\): `+['zwei Punkte (Dimension 0)','eine Kurve (Dimension 1)','eine Fläche, z. B. ein Dreiecksnetz (Dimension 2)'][n-1]}; }
+      const k=R.int(1,4); let x=R.int(0,1); const I=[]; for(let j=0;j<k;j++){ const l=R.int(1,2); I.push([x,x+l]); x+=l+R.int(1,2); }
+      return {q:T`\(\Omega=${I.map(([a,b])=>`[${a},${b}]`).join('\\cup')}\): Anzahl Punkte in \(\partial\Omega\)`, a:2*k, how:T`Jedes Stück hat zwei Endpunkte: \(${k}\cdot2=${2*k}\)`};
+    }};
+
+  PK.partiell={t:T`Partielle Ableitung \(\frac{\partial E}{\partial x}\)`,
+    f:T`Nach \(x\) ableiten heißt: alle anderen Variablen wie feste Zahlen behandeln. Danach den Punkt einsetzen.`,
+    gen:(R,i)=>{ const x=R.int(1,4), y=R.pick([-3,-2,-1,1,2,3,4]);
+      if(i===0){ const c=R.int(2,5); return {q:T`Schule: \(f(x)=${c}x^2\), \(f'(${x})\)`, a:2*c*x, how:T`\(f'(x)=${2*c}x\), also \(f'(${x})=${2*c*x}\)`}; }
+      if(i===1) return {q:T`\(E=x^2y\): \(\frac{\partial E}{\partial x}\) bei \((${x};${lx(y)})\)`, a:2*x*y, how:T`\(y\) festhalten: \(\frac{\partial E}{\partial x}=2xy=2\cdot${x}\cdot${lp(y)}=${lx(2*x*y)}\)`};
+      if(i===2) return {q:T`\(E=x^2y\): \(\frac{\partial E}{\partial y}\) bei \((${x};${lx(y)})\)`, a:x*x, how:T`\(x\) festhalten, \(x^2\) ist dann eine Zahl vor \(y\): \(\frac{\partial E}{\partial y}=x^2=${x*x}\)`};
+      if(i===3){ const a=R.int(1,5), b=R.int(1,5), c=R.int(2,4);
+        return {q:T`\(E=${a}x+${b}y+${c}xy\): \(\frac{\partial E}{\partial y}\) bei \((${x};${lx(y)})\)`, a:b+c*x, how:T`\(${a}x\) hängt nicht von \(y\) ab und fällt weg: \(\frac{\partial E}{\partial y}=${b}+${c}x=${b}+${c}\cdot${x}=${b+c*x}\)`}; }
+      const c=R.int(1,6);
+      return {q:T`\(E=(x+y-${c})^2\): \(\frac{\partial E}{\partial x}\) bei \((${x};${lx(y)})\)`, a:2*(x+y-c), how:T`Kettenregel: \(2(x+y-${c})\cdot1=2\cdot${lp(x+y-c)}=${lx(2*(x+y-c))}\)`};
+    }};
+
+  PK.kette={t:T`Kettenregel für die Energie \(E(\Omega(\boldsymbol\theta))\)`,
+    f:T`\(\frac{dE}{dt}=\frac{dE}{dA}\cdot\frac{dA}{dt}\): Steigung außen mal Steigung innen. Wie in der Grafik ist das „Volumen“ hier eine einzige Zahl, die Fläche \(A\).`,
+    gen:(R,i)=>{
+      if(i===0){ const p=R.st(-3,3,0.5)||1.5, q=R.pick([2,0.5,3,-1]);
+        return {q:T`\(\frac{dE}{dA}=${lx(p)},\ \frac{dA}{dt}=${lx(q)}\): \(\frac{dE}{dt}\)`, a:p*q, how:T`\(${lx(p)}\cdot${lp(q)}=${lx(p*q)}\)`}; }
+      if(i===1){ const m=R.pick([2,3,0.5]), b=R.int(-2,2), As=R.pick([4,6]), t=R.int(1,4), A=m*t+b, a=2*(A-As)*m;
+        return {q:T`\(A(t)=${lx(m)}t${b===0?'':b<0?lx(b):'+'+b},\ E(A)=(A-${As})^2\): \(\frac{dE}{dt}\) bei \(t=${t}\)`, a, how:T`\(A(${t})=${lx(A)}\), \(\frac{dE}{dA}=2(A-${As})=${lx(2*(A-As))}\), \(\frac{dA}{dt}=${lx(m)}\), Produkt \(${lx(a)}\)`}; }
+      if(i===2){ const k=R.int(2,4), t=R.int(1,3), a=2*k*k*t;
+        return {q:T`\(A(t)=${k}t,\ E(A)=A^2\): \(\frac{dE}{dt}\) bei \(t=${t}\)`, a, how:T`\(\frac{dE}{dA}=2A=2\cdot${k*t}=${2*k*t}\), \(\frac{dA}{dt}=${k}\), Produkt \(${a}\). Probe: \(E=${k*k}t^2\), also \(E'=${2*k*k}t=${a}\) ✔`}; }
+      if(i===3){ const t=R.pick([1,3,0.5,2.5]), A=t*t, a=2*(A-4)*2*t;
+        return {q:T`\(A(t)=t^2,\ E(A)=(A-4)^2\): \(\frac{dE}{dt}\) bei \(t=${lx(t)}\)`, a, how:T`\(A=${lx(A)}\), \(\frac{dE}{dA}=2(A-4)=${lx(2*(A-4))}\), \(\frac{dA}{dt}=2t=${lx(2*t)}\), Produkt \(${lx(a)}\)`}; }
+      const q=R.pick([2,4,0.5]), p=R.pick([-3,-1,2,3,5]);
+      return {q:T`\(\frac{dE}{dt}=${lx(p*q)},\ \frac{dA}{dt}=${lx(q)}\): \(\frac{dE}{dA}\)`, a:p, how:T`rückwärts: \(\frac{dE}{dA}=\frac{dE}{dt}\Big/\frac{dA}{dt}=${lx(p*q)}/${lx(q)}=${lx(p)}\)`};
+    }};
+
+  PK.wn1d={t:T`Winding Number \(w(x)\) in 1D`,
+    f:T`Jedes Stück \([a,b]\) zählt für die Punkte zwischen \(a\) und \(b\) einmal. \(w(x)\) ist die Anzahl der Stücke, in denen \(x\) liegt. Voxel \(i\) hat die Mitte \(x_i=i-\tfrac12\).`,
+    gen:(R,i)=>{ const P=two(R), [[a1,b1],[a2,b2]]=P;
+      if(i<3){ const x=i===0?R.int(a2,b1-1)+0.5:i===1?R.pick([R.int(a1,a2-1),R.int(b1,b2-1)])+0.5:R.pick([a1-0.5,b2+0.5,b2+1.5]), a=wAt(P,x);
+        return {q:T`Stücke \(${iv(P)}\): \(w(${lx(x)})\)`, a, how:T`\(x=${lx(x)}\) liegt in ${a===0?'keinem Stück':a===1?'genau einem Stück':'beiden Stücken'}: \(w=${a}\)`}; }
+      if(i===3){ const k=R.int(Math.max(1,a1),b2+1), x=k-0.5, a=wAt(P,x);
+        return {q:T`Stücke \(${iv(P)}\): Voxelwert \(\mathbf W_{${k}}=w(x_{${k}})\)`, a, how:T`Mitte \(x_{${k}}=${k}-0{,}5=${lx(x)}\), dort ist \(w=${a}\)`}; }
+      const a=(b1-a1)+(b2-a2);
+      return {q:T`Stücke \(${iv(P)}\): \(\int w\,dx\) (Länge mit Vielfachheit)`, a, how:T`Jedes Stück zählt mit seiner Länge: \(${b1-a1}+${b2-a2}=${a}\). Der doppelt bedeckte Teil zählt doppelt.`};
+    }};
+
+  PK.chi={t:T`Indikatorfunktion \(\chi_\Omega(\mathbf x)\)`,
+    f:T`\(\chi_\Omega(\mathbf x)=1\), wenn \(\mathbf x\) in \(\Omega\) liegt, sonst 0. Sie zählt nicht, sie sagt nur ja oder nein.`,
+    gen:(R,i)=>{
+      if(i===0){ const A=R.int(3,6), B=R.int(2,4), inn=R()<0.5, p=inn?R.int(0,A-1)+0.5:R.pick([A+0.5,-0.5,R.int(0,A-1)+0.5]), q=inn?R.int(0,B-1)+0.5:(p>A||p<0?R.int(0,B-1)+0.5:R.pick([B+0.5,-0.5])), okx=p>0&&p<A, oky=q>0&&q<B, a=okx&&oky?'1':'0';
+        return {q:T`\(\Omega=[0,${A}]\times[0,${B}]\) (Rechteck): \(\chi_\Omega(${lx(p)};\ ${lx(q)})\)`, a, ch:['0','1'], how:T`\(0\le x\le${A}\) ${okx?'stimmt':'stimmt nicht'}, \(0\le y\le${B}\) ${oky?'stimmt':'stimmt nicht'}: \(\chi=${a}\)`}; }
+      if(i===1){ const r=R.pick([3,5]); let p,q; do{ p=R.int(-r,r); q=R.int(-r,r); }while(p*p+q*q===r*r); const a=p*p+q*q<r*r?'1':'0';
+        return {q:T`\(\Omega\) = Kreisscheibe um \((0;0)\) mit Radius ${r}: \(\chi_\Omega(${lx(p)};\ ${lx(q)})\)`, a, ch:['0','1'], how:T`\(${lp(p)}^2+${lp(q)}^2=${p*p+q*q}\) ist ${a==='1'?'kleiner':'größer'} als \(${r}^2=${r*r}\): \(\chi=${a}\)`}; }
+      if(i===2){ const P=two(R), x=R.int(P[1][0],P[0][1]-1)+0.5;
+        return {q:T`Zwei Stücke \(${iv(P)}\) überlappen sich, \(\Omega\) ist ihre Vereinigung: \(\chi_\Omega(${lx(x)})\)`, a:'1', ch:['0','1','2'], how:T`Dort ist \(w=2\), aber \(\chi\) kennt nur drin (1) oder nicht drin (0): \(\chi=1\). Deshalb ist \(w=\chi\) nur ohne Selbstüberschneidung.`}; }
+      if(i===3){ const r1=R.int(1,2), r2=r1+R.int(2,3), d=R.pick([0.5*r1,r1+1,r2+1]), a=(d>r1&&d<r2)?'1':'0';
+        return {q:T`\(\Omega=\{\mathbf x:\ ${r1}\le|\mathbf x|\le${r2}\}\) (Ring): \(\chi_\Omega(${lx(d)};\ 0)\)`, a, ch:['0','1'], how:T`\(|\mathbf x|=${lx(d)}\) ${d<r1?'liegt im Loch':d>r2?'liegt außerhalb':'liegt im Ring'}: \(\chi=${a}\)`}; }
+      const m=R.pick([1,2,-1]), c=R.int(1,3), ms=m===1?'':m===-1?'-':String(m); let x,y; do{ x=R.int(-2,3); y=R.int(-3,5); }while(y===m*x+c); const a=y<m*x+c?'1':'0';
+      return {q:T`\(\Omega=\{(x,y):\ y\lt ${ms}x+${c}\}\) (Halbebene): \(\chi_\Omega(${x};\ ${y})\)`, a, ch:['0','1'], how:T`\(${ms}x+${c}=${m*x+c}\) bei \(x=${x}\), und \(y=${y}\) ist ${a==='1'?'kleiner':'größer'}: \(\chi=${a}\)`};
+    }};
+
+  PK.kern={t:T`Kern \(k(\mathbf u)\): Box \(k_\square\) und Gauß \(k_\sigma\)`,
+    f:T`Box: \(k_\square(\mathbf u)=1/|\square|\), wenn \(\mathbf u\) im Fenster liegt, sonst 0. In 1D ist \(|\square|=s\) und das Fenster \(|u|\lt s/2\). Gauß in 1D: \(k_\sigma(u)=\frac{1}{\sigma\sqrt{2\pi}}e^{-u^2/(2\sigma^2)}\).`,
+    gen:(R,i)=>{
+      if(i<2){ const s=R.pick([0.5,1,2,4]), u=+(s*(i===0?R.pick([-0.4,-0.2,0,0.1,0.3]):R.pick([-0.8,0.6,0.75,1.2]))).toFixed(4), inn=Math.abs(u)<s/2, head=T`\(|u|=${lx(Math.abs(u))}\)`;
+        return {q:T`Box in 1D, \(s=${lx(s)}\): \(k_\square(${lx(u)})\)`, a:inn?1/s:0, how:inn?head+T` ist kleiner als \(s/2=${lx(s/2)}\): im Fenster, Gewicht \(1/s=${lx(1/s)}\)`:head+T` ist nicht kleiner als \(s/2=${lx(s/2)}\): außerhalb, Gewicht 0`}; }
+      if(i===2){ const n=R.int(2,3), l=R.pick([0.5,2,1]), V=l**n;
+        return {q:T`Box in ${n}D, Seitenlänge \(l=${lx(l)}\): \(k_\square(\mathbf 0)\)`, a:1/V, how:T`\(|\square|=l^${n}=${lx(V)}\), also \(k=1/${lx(V)}=${lx(1/V)}\). Kleines Fenster, großes Gewicht: Die Gesamtmasse bleibt 1.`}; }
+      if(i===3){ const sg=R.pick([0.5,1,2]), a=1/(sg*Math.sqrt(2*Math.PI));
+        return {q:T`Gauß, \(\sigma=${lx(sg)}\): \(k_\sigma(0)\) (Tipp: \(\sqrt{2\pi}\approx2{,}5066\))`, a, how:T`\(\frac{1}{${lx(sg)}\cdot2{,}5066}=${lx(a)}\)`}; }
+      const sg=R.pick([0.5,1,2]), r=R.pick([0.5,1,2]), u=r*sg, a=Math.exp(-r*r/2);
+      return {q:T`Gauß, \(\sigma=${lx(sg)}\): Verhältnis \(k_\sigma(${lx(u)})/k_\sigma(0)\)`, a, how:T`Der Vorfaktor kürzt sich: \(e^{-u^2/(2\sigma^2)}=e^{-${lx(u*u)}/${lx(2*sg*sg)}}=e^{-${lx(r*r/2)}}=${lx(a)}\)`};
+    }};
+
+  PK.falt={t:T`Geglättete Winding Number \(\tilde w(x)\) (Faltung mit Box-Kern)`,
+    f:T`Mit Box-Kern der Breite \(s\): \(\tilde w(x)=\frac1s\int_{x-s/2}^{x+s/2}w(x')\,dx'\). Also: Fenster um \(x\) legen, den Inhalt von \(w\) darin messen, durch \(s\) teilen.`,
+    gen:(R,i)=>{ let P,x,s;
+      if(i===0){ const a=R.int(0,2), b=a+R.int(4,6); P=[[a,b]]; s=1; x=a+R.int(1,b-a-1)+R.pick([0,0.5]); }
+      else if(i===1){ const a=R.int(1,3), b=a+R.int(4,5); P=[[a,b]]; s=1; x=+(a+R.pick([-0.3,-0.2,-0.1,0.1,0.2,0.3,0.4])).toFixed(4); }
+      else if(i===2){ const a=R.int(0,2), b=a+R.int(4,5); P=[[a,b]]; s=2; x=+(b+R.pick([-0.6,-0.2,0.4,0.8])).toFixed(4); }
+      else if(i===3){ const a1=R.int(0,2), a2=a1+R.int(2,3), b1=a2+R.int(2,3), b2=b1+R.int(2,3); P=[[a1,b1],[a2,b2]]; s=2; x=+(a2+R.pick([-0.5,0,0.5])).toFixed(4); }
+      else { const a=R.int(1,3), b=a+R.int(4,5); P=[[a,b]]; s=R.pick([0.5,1,2]); x=R.pick([a,b]); }
+      const l=x-s/2, r=x+s/2, I=intW(P,l,r), a=I/s, two_=P.length>1;
+      return {q:T`\(w\) aus ${two_?'den Stücken':'dem Stück'} \(${iv(P)}\), \(s=${lx(s)}\): \(\tilde w(${lx(x)})\)`, a,
+        how:T`Fenster \([${lx(l)};\ ${lx(r)}]\). ${two_?'Inhalt von \\(w\\) darin (doppelt bedeckte Teile zählen doppelt):':'Davon liegt in \\(\\Omega\\) die Länge'} \(${lx(I)}\), also \(\tilde w=${lx(I)}/${lx(s)}=${lx(a)}\)`+(i===4?'. Genau auf dem Rand ist das Fenster halb voll.':'')};
+    }};
+
+  PK.energie={t:T`Energie \(E(\mathbf W)\) und \(\arg\min\)`,
+    f:T`Beispiel-Energie: \(E=\sum_i(\mathbf W_i-T_i)^2\) mit Zielwerten \(T_i\). \(\min\) liefert den kleinsten <i>Wert</i>, \(\arg\min\) die <i>Stelle</i>, an der er erreicht wird.`,
+    gen:(R,i)=>{
+      if(i<2){ const n=i===0?3:4, W=[], Tt=[]; for(let k=0;k<n;k++){ Tt.push(R.pick([0,1])); W.push(R.st(0,1,0.1)); }
+        const terms=W.map((w,k)=>(w-Tt[k])**2), a=sum(terms);
+        return {q:T`\(\mathbf W=${vec(W)}\), \(T=${vec(Tt)}\): \(E\)`, a, how:T`\(${W.map((w,k)=>`(${lx(w)}-${Tt[k]})^2`).join('+')}=${terms.map(v=>lx(v)).join('+')}=${lx(a)}\)`}; }
+      if(i===2){ const c=R.st(0.5,5,0.5), d=R.int(1,5);
+        return {q:T`\(\arg\min_\theta\big((\theta-${lx(c)})^2+${d}\big)\)`, a:c, how:T`Das Quadrat ist am kleinsten (nämlich 0) bei \(\theta=${lx(c)}\). Das ist die Stelle, also der \(\arg\min\).`}; }
+      if(i===3){ const c=R.st(0.5,5,0.5), d=R.int(1,5);
+        return {q:T`\(\min_\theta\big((\theta-${lx(c)})^2+${d}\big)\)`, a:d, how:T`An der besten Stelle \(\theta=${lx(c)}\) ist das Quadrat 0, übrig bleibt der Wert \(${d}\). Der \(\min\) ist ein Wert, keine Stelle.`}; }
+      const p=R.pick([2,4,5]), q=R.int(1,9);
+      return {q:T`\(\arg\min_\theta\,(${p}\theta-${q})^2\)`, a:q/p, how:T`Null wird es bei \(${p}\theta=${q}\), also \(\theta=${q}/${p}=${lx(q/p)}\)`};
+    }};
+
+  PK.hauptsatz={t:T`Ableitung eines Integrals mit wanderndem Rand`,
+    f:T`\(\frac{d}{d\theta}\int_c^\theta g(x)\,dx=g(\theta)\): Die Ableitung ist der Integrand <b>am wandernden Rand</b>. Wandert die <i>untere</i> Grenze, kommt ein Minus dazu.`,
+    gen:(R,i)=>{ const t=R.st(0.5,4,0.5);
+      if(i===0){ const k=R.int(1,5);
+        return {q:T`\(\frac{d}{d\theta}\int_0^\theta ${k}\,dx\) bei \(\theta=${lx(t)}\)`, a:k, how:T`\(g(\theta)=${k}\). „Unter dem Integral ableiten“ gäbe fälschlich 0, weil \(${k}\) nicht von \(\theta\) abhängt.`}; }
+      if(i===1) return {q:T`\(\frac{d}{d\theta}\int_0^\theta x\,dx\) bei \(\theta=${lx(t)}\)`, a:t, how:T`\(g(\theta)=\theta=${lx(t)}\). Probe: \(\int_0^\theta x\,dx=\theta^2/2\), abgeleitet \(\theta\) ✔`};
+      if(i===2){ const G=R.pick([['x^2',v=>v*v,v=>sq(v)],['3x+1',v=>3*v+1,v=>'3\\cdot'+lp(v)+'+1'],['2x^2',v=>2*v*v,v=>'2\\cdot'+sq(v)]]);
+        return {q:T`\(\frac{d}{d\theta}\int_1^\theta ${G[0]}\,dx\) bei \(\theta=${lx(t)}\)`, a:G[1](t), how:T`\(g(\theta)\) einsetzen: \(${G[2](t)}=${lx(G[1](t))}\). Die untere Grenze 1 steht fest und spielt keine Rolle.`}; }
+      if(i===3){ const k=R.int(2,5);
+        return {q:T`Wert, nicht Ableitung: \(f(\theta)=\int_0^\theta ${k}\,dx\) bei \(\theta=${lx(t)}\)`, a:k*t, how:T`Rechteck mit Breite \(${lx(t)}\) und Höhe \(${k}\): \(f=${lx(k*t)}\). Die Ableitung wäre \(${k}\).`}; }
+      const k=R.int(1,3);
+      return {q:T`\(\frac{d}{d\theta}\int_\theta^{6}(x+${k})\,dx\) bei \(\theta=${lx(t)}\)`, a:-(t+k), how:T`Die untere Grenze wandert nach rechts, dabei geht Fläche verloren: \(-g(\theta)=-(${lx(t)}+${k})=${lx(-(t+k))}\)`};
+    }};
+
+  PK.regionen={t:T`Zerlegung in Regionen \(D_i\) mit festen Werten \(w_i\) (Gl. 7)`,
+    f:T`Eine Region \(D_i\) ist ein Stück, auf dem \(w\) überall gleich \(w_i\) ist. Dann gilt \(\int w\,dx=\sum_i w_i\cdot|D_i|\): Wert mal Länge, summiert.`,
+    gen:(R,i)=>{
+      const desc=P=>{ const bs=[...new Set(P.flat())].sort((a,b)=>a-b), out=[]; for(let k=0;k<bs.length-1;k++) out.push([bs[k],bs[k+1],wAt(P,(bs[k]+bs[k+1])/2)]); return out; };
+      const regTex=D=>D.map(([l,r,w])=>`[${lx(l)};${lx(r)}):\\ w=${w}`).join(',\\quad ');
+      const prod=D=>D.map(([l,r,w])=>`${w}\\cdot${lx(r-l)}`).join('+');
+      if(i===3){ const a1=R.int(0,1), a2=a1+R.int(1,2), b2=a2+R.int(2,3), b1=b2+R.int(1,2), P=[[a1,b1],[a2,b2]], D=desc(P), a=sum(D.map(([l,r,w])=>w*(r-l)));
+        return {q:T`Stücke \(${iv(P)}\) (eins liegt im anderen): \(\sum_i w_i\,|D_i|\)`, a, how:T`Regionen \(${regTex(D)}\). Summe \(${prod(D)}=${lx(a)}\)`}; }
+      const P=two(R), [[a1,b1],[a2,b2]]=P, D=desc(P);
+      if(i===0) return {q:T`Stücke \(${iv(P)}\): Länge der Region mit \(w=2\)`, a:b1-a2, how:T`Regionen \(${regTex(D)}\). Die Region mit \(w=2\) ist \([${a2};${b1})\), Länge \(${b1-a2}\).`};
+      if(i===1) return {q:T`Stücke \(${iv(P)}\): Gesamtlänge aller Regionen mit \(w=1\)`, a:(a2-a1)+(b2-b1), how:T`Regionen \(${regTex(D)}\). Mit \(w=1\): \(${a2-a1}+${b2-b1}=${(a2-a1)+(b2-b1)}\)`};
+      if(i===2){ const a=sum(D.map(([l,r,w])=>w*(r-l)));
+        return {q:T`Stücke \(${iv(P)}\): \(\sum_i w_i\,|D_i|\)`, a, how:T`\(${prod(D)}=${lx(a)}\). Probe: Summe der Stücklängen \(${b1-a1}+${b2-a2}=${(b1-a1)+(b2-a2)}\) ✔`}; }
+      const x=b1+R.pick([-0.5,0,0.5]), l=x-1, r=x+1, parts=D.map(([L,Rr,w])=>[w,Math.max(0,Math.min(r,Rr)-Math.max(l,L))]).filter(([w,o])=>o>0&&w>0), a=sum(parts.map(([w,o])=>w*o))/2;
+      return {q:T`Stücke \(${iv(P)}\), Box-Fenster \(s=2\) um \(x=${lx(x)}\): \(\tilde w(x)\), Region für Region`, a, how:T`Fenster \([${lx(l)};\ ${lx(r)}]\). Regionsweise: \(\big(${parts.map(([w,o])=>`${w}\\cdot${lx(o)}`).join('+')}\big)/2=${lx(a)}\). Genau so zerlegt Gl. 7 das Integral.`};
+    }};
+
+  PK.reynolds={t:T`Reynolds-Transporttheorem (Rand-Term)`,
+    f:T`Ändert sich nur das Gebiet und nicht der Integrand, gilt \(\frac{d}{d\theta}\int_{D(\theta)}f=\oint_{\partial D}v_n\,f\,d\ell\). In 1D besteht der Rand aus zwei Punkten: Rechts zählt die Geschwindigkeit mit \(+\), links mit \(-\), denn dort zeigt die Normale nach links.`,
+    gen:(R,i)=>{
+      if(i===0){ const a=R.int(0,2), k=R.int(1,5), t=R.int(a+2,a+5);
+        return {q:T`\(D(\theta)=[${a},\theta],\ f=${k}\): \(\frac{d}{d\theta}\int_D f\,dx\) bei \(\theta=${t}\)`, a:k, how:T`Nur der rechte Rand wandert, mit \(v_n=+1\): Beitrag \(f\cdot v_n=${k}\). Der Innen-Term ist 0, weil \(f\) fest ist.`}; }
+      if(i===1){ const b=R.int(6,9), k=R.int(1,5), t=R.int(1,4);
+        return {q:T`\(D(\theta)=[\theta,${b}],\ f=${k}\): \(\frac{d}{d\theta}\int_D f\,dx\) bei \(\theta=${t}\)`, a:-k, how:T`Der linke Rand wandert nach rechts, also ins Innere. Dort zeigt die Normale nach links: \(v_n=-1\), Beitrag \(${k}\cdot(-1)=${lx(-k)}\). Das Gebiet schrumpft.`}; }
+      if(i===2){ const p=R.int(1,2), q=p+R.int(1,3), t=R.int(1,3);
+        return {q:T`\(D(\theta)=[${p===1?'':p}\theta,\ ${q}\theta],\ f=1\): \(\frac{d}{d\theta}\int_D f\,dx\) bei \(\theta=${t}\)`, a:q-p, how:T`rechts: Geschwindigkeit \(${q}\), Normale \(+1\), also \(+${q}\). Links: Geschwindigkeit \(${p}\), Normale \(-1\), also \(-${p}\). Summe \(${q-p}\). Probe: Länge \(${q-p===1?'':q-p}\theta\), Ableitung \(${q-p}\) ✔`}; }
+      if(i===3){ const r=R.int(1,5), a=2*Math.PI*r;
+        return {q:T`Kreisscheibe mit Radius \(r=\theta\), \(f=1\): \(\frac{dA}{d\theta}\) bei \(r=${r}\)`, a, how:T`Überall ist \(v_n=1\), also \(\oint 1\,d\ell\) = Umfang \(=2\pi r=${lx(a)}\). Probe: \(A=\pi r^2\), \(A'=2\pi r\) ✔`}; }
+      const s=R.int(1,6);
+      return {q:T`Quadrat \([0,\theta]\times[0,\theta]\), \(f=1\): \(\frac{dA}{d\theta}\) bei \(\theta=${s}\)`, a:2*s, how:T`Nur die rechte und die obere Seite wandern, je mit \(v_n=1\) und Länge \(${s}\). Links und unten ist \(v_n=0\). Summe \(2\cdot${s}=${2*s}\). Probe: \(A=\theta^2\), \(A'=2\theta\) ✔`};
+    }};
+
+  PK.vn={t:T`Normalgeschwindigkeit \(v_n=\mathbf u^{\mathsf T}\mathbf n\)`,
+    f:T`\(\mathbf u=\partial_\theta\mathbf x_b\) ist die Geschwindigkeit eines Randpunkts, \(\mathbf n\) die Normale (Länge 1, nach außen). \(v_n=u_xn_x+u_yn_y\). Nur dieser Anteil überstreicht neue Fläche.`,
+    gen:(R,i)=>{ const NA=[[1,0],[0,1],[-1,0],[0,-1]], N5=[[0.6,0.8],[0.8,0.6],[-0.6,0.8],[0.8,-0.6]], dot=(u,n)=>u[0]*n[0]+u[1]*n[1];
+      const res=(u,n,a,extra='')=>({q:T`\(\mathbf u=${vec(u)},\ \mathbf n=${vec(n)}\): \(v_n\)`, a, how:T`\(${lp(u[0])}\cdot${lp(n[0])}+${lp(u[1])}\cdot${lp(n[1])}=${lx(a)}\)`+extra});
+      if(i===0){ const n=R.pick(NA), u=[R.int(-3,3),R.int(-3,3)]; return res(u,n,dot(u,n)); }
+      if(i===1){ const n=R.pick(N5), u=[R.int(-3,4),R.int(-3,4)]; return res(u,n,dot(u,n)); }
+      if(i===2){ const n=R.pick(N5), c=R.pick([-2,-1,1,2,3]), u=[+(-n[1]*c).toFixed(4),+(n[0]*c).toFixed(4)]; return res(u,n,0,'. Die Bewegung läuft genau entlang des Randes und überstreicht keine Fläche.'); }
+      if(i===3){ const n=R.pick(NA), c=R.int(1,3), t=R.int(-2,2), u=[-c*n[0]-t*n[1],-c*n[1]+t*n[0]]; return res(u,n,-c,'. Negativ: Der Rand wandert nach innen, das Gebiet wird kleiner.'); }
+      const n=R.pick(NA), u=[R.int(-2,3),R.int(-2,3)], L=R.pick([2,3,0.5]), a=L*dot(u,n);
+      return {q:T`Kante der Länge \(${lx(L)}\), alle Punkte mit \(\mathbf u=${vec(u)}\), \(\mathbf n=${vec(n)}\): überstrichene Fläche pro \(\theta\)`, a, how:T`\(v_n=${lx(dot(u,n))}\), mal Länge: \(${lx(L)}\cdot${lp(dot(u,n))}=${lx(a)}\)`};
+    }};
+
+  PK.sprung={t:T`Doppelte Überdeckung: Beitrag einer Wand \(v_n\,(w_i-w_j)\) (Gl. 9–14)`,
+    f:T`Jede Wand gehört zu zwei Regionen. \(D_i\) auf der Innenseite sieht die Normale \(\mathbf n\) und liefert \(+v_n w_i\). \(D_j\) sieht \(-\mathbf n\) und liefert \(-v_n w_j\). Zusammen: \(v_n(w_i-w_j)\). Geht man in Normalenrichtung durch die Wand, fällt \(w\) um genau 1.`,
+    gen:(R,i)=>{ const v=R.pick([-1.5,-0.5,0.5,0.8,1.2,2,3]);
+      if(i===0) return {q:T`\(v_n=${lx(v)},\ w_i=1,\ w_j=0\) (Gl. 10): Beitrag`, a:v, how:T`\(${lx(v)}\cdot(1-0)=${lx(v)}\)`};
+      if(i===1){ const k=R.int(1,3); return {q:T`\(v_n=${lx(v)},\ w_i=${k+1},\ w_j=${k}\): Beitrag`, a:v, how:T`\(${lx(v)}\cdot(${k+1}-${k})=${lx(v)}\). Die Werte selbst fallen heraus, nur der Sprung 1 bleibt (Gl. 14).`}; }
+      if(i===2){ const wj=R.int(0,3); return {q:T`\(v_n=${lx(v)},\ w_j=${wj}\): Beitrag der Region \(D_j\) allein`, a:-v*wj, how:T`\(D_j\) sieht die Normale \(-\mathbf n\), also \(-v_n\cdot w_j=-${lp(v)}\cdot${wj}=${lx(-v*wj)}\)`}; }
+      if(i===3){ const wi=R.int(1,4); return {q:T`\(v_n=${lx(v)},\ w_i=${wi}\): Beitrag der Region \(D_i\) allein`, a:v*wi, how:T`\(+v_n\cdot w_i=${lx(v)}\cdot${wi}=${lx(v*wi)}\)`}; }
+      const wi=R.pick([-1,0,1,2,3]);
+      return {q:T`Auf der Innenseite ist \(w_i=${wi}\). Wert \(w_j\) direkt hinter der Wand (in Normalenrichtung)`, a:wi-1, how:T`In Normalenrichtung fällt \(w\) um 1: \(w_j=${wi}-1=${wi-1}\)`};
+    }};
+
+  PK.adjungiert={t:T`Gradient der Energie über die Adjungierte (Gl. 15)`,
+    f:T`Die Adjungierte ist \(\frac{\partial E}{\partial\mathbf W_i}\), für \(E=\sum_i(\mathbf W_i-T_i)^2\) also \(2(\mathbf W_i-T_i)\). Gradient: \(\frac{\partial E}{\partial\theta}=\sum_i\frac{\partial E}{\partial\mathbf W_i}\cdot\frac{\partial\mathbf W_i}{\partial\theta}\).`,
+    gen:(R,i)=>{
+      if(i===0){ const t=R.pick([0,1]); let w; do{ w=R.st(0,1,0.1); }while(w===t); const a=2*(w-t);
+        return {q:T`\(\mathbf W_i=${lx(w)},\ T_i=${t}\): Adjungierte \(\frac{\partial E}{\partial\mathbf W_i}\)`, a, how:T`\(2(${lx(w)}-${t})=${lx(a)}\). ${a>0?'Positiv: Das Voxel ist zu voll und soll leerer werden.':'Negativ: Das Voxel ist zu leer und soll voller werden.'}`}; }
+      if(i===1){ const w=R.pick([1.2,1.5,2,0.8,0.5,1.1]), a=w>1?2*w:0;
+        return {q:T`\(E_{\text{sect}}=\sum_{\mathbf W_i\gt1}\mathbf W_i^2\), \(\mathbf W_i=${lx(w)}\): \(\frac{\partial E_{\text{sect}}}{\partial\mathbf W_i}\)`, a, how:w>1?T`Das Voxel ist übervoll und zählt mit. Die Ableitung von \(\mathbf W_i^2\) ist \(2\mathbf W_i=${lx(a)}\).`:T`\(\mathbf W_i\le1\) zählt in \(E_{\text{sect}}\) gar nicht mit: Ableitung 0.`}; }
+      if(i<4){ const n=i===2?2:3, A=[], D=[]; for(let k=0;k<n;k++){ A.push(R.st(-1,1,0.2)||0.4); D.push(R.st(-0.5,0.5,0.1)||0.2); } const a=sum(A.map((x,k)=>x*D[k]));
+        return {q:T`Adjungierte \(${vec(A)}\), \(\frac{\partial\mathbf W_i}{\partial\theta}=${vec(D)}\): \(\frac{\partial E}{\partial\theta}\)`, a, how:T`\(${A.map((x,k)=>`${lp(x)}\\cdot${lp(D[k])}`).join('+')}=${lx(a)}\)`}; }
+      const W=[R.st(0.3,0.9,0.1),R.st(0.1,0.6,0.1)], D=[R.pick([0.5,0.4,0.2]),R.pick([-0.3,0.3,0.6])], A=[2*(W[0]-1),2*W[1]], a=A[0]*D[0]+A[1]*D[1];
+      return {q:T`\(\mathbf W=${vec(W)},\ T=(1;\ 0)\), \(\frac{\partial\mathbf W}{\partial\theta}=${vec(D)}\): \(\frac{\partial E}{\partial\theta}\)`, a, how:T`Adjungierte \(2(\mathbf W-T)=${vec(A)}\), dann \(${A.map((x,k)=>`${lp(x)}\\cdot${lp(D[k])}`).join('+')}=${lx(a)}\)`};
+    }};
+
+  PK.div={t:T`Divergenz \(\nabla\cdot\mathbf F\) und Fluss (Gl. 16)`,
+    f:T`\(\nabla\cdot\mathbf F=\frac{\partial F_1}{\partial x}+\frac{\partial F_2}{\partial y}\): wie viel an einem Punkt „entsteht“. Divergenzsatz: Der Fluss durch den Rand ist \(\oint\mathbf F^{\mathsf T}\mathbf n\,d\ell=\int\nabla\cdot\mathbf F\,dA\).`,
+    gen:(R,i)=>{ const sx=c=>c===1?'':c===-1?'-':String(c);
+      if(i===0){ const a=R.pick([-2,-1,1,2,3]), b=R.pick([-1,1,2,3]);
+        return {q:T`\(\mathbf F=(${sx(a)}x;\ ${sx(b)}y)\): \(\nabla\cdot\mathbf F\)`, a:a+b, how:T`\(\frac{\partial(${sx(a)}x)}{\partial x}+\frac{\partial(${sx(b)}y)}{\partial y}=${lx(a)}+${lp(b)}=${lx(a+b)}\)`}; }
+      if(i===1){ const c=R.int(1,4), x=R.int(-2,3), y=R.int(-2,3);
+        return {q:T`\(\mathbf F=(x^2;\ ${sx(c)}y)\): \(\nabla\cdot\mathbf F\) bei \((${x};${y})\)`, a:2*x+c, how:T`\(2x+${c}=2\cdot${lp(x)}+${c}=${2*x+c}\)`}; }
+      if(i===2){ const x=R.int(-2,3), y=R.int(-2,3);
+        return {q:T`\(\mathbf F=(xy;\ y^2)\): \(\nabla\cdot\mathbf F\) bei \((${x};${y})\)`, a:3*y, how:T`\(\frac{\partial(xy)}{\partial x}=y\) und \(\frac{\partial(y^2)}{\partial y}=2y\), zusammen \(3y=3\cdot${lp(y)}=${3*y}\)`}; }
+      if(i===3){ const s=R.pick([0.5,1,2,4]);
+        return {q:T`Box-Feld aus der Grafik: in der Box \(\mathbf F=(0;\ (y-y_0)/s^2)\), \(s=${lx(s)}\): \(\nabla\cdot\mathbf F\)`, a:1/(s*s), how:T`\(\frac{\partial}{\partial y}\frac{y-y_0}{s^2}=\frac1{s^2}=${lx(1/(s*s))}\). Das ist genau das Kerngewicht \(1/|\square|\), wie Gl. 16 es verlangt.`}; }
+      const a=R.int(1,3), b=R.int(1,3), W=R.int(1,4), H=R.int(1,3), r=(a+b)*W*H;
+      return {q:T`\(\mathbf F=(${sx(a)}x;\ ${sx(b)}y)\), Rechteck ${W} × ${H}: Fluss \(\oint\mathbf F^{\mathsf T}\mathbf n\,d\ell\)`, a:r, how:T`Divergenzsatz: \(\nabla\cdot\mathbf F=${a+b}\) überall, mal Fläche \(${W*H}\): \(${r}\)`};
+    }};
+
+  PK.sgnint={t:T`Vorzeichenbehaftete Schnittzahl \(\mathrm{sgnInt}\)`,
+    f:T`Jeder Durchstoß zählt \(+1\), wenn \(\mathbf d^{\mathsf T}\mathbf n\gt0\) (der Strahl tritt in Normalenrichtung aus), und \(-1\), wenn \(\mathbf d^{\mathsf T}\mathbf n\lt0\). Die Summe ist \(w(\mathbf x)\).`,
+    gen:(R,i)=>{
+      if(i<2){ const n=i===0?3:4, V=[]; for(let k=0;k<n;k++) V.push(+(R.st(0.1,0.9,0.1)*R.sg()).toFixed(1)); const sg=V.map(v=>v>0?1:-1), a=sum(sg);
+        return {q:T`Durchstöße mit \(\mathbf d^{\mathsf T}\mathbf n\): ${V.map(v=>nf(v)).join('; ')}. \(\mathrm{sgnInt}\)`, a, how:T`Nur das Vorzeichen zählt: \(${sg.map(s=>s>0?'+1':'-1').join('')}=${lx(a)}\)`}; }
+      if(i===2){ const d=R.pick([[1,0],[0,1]]), n=R.pick([[0.6,0.8],[0.8,-0.6],[-0.6,0.8],[-0.8,-0.6],[0.6,-0.8]]), p=d[0]*n[0]+d[1]*n[1], a=p>0?'+1':'−1';
+        return {q:T`\(\mathbf d=${vec(d)},\ \mathbf n=${vec(n)}\): Beitrag dieses Durchstoßes`, a, ch:['+1','−1'], how:T`\(\mathbf d^{\mathsf T}\mathbf n=${lx(p)}\) ist ${p>0?'positiv: Austritt, +1':'negativ: Eintritt, −1'}`}; }
+      if(i===3){ const k=R.int(1,4), m=R.int(0,k);
+        return {q:T`Ein Strahl tritt ${k}-mal in Normalenrichtung aus und ${m}-mal ein: \(\mathrm{sgnInt}\)`, a:k-m, how:T`\(${k}\cdot(+1)+${m}\cdot(-1)=${k-m}\)`}; }
+      const L=[]; for(let k=0;k<7;k++) L.push(R.pick([0,0,0,1,1,-1])); const a=sum(L);
+      return {q:T`Beiträge \(w_i(\mathbf x,\mathbf d)\) von sieben Dreiecken: ${L.map(v=>nf(v)).join('; ')}. \(w(\mathbf x)\)`, a, how:T`Gl. 17: einfach summieren, die meisten Dreiecke liefern 0. Summe \(${lx(a)}\)`};
+    }};
+
+  PK.halboffen={t:T`Box \(\square_{\mathbf x_{\mathbf i}}\) (halboffen, Gl. 19)`,
+    f:T`Mit Breite \(l\) ist Voxel \(i\) das Intervall \([(i-1)\,l,\ i\,l)\): Der linke Rand gehört dazu, der rechte nicht. Mittelpunkt \(x_i=(i-\tfrac12)\,l\). Also \(i=\lfloor y/l\rfloor+1\) (\(\lfloor\cdot\rfloor\) heißt abrunden).`,
+    gen:(R,i)=>{ const idx=(y,l)=>Math.floor(y/l+1e-9)+1;
+      if(i===0){ let y; do{ y=R.st(0.1,6.9,0.1); }while(Math.abs(y-Math.round(y))<1e-9); const a=idx(y,1);
+        return {q:T`\(l=1\): Voxel \(i\) von \(y=${lx(y)}\)`, a, how:T`\(${a-1}\le${lx(y)}\lt${a}\), also Voxel \(${a}\)`}; }
+      if(i===1){ const y=R.int(1,6), a=y+1;
+        return {q:T`\(l=1\): Voxel \(i\) von \(y=${y}\) (genau auf einer Grenze)`, a, how:T`\(y=${y}\) ist der linke Rand von \([${y},${y+1})\) und gehört dazu, aber nicht zu \([${y-1},${y})\): Voxel \(${a}\)`}; }
+      if(i===2){ const y=R.st(0.1,3.9,0.1), a=idx(y,0.5);
+        return {q:T`\(l=0{,}5\): Voxel \(i\) von \(y=${lx(y)}\)`, a, how:T`\(y/l=${lx(y/0.5)}\), abgerundet \(${a-1}\), plus 1: Voxel \(${a}\). Probe: \([${lx((a-1)*0.5)};\ ${lx(a*0.5)})\) enthält \(${lx(y)}\).`}; }
+      if(i===3){ const l=R.pick([1,0.5]), y=[R.st(0.1,3.9,0.1),R.st(0.1,3.9,0.1)], a=y.map(v=>idx(v,l));
+        return {q:T`\(l=${lx(l)}\), Punkt \(\mathbf y=${vec(y)}\): Multi-Index \(\mathbf i=(i_1;\ i_2)\)`, a, how:T`jede Achse einzeln: \(\lfloor${lx(y[0])}/${lx(l)}\rfloor+1=${a[0]}\) und \(\lfloor${lx(y[1])}/${lx(l)}\rfloor+1=${a[1]}\)`}; }
+      const l=R.pick([1,0.5,2]), k=R.int(1,8);
+      return {q:T`\(l=${lx(l)}\): Mittelpunkt \(x_{${k}}\)`, a:(k-0.5)*l, how:T`\((${k}-0{,}5)\cdot${lx(l)}=${lx((k-0.5)*l)}\)`};
+    }};
+
+  PK.fuellgrad={t:T`Box-Mittelwert \(\tilde w(\mathbf x_{\mathbf i})\) = Füllgrad (Gl. 18)`,
+    f:T`\(\tilde w(\mathbf x_{\mathbf i})=\frac{1}{|\square|}\int_\square w\,dA\): der Inhalt von \(w\) im Voxel, geteilt durch die Voxelgröße. Ohne Überlappung ist das der gefüllte Anteil.`,
+    gen:(R,i)=>{
+      if(i===0){ const k=R.int(2,6), a0=+(k-1+R.st(0.1,0.9,0.1)).toFixed(4), b0=k+R.int(1,3), ov=k-a0;
+        return {q:T`1D, \(l=1\), Voxel \(${k}=[${k-1},${k})\), \(\Omega=[${lx(a0)},${b0}]\): \(\tilde w\)`, a:ov, how:T`gefüllt ist \([${lx(a0)};\ ${k})\), Länge \(${lx(ov)}\), geteilt durch \(l=1\): \(${lx(ov)}\)`}; }
+      if(i===1){ const c=R.st(0.1,0.9,0.1);
+        return {q:T`Voxel \([0,1)^2\), \(\Omega=\{x\lt${lx(c)}\}\) (Halbebene): \(\tilde w\)`, a:c, how:T`gefüllt ist ein Streifen \(${lx(c)}\times1\) mit Fläche \(${lx(c)}\), geteilt durch die Voxelfläche 1`}; }
+      if(i===2){ const a=R.st(0.4,1,0.2), b=R.st(0.4,1,0.2), A=a*b/2;
+        return {q:T`Voxel \([0,1)^2\), \(\Omega\) = Dreieck \((0;0),\ (${lx(a)};0),\ (0;${lx(b)})\): \(\tilde w\)`, a:A, how:T`Dreiecksfläche \(\tfrac12\cdot${lx(a)}\cdot${lx(b)}=${lx(A)}\), Voxelfläche 1`}; }
+      if(i===3){ const p2=R.st(0.1,0.4,0.1), p1=R.st(0.1,+(0.9-p2).toFixed(1),0.1), a=p1+2*p2;
+        return {q:T`Im Voxel ist der Anteil \(${lx(p1)}\) einfach bedeckt (\(w=1\)) und \(${lx(p2)}\) doppelt (\(w=2\)): \(\tilde w\)`, a, how:T`\(1\cdot${lx(p1)}+2\cdot${lx(p2)}=${lx(a)}\)`+(a>1?'. Über 1: ein Zeichen für Überlappung.':'')}; }
+      const l=R.pick([0.5,2]), A=+(l*l*R.st(0.2,0.8,0.1)).toFixed(4), a=A/(l*l);
+      return {q:T`Voxel mit Seite \(l=${lx(l)}\), Fläche von \(\Omega\cap\square\) ist \(${lx(A)}\): \(\tilde w\)`, a, how:T`\(|\square|=l^2=${lx(l*l)}\), \(\tilde w=${lx(A)}/${lx(l*l)}=${lx(a)}\)`};
+    }};
+
+  PK.schatten={t:T`Schattenvolumen = projizierte Fläche × Schwerpunkthöhe`,
+    f:T`Volumen zwischen Dreieck und Grundebene: \(V=A\cdot\bar z\) mit \(\bar z=\frac{z_1+z_2+z_3}{3}\). Zeigt die Normale nach unten, zählt es negativ. In der Voxelsäule (\(l=1\)) bekommt jedes Voxel unter dem Dreieck \(A\cdot l\), das eigene Voxel den Rest.`,
+    gen:(R,i)=>{ const A=R.st(0.2,1.2,0.1);
+      if(i<2){ const z=[R.st(1,3,0.2),R.st(1,3,0.2),R.st(1,3,0.2)], zb=sum(z)/3, a=(i===0?1:-1)*A*zb;
+        return {q:T`\(A=${lx(A)}\), Höhen \(${z.map(v=>lx(v)).join(';\\ ')}\)${i===1?', Normale nach unten':''}: \(V\)`, a, how:T`\(\bar z=(${z.map(v=>lx(v)).join('+')})/3=${lx(zb)}\), \(V=${i===1?'-':''}${lx(A)}\cdot${lx(zb)}=${lx(a)}\)`}; }
+      if(i===2){ const l=R.pick([1,0.5]);
+        return {q:T`\(A=${lx(A)}\), Voxelhöhe \(l=${lx(l)}\): Beitrag an ein Voxel <i>unter</i> dem Dreieck`, a:A*l, how:T`Das Voxel liegt ganz im Schatten: Grundfläche mal Höhe, \(${lx(A)}\cdot${lx(l)}=${lx(A*l)}\)`}; }
+      const k=R.int(1,3), z=[0,0,0].map(()=>+(k+R.st(0.1,0.9,0.1)).toFixed(4)), zb=sum(z)/3;
+      if(i===3){ const a=A*(zb-k);
+        return {q:T`Dreieck in Voxel \(k=${k}\) (\(${k}\le z\lt${k+1}\)), \(l=1\), \(A=${lx(A)}\), Höhen \(${z.map(v=>lx(v)).join(';\\ ')}\): Beitrag an das <i>eigene</i> Voxel`, a, how:T`gesamt \(A\bar z=${lx(A)}\cdot${lx(zb)}=${lx(A*zb)}\), minus \(${k}\) Voxel darunter zu je \(${lx(A)}\): \(${lx(A*zb)}-${lx(k*A)}=${lx(a)}\), also \(A(\bar z-${k})\)`}; }
+      return {q:T`Dreieck in Voxel \(k=${k}\), \(l=1\), \(A=${lx(A)}\), \(\bar z=${lx(zb)}\): Summe aller Beiträge der Säule`, a:A*zb, how:T`eigenes Voxel \(${lx(A*(zb-k))}\) plus \(${k}\cdot${lx(A)}\) darunter \(=${lx(A*zb)}=A\bar z\) ✔`};
+    }};
+
+  PK.fan={t:T`Fächer-Triangulierung: \(k\)-Eck → \(k-2\) Dreiecke`,
+    f:T`Eine Ecke festhalten und mit allen anderen Ecken verbinden: Aus einem konvexen \(k\)-Eck werden \(k-2\) Dreiecke. Jede Schnittebene fügt höchstens eine Ecke hinzu.`,
+    gen:(R,i)=>{
+      if(i===0){ const k=R.int(4,9); return {q:T`\(k=${k}\) Ecken: Anzahl Teildreiecke`, a:k-2, how:T`\(${k}-2=${k-2}\)`}; }
+      if(i===1){ const d=R.pick([2,3]), p=d===2?4:6;
+        return {q:T`${d}D: ein Dreieck (3 Ecken) wird an einem Voxel mit ${p} ${d===2?'Schnittlinien':'Schnittebenen'} geschnitten: höchste mögliche Eckenzahl`, a:3+p, how:T`\(3+${p}=${3+p}\)`+(d===3?', wie im Paper (3 bis 9 Ecken)':'')}; }
+      if(i===2){ const k=R.int(3,9); return {q:T`Innenwinkelsumme eines \(${k}\)-Ecks in Grad`, a:(k-2)*180, u:'°', how:T`\(${k-2}\) Dreiecke zu je \(180^\circ\): \(${(k-2)*180}^\circ\)`}; }
+      if(i===3){ const k=R.int(4,9); return {q:T`\(${k}\)-Eck: Anzahl der Fächer-Diagonalen ab einer Ecke`, a:k-3, how:T`Zu den zwei Nachbarn gibt es schon Kanten, zu sich selbst keine: \(${k}-3=${k-3}\)`}; }
+      const L=[R.int(3,7),R.int(3,7),R.int(3,7)], a=sum(L.map(k=>k-2));
+      return {q:T`Drei Polygone mit ${L.join(', ')} Ecken: Teildreiecke insgesamt`, a, how:T`\(${L.map(k=>`(${k}-2)`).join('+')}=${a}\)`};
+    }};
+
+  PK.ableitvoxel={t:T`Ableitung des Füllgrads eines Voxels (Gl. 20–21)`,
+    f:T`\(\partial_\theta\tilde w(\mathbf x_{\mathbf i})=\frac{1}{|\square|}\int_{\partial\Omega\cap\square}v_n\,d\ell\): die überstrichene Fläche (2D) bzw. das überstrichene Volumen (3D) pro \(\theta\), geteilt durch die Voxelgröße. Nur Randstücke <i>im</i> Voxel zählen.`,
+    gen:(R,i)=>{ const L=R.st(0.2,1,0.1), v=R.pick([0.5,1,2,-1]);
+      if(i===0) return {q:T`2D, \(l=1\), Randstück der Länge \(${lx(L)}\) im Voxel, \(v_n=${lx(v)}\): \(\partial_\theta\tilde w\)`, a:L*v, how:T`\(${lx(L)}\cdot${lp(v)}/1=${lx(L*v)}\)`};
+      if(i===1){ const LL=+(L/2).toFixed(4);
+        return {q:T`2D, \(l=0{,}5\), Randstück der Länge \(${lx(LL)}\), \(v_n=${lx(v)}\): \(\partial_\theta\tilde w\)`, a:LL*v/0.25, how:T`\(|\square|=0{,}25\): \(${lx(LL)}\cdot${lp(v)}/0{,}25=${lx(LL*v/0.25)}\)`}; }
+      if(i===2){ const n=R.pick([[0,1],[1,0]]), u=n[0]?[0,R.int(1,3)]:[R.int(1,3),0];
+        return {q:T`2D, \(l=1\), Randstück der Länge \(${lx(L)}\), \(\mathbf n=${vec(n)}\), \(\mathbf u=${vec(u)}\): \(\partial_\theta\tilde w\)`, a:0, how:T`\(v_n=\mathbf u^{\mathsf T}\mathbf n=0\): Der Rand gleitet nur an sich entlang, der Füllgrad ändert sich nicht.`}; }
+      if(i===3){ const l=R.pick([1,0.5]), A=+(l*l*R.st(0.2,0.8,0.1)).toFixed(4), a=A*v/l**3;
+        return {q:T`3D, Voxelseite \(l=${lx(l)}\), Flächenstück \(${lx(A)}\) im Voxel, \(v_n=${lx(v)}\): \(\partial_\theta\tilde w\)`, a, how:T`\(|\square|=l^3=${lx(l**3)}\): \(${lx(A)}\cdot${lp(v)}/${lx(l**3)}=${lx(a)}\)`}; }
+      const L2=R.st(0.2,0.8,0.1), v2=R.pick([-0.5,-1,0.5]), a=L*v+L2*v2;
+      return {q:T`2D, \(l=1\), zwei Randstücke: \(${lx(L)}\) mit \(v_n=${lx(v)}\) und \(${lx(L2)}\) mit \(v_n=${lx(v2)}\): \(\partial_\theta\tilde w\)`, a, how:T`\(${lx(L)}\cdot${lp(v)}+${lx(L2)}\cdot${lp(v2)}=${lx(a)}\)`};
+    }};
+
+  PK.lambda={t:T`Baryzentrische Koordinate \(\lambda_j(\mathbf p)\)`,
+    f:T`Dreieck \(\mathbf v_1=(0;0),\ \mathbf v_2=(a;0),\ \mathbf v_3=(0;a)\). Dann ist \(\lambda_2=x/a\), \(\lambda_3=y/a\) und \(\lambda_1=1-\lambda_2-\lambda_3\). \(\lambda_j\) ist 1 an Ecke \(j\) und 0 an der Gegenkante.`,
+    gen:(R,i)=>{ const a=R.pick([2,4,5,10]); let x,y; do{ x=+(a*R.st(0.1,0.8,0.1)).toFixed(4); y=+(a*R.st(0.1,0.8,0.1)).toFixed(4); }while(x+y>=a-1e-9);
+      if(i===0) return {q:T`\(a=${a}\), \(\mathbf p=(${lx(x)};\ ${lx(y)})\): \(\lambda_2\)`, a:x/a, how:T`\(x/a=${lx(x)}/${a}=${lx(x/a)}\)`};
+      if(i===1) return {q:T`\(a=${a}\), \(\mathbf p=(${lx(x)};\ ${lx(y)})\): \(\lambda_1\)`, a:1-(x+y)/a, how:T`\(1-\frac{${lx(x)}+${lx(y)}}{${a}}=1-${lx((x+y)/a)}=${lx(1-(x+y)/a)}\)`};
+      if(i===2){ const j=R.int(1,3);
+        return {q:T`\(a=${a}\), Schwerpunkt \(\big(\tfrac{${a}}{3};\ \tfrac{${a}}{3}\big)\): \(\lambda_${j}\)`, a:1/3, as:'1/3 ≈ 0,3333', how:T`Im Schwerpunkt sind alle drei Gewichte gleich: \(\tfrac13\). Darum steht in Gl. 22 der Faktor ⅓.`}; }
+      if(i===3){ const j=R.int(1,3), k=R.int(1,3);
+        return {q:T`\(\lambda_${j}\) an der Ecke \(\mathbf v_${k}\)`, a:j===k?1:0, how:j===k?T`An der eigenen Ecke ist \(\lambda_${j}=1\).`:T`\(\mathbf v_${k}\) liegt auf der Gegenkante von \(\mathbf v_${j}\): \(\lambda_${j}=0\).`}; }
+      const b=R.pick([2,3,6]), A=a*b/2;
+      return {q:T`Dreieck mit Katheten \(${a}\) und \(${b}\): \(\int_t\lambda_j\,dA\)`, a:A/3, how:T`Fläche \(${lx(A)}\), davon ein Drittel: \(${lx(A/3)}\). Als Graph ist \(\lambda_j\) eine Pyramide mit Höhe 1, und ihr Volumen ist Grundfläche/3.`};
+    }};
+
+  PK.gl22={t:T`Ableitung des Füllgrads pro Dreieck (Gl. 22)`,
+    f:T`Beitrag von Ecke \(j\): \(\frac{1}{|\square|}\cdot\frac13\cdot(\mathbf u_j^{\mathsf T}\mathbf n_t)\cdot\mathrm{Area}(t)\). Dabei ist \(\mathbf u_j=\partial_\theta\mathbf v_j\), wie sich die Ecke bewegt.`,
+    gen:(R,i)=>{ const A=R.st(0.1,0.9,0.1), c=R.pick([1,2,3,-1]);
+      if(i===0) return {q:T`\(|\square|=1,\ \mathrm{Area}=${lx(A)},\ \mathbf n=(0;0;1),\ \mathbf u=(0;0;${lx(c)})\): Beitrag dieser Ecke`, a:A*c/3, how:T`\(\frac13\cdot${lp(c)}\cdot${lx(A)}=${lx(A*c/3)}\)`};
+      if(i===1){ const u=[R.int(1,3),R.int(-2,2)];
+        return {q:T`\(|\square|=1,\ \mathrm{Area}=${lx(A)},\ \mathbf n=(0;0;1),\ \mathbf u=(${u[0]};${u[1]};0)\): Beitrag dieser Ecke`, a:0, how:T`\(\mathbf u^{\mathsf T}\mathbf n=0\): Die Ecke bewegt sich in der Dreiecksebene. Das zählt nicht.`}; }
+      if(i===2) return {q:T`\(|\square|=1,\ \mathrm{Area}=${lx(A)},\ \mathbf n=(0;0;1),\) <b>alle drei</b> Ecken mit \(\mathbf u=(0;0;${lx(c)})\): Summe`, a:A*c, how:T`\(3\cdot\frac13\cdot${lp(c)}\cdot${lx(A)}=${lx(A*c)}\): Das ganze Dreieck verschiebt sich, überstrichen wird Fläche mal Weg.`};
+      if(i===3){ const a2=+(A/10).toFixed(4), a=a2*c/3/0.125;
+        return {q:T`Voxelseite \(0{,}5\), also \(|\square|=0{,}125\); \(\mathrm{Area}=${lx(a2)},\ \mathbf n=(0;0;1),\ \mathbf u=(0;0;${lx(c)})\): Beitrag dieser Ecke`, a, how:T`\(\frac{1}{0{,}125}\cdot\frac13\cdot${lp(c)}\cdot${lx(a2)}=${lx(a)}\)`}; }
+      const p=R.int(-2,2), q=R.int(1,3), un=0.6*p+0.8*q;
+      return {q:T`\(|\square|=1,\ \mathrm{Area}=${lx(A)},\ \mathbf n=(0;\ 0{,}6;\ 0{,}8),\ \mathbf u=(0;\ ${lx(p)};\ ${lx(q)})\): Beitrag dieser Ecke`, a:A*un/3, how:T`\(\mathbf u^{\mathsf T}\mathbf n=0{,}6\cdot${lp(p)}+0{,}8\cdot${q}=${lx(un)}\), dann \(\frac13\cdot${lp(un)}\cdot${lx(A)}=${lx(A*un/3)}\)`};
+    }};
+
+  PK.voxzahl={t:T`Anzahl Voxel \(d_1\cdot d_2\cdot d_3\) und logarithmische Achse`,
+    f:T`Ein Gitter \(d^3\) hat \(d\cdot d\cdot d\) Voxel. Doppelte Auflösung heißt \(2^3=8\)-mal so viele Voxel. Auf einer log-Achse zählt man Zehnerpotenzen: \(\log_{10}(10^k)=k\).`,
+    gen:(R,i)=>{
+      if(i===0){ const d=R.pick([16,32,64,128,256,512]); return {q:T`\(${d}^3\)`, a:d**3, tol:0.5, how:T`\(${d}\cdot${d}\cdot${d}=${lx(d**3)}\)`}; }
+      if(i===1){ const k=R.pick([2,3,4,10]); return {q:T`Auflösung \(\times${k}\) in jeder Richtung: Faktor, um den die Voxelzahl wächst`, a:k**3, tol:0.5, how:T`\(${k}^3=${k**3}\)`}; }
+      if(i===2){ const d=R.pick([10,100,1000]), e=Math.round(Math.log10(d)); return {q:T`\(\log_{10}(${d}^3)\)`, a:3*e, how:T`\(${d}^3=10^{${3*e}}\), also \(${3*e}\) Dekaden`}; }
+      if(i===3){ const d=R.pick([96,192,384]); return {q:T`\(d=${d}\), 27 Teilwürfel: Voxel pro Teilwürfel \((d/3)^3\)`, a:(d/3)**3, tol:0.5, how:T`\(${d}/3=${d/3}\) und \(${d/3}^3=${lx((d/3)**3)}\)`}; }
+      const d=R.pick([128,256,512]), mb=d**3*4/1e6;
+      return {q:T`\(${d}^3\) Voxel mit je 4 Byte (float32): Speicher in MB (\(10^6\) Byte)`, a:mb, u:'MB', how:T`\(${lx(d**3)}\cdot4=${lx(d**3*4)}\) Byte, also etwa \(${lx(mb,1)}\) MB`};
+    }};
+
+  PK.esect={t:T`Überschneidungs-Energie \(E_{\text{sect}}\)`,
+    f:T`\(E_{\text{sect}}=\sum_{\mathbf W_i\gt1}\mathbf W_i^2\): Nur übervolle Voxel zählen, \(\mathbf W_i=1\) zählt nicht. Gesamtenergie \(E=E_{\text{sect}}+\alpha E_{\text{arap}}\) mit \(\alpha=0{,}005\).`,
+    gen:(R,i)=>{
+      const mk=n=>{ let W; do{ W=Array.from({length:n},()=>R.pick([0.3,0.8,1,1.1,1.2,1.5,2])); }while(!W.some(w=>w>1)); return W; };
+      if(i<2){ const W=mk(i===0?4:3); if(i===1) W.splice(R.int(0,3),0,1); const big=W.filter(w=>w>1), a=sum(big.map(w=>w*w));
+        return {q:T`\(\mathbf W=${vec(W)}\): \(E_{\text{sect}}\)`, a, how:T`Es zählen \(${big.map(w=>lx(w)).join(',\\ ')}\): \(${big.map(sq).join('+')}=${lx(a)}\)`+(W.includes(1)?'. Die 1 zählt nicht, sie ist nicht größer als 1.':'')}; }
+      if(i===2){ const w=R.pick([1.2,1.5,2,0.8,1]), a=w>1?2*w:0;
+        return {q:T`\(\mathbf W_i=${lx(w)}\): \(\partial E_{\text{sect}}/\partial\mathbf W_i\)`, a, how:w>1?T`\(2\mathbf W_i=${lx(a)}\gt0\): „werde leerer“`:T`Zählt nicht mit, also 0.`}; }
+      if(i===3){ const es=R.st(0.5,5,0.25), ea=R.int(10,200), a=es+0.005*ea;
+        return {q:T`\(E_{\text{sect}}=${lx(es)},\ E_{\text{arap}}=${ea},\ \alpha=0{,}005\): \(E\)`, a, how:T`\(${lx(es)}+0{,}005\cdot${ea}=${lx(es)}+${lx(0.005*ea)}=${lx(a)}\)`}; }
+      const W=Array.from({length:6},()=>R.pick([0.4,0.9,1,1.05,1.3,2])), a=W.filter(w=>w>1).length;
+      return {q:T`\(\mathbf W=${vec(W)}\): Anzahl der Voxel, die zu \(E_{\text{sect}}\) beitragen`, a, tol:0.1, how:T`alle mit \(\mathbf W_i\gt1\): \(${a}\)`};
+    }};
+
+  PK.arap={t:T`ARAP-Energie für Kanten \(\|\bar{\mathbf e}-R\,\mathbf e\|^2\)`,
+    f:T`Wie in der Grafik: Original-Kante \(\mathbf e\), verformte Kante \(\bar{\mathbf e}\), Drehung \(R(\varphi)\). In 2D ist \(R(\varphi)(x;y)=(x\cos\varphi-y\sin\varphi;\ x\sin\varphi+y\cos\varphi)\). Beste Drehung einer Kante: \(\varphi^\star=\operatorname{atan2}(\mathbf e\times\bar{\mathbf e},\ \mathbf e\cdot\bar{\mathbf e})\).`,
+    gen:(R,i)=>{ const e=[R.int(-3,3)||1,R.int(-3,3)];
+      if(i===0){ const ph=R.pick([90,-90,180]), a=ph===90?[-e[1],e[0]]:ph===-90?[e[1],-e[0]]:[-e[0],-e[1]];
+        return {q:T`\(R(${ph}^\circ)\,${vec(e)}\)`, a, how:T`\(\cos(${ph}^\circ)=${ph===180?-1:0}\), \(\sin(${ph}^\circ)=${ph===90?1:ph===-90?-1:0}\), eingesetzt: \(${vec(a)}\)`}; }
+      if(i===1){ const eb=[e[0]+R.int(-2,2),e[1]+R.int(-2,2)], d=[eb[0]-e[0],eb[1]-e[1]], a=d[0]**2+d[1]**2;
+        return {q:T`\(\varphi=0\), \(\mathbf e=${vec(e)},\ \bar{\mathbf e}=${vec(eb)}\): \(\|\bar{\mathbf e}-\mathbf e\|^2\)`, a, how:T`\(\bar{\mathbf e}-\mathbf e=${vec(d)}\), Länge zum Quadrat \(${lp(d[0])}^2+${lp(d[1])}^2=${a}\)`}; }
+      if(i===2){ const Re=[-e[1],e[0]], d=[R.int(-1,1),R.int(-1,2)], eb=[Re[0]+d[0],Re[1]+d[1]], a=d[0]**2+d[1]**2;
+        return {q:T`\(\varphi=90^\circ\), \(\mathbf e=${vec(e)},\ \bar{\mathbf e}=${vec(eb)}\): \(\|\bar{\mathbf e}-R\,\mathbf e\|^2\)`, a, how:T`\(R\,\mathbf e=${vec(Re)}\), Abweichung \(${vec(d)}\), Quadrat \(${a}\)`+(a===0?'. Reine Drehung kostet nichts.':'')}; }
+      if(i===3){ let E,B,cr,dt; do{ E=R.pick([[1,0],[2,0],[0,1]]); B=R.pick([[1,1],[0,2],[-1,1],[1,-1],[2,2],[0,-3],[-2,-2]]); cr=E[0]*B[1]-E[1]*B[0]; dt=E[0]*B[0]+E[1]*B[1]; }while(cr===0&&dt<=0); const ph=deg(Math.atan2(cr,dt));
+        return {q:T`\(\mathbf e=${vec(E)},\ \bar{\mathbf e}=${vec(B)}\): \(\varphi^\star\) in Grad`, a:ph, u:'°', how:T`\(\mathbf e\times\bar{\mathbf e}=${lx(cr)}\), \(\mathbf e\cdot\bar{\mathbf e}=${lx(dt)}\), \(\operatorname{atan2}(${lx(cr)},\ ${lx(dt)})=${lx(ph,2)}^\circ\)`}; }
+      const a0=R.int(1,3), c=R.pick([0.5,1.5,2]), a=(c-1)**2*a0*a0;
+      return {q:T`Nur gestreckt: \(\mathbf e=(${a0};0),\ \bar{\mathbf e}=(${lx(c*a0)};0)\), beste Drehung \(\varphi^\star=0\): \(\|\bar{\mathbf e}-\mathbf e\|^2\)`, a, how:T`\((${lx(c*a0)}-${a0})^2=${lx(a)}\). Strecken ist keine Drehung, also kostet es etwas.`};
+    }};
+
+  PK.mellow={t:T`mellowmax (weiches Maximum)`,
+    f:T`\(\mathrm{mm}_w(\mathbf W)=\frac1w\ln\Big(\frac1d\sum_k e^{\,w\mathbf W_k}\Big)\). Bei kleinem \(w\) fast der Mittelwert, bei großem fast das Maximum. Gradient: die Softmax-Gewichte \(e^{w\mathbf W_k}/\sum_{k'}e^{w\mathbf W_{k'}}\). Taschenrechner erlaubt.`,
+    gen:(R,i)=>{
+      if(i===0){ const c=R.st(0.2,0.9,0.1), w=R.pick([1,10,1000]);
+        return {q:T`\(\mathbf W=(${lx(c)};${lx(c)};${lx(c)}),\ w=${w}\): mellowmax`, a:c, how:T`Alle Werte gleich: \(\frac1w\ln\big(e^{w\cdot${lx(c)}}\big)=${lx(c)}\), egal welches \(w\)`}; }
+      if(i===1){ const b=R.pick([1,2]), w=R.pick([1,2]), S=(1+Math.exp(w*b))/2, a=Math.log(S)/w;
+        return {q:T`\(\mathbf W=(0;${b}),\ w=${w}\): mellowmax`, a, how:T`\(\frac{1}{${w}}\ln\frac{e^0+e^{${w*b}}}{2}=\frac{1}{${w}}\ln${lx(S)}=${lx(a)}\), zwischen Mittelwert \(${lx(b/2)}\) und Maximum \(${b}\)`}; }
+      if(i===2){ const w=R.pick([1,2,3]), a=Math.exp(w)/(1+Math.exp(w));
+        return {q:T`\(\mathbf W=(0;1),\ w=${w}\): Softmax-Gewicht des größeren Werts`, a, how:T`\(\frac{e^{${w}}}{e^0+e^{${w}}}=\frac{${lx(Math.exp(w))}}{${lx(1+Math.exp(w))}}=${lx(a)}\): Der größere Wert bekommt den Großteil des Gradienten.`}; }
+      if(i===3){ const W=[0,0,0,0].map(()=>R.st(0,1,0.1)), a=sum(W)/4;
+        return {q:T`Grenzfall \(w\to0\), \(\mathbf W=${vec(W)}\): mellowmax geht gegen`, a, how:T`den Mittelwert \((${W.map(v=>lx(v)).join('+')})/4=${lx(a)}\)`}; }
+      const w=R.pick([10,100]), a=(Math.log1p(Math.exp(-w))+w-Math.log(2))/w;
+      return {q:T`\(\mathbf W=(0;1),\ w=${w}\): mellowmax`, a, how:T`\(\frac{1}{${w}}\ln\frac{1+e^{${w}}}{2}\approx1-\frac{\ln2}{${w}}=${lx(a)}\): fast schon das Maximum 1`};
+    }};
+
+  PK.ecut={t:T`Extrusions-Schnittmenge \(\mathbf S\) und \(E_{\text{cut}}\)`,
+    f:T`\(\mathbf S_{ijk}=(\mathbf S_x)_{jk}(\mathbf S_y)_{ik}(\mathbf S_z)_{ij}\): Produkt der drei Silhouetten (logisches UND). Eine harte Silhouette ist das Maximum ihrer Säule. \(E_{\text{cut}}=\frac1{d^3}\sum(\mathbf S-\mathbf W)^2\).`,
+    gen:(R,i)=>{
+      if(i===0){ const s=[R.pick([1,0.9,0.8,0.5]),R.pick([1,0.9,0.6]),R.pick([1,0.8,0.5])], a=s[0]*s[1]*s[2];
+        return {q:T`\((\mathbf S_x)=${lx(s[0])},\ (\mathbf S_y)=${lx(s[1])},\ (\mathbf S_z)=${lx(s[2])}\): \(\mathbf S_{ijk}\)`, a, how:T`\(${s.map(v=>lx(v)).join('\\cdot')}=${lx(a)}\)`}; }
+      if(i===1){ const C=[0,0,0,0].map(()=>R.st(0,1,0.1)), a=Math.max(...C);
+        return {q:T`Säule \(${vec(C)}\): harte Silhouette`, a, how:T`größter Wert der Säule: \(${lx(a)}\). Ist irgendein Voxel der Säule voll, schneidet die Säge dort nicht.`}; }
+      if(i===2){ const D=Array(8).fill(0), k=R.int(1,3); for(let j=0;j<k;j++) D[R.int(0,7)]=R.pick([0.2,0.4,0.5,-0.3]); const a=sum(D.map(v=>v*v))/8;
+        return {q:T`\(d=2\) (8 Voxel), Abweichungen \(\mathbf S-\mathbf W\): ${D.map(v=>nf(v)).join('; ')}. \(E_{\text{cut}}\)`, a, how:T`\(\frac18\big(${D.filter(v=>v!==0).map(sq).join('+')}\big)=${lx(a)}\)`}; }
+      if(i===3){ const s=[R.int(0,1),R.int(0,1),R.int(0,1)], a=String(s[0]*s[1]*s[2]);
+        return {q:T`Harte Silhouetten durch das Voxel: \(${s.join(',\\ ')}\) (für \(x,y,z\)). Bleibt es stehen? \(\mathbf S_{ijk}\)`, a, ch:['0','1'], how:T`\(${s.join('\\cdot')}=${a}\)`+(a==='1'?': Es liegt in allen drei Silhouetten.':': Mindestens eine Säge schneidet es weg.')}; }
+      const eb=R.st(0.02,0.08,0.002), ea=+(eb*R.st(0.2,0.5,0.01)).toFixed(4), a=100*(1-ea/eb);
+      return {q:T`\(E_{\text{cut}}\) vorher \(${lx(eb)}\), nachher \(${lx(ea)}\): Verbesserung \(1-E_{\text{nachher}}/E_{\text{vorher}}\) in %`, a, u:'%', tol:0.6, how:T`\(1-${lx(ea)}/${lx(eb)}=1-${lx(ea/eb)}=${lx(a/100)}\), also \(${lx(a,1)}\,\%\)`};
+    }};
+
+  PK.efill={t:T`Füll-Energie \(E_{\text{fill}}\)`,
+    f:T`Pro Voxel der Kachelzelle ist die Bedeckung \(c=\sum\bar{\mathbf C}\) (alle Instanzen, alle Teile übereinandergelegt). \(E_{\text{fill}}=\sum(c-1)^2\). Lücken (\(c\lt1\)) und Überlappungen (\(c\gt1\)) kosten beide. Falten: \(x\) aus Teil 1 wird um \(+\tfrac23\) verschoben, aus Teil 3 um \(-\tfrac23\).`,
+    gen:(R,i)=>{
+      if(i===0){ const C=[0,0,0,0].map(()=>R.int(0,2)), a=sum(C.map(c=>(c-1)**2));
+        return {q:T`Bedeckungen \(${vec(C)}\): \(E_{\text{fill}}\)`, a, how:T`\(${C.map(c=>`(${c}-1)^2`).join('+')}=${a}\)`}; }
+      if(i===1){ const A=[0,0,0].map(()=>R.st(0,1,0.1)), B=[0,0,0].map(()=>R.st(0,1,0.1)), C=A.map((v,k)=>+(v+B[k]).toFixed(4)), a=sum(C.map(c=>(c-1)**2));
+        return {q:T`Instanz 1 bedeckt \(${vec(A)}\), Instanz 2 bedeckt \(${vec(B)}\): \(E_{\text{fill}}\)`, a, how:T`Bedeckung \(c=${vec(C)}\), dann \(${C.map(c=>`(${lx(c)}-1)^2`).join('+')}=${lx(a)}\)`}; }
+      if(i===2){ const n=R.int(1,3);
+        return {q:T`\([-1,1]^${n}\), jede Achse in Drittel geteilt: Anzahl Teile`, a:3**n, how:T`\(3^${n}=${3**n}\)`+(n===3?', die 27 Teilwürfel des Papers':'')}; }
+      if(i===3){ const x=R.pick([-0.9,-0.8,-0.5,-0.4,0.4,0.5,0.7,0.9]), a=x<-1/3?x+2/3:x-2/3;
+        return {q:T`Wohin wird \(x=${lx(x)}\) in die Kachelzelle \([-\tfrac13,\tfrac13)\) gefaltet?`, a, how:T`\(x\) liegt in Teil ${x<0?'1, also \\(+\\tfrac23\\)':'3, also \\(-\\tfrac23\\)'}: \(${lx(x)}${x<0?'+':'-'}0{,}6667=${lx(a)}\)`}; }
+      const c1=R.st(0.1,0.9,0.1);
+      return {q:T`Instanz 1 bedeckt ein Voxel zu \(${lx(c1)}\). Wie viel muss Instanz 2 beitragen, damit \((c-1)^2=0\) wird?`, a:1-c1, how:T`\(1-${lx(c1)}=${lx(1-c1)}\)`};
+    }};
+
+  /* ---------- Bau, Eingabe, Prüfen ---------- */
+  const hash=s=>{ let h=2166136261; for(const ch of s){ h^=ch.charCodeAt(0); h=Math.imul(h,16777619); } return h>>>0; };
+  const parse=s=>{ s=String(s).toLowerCase().replace(/[\s\u202f]/g,'').replace(/[−–]/g,'-').replace(/,/g,'.').replace(/[·×]/g,'*').replace(/pi/g,'π').replace(/[°%]/g,'');
+    if(!s) return NaN;
+    s=s.replace(/√(\d+(?:\.\d+)?)/g,(_,a)=>'('+Math.sqrt(+a)+')');
+    s=s.replace(/(\d|\))(?=π|\()/g,'$1*').replace(/π(?=\d|\()/g,'π*').replace(/π/g,'('+Math.PI+')');
+    if(!/^[\d.+\-*/()e]+$/.test(s)) return NaN;
+    try{ const v=Function('"use strict";return('+s+')')(); return typeof v==='number'&&isFinite(v)?v:NaN; }catch(_){ return NaN; } };
+  const tolOf=(t,a)=>t.tol!=null?t.tol:0.005+0.005*Math.abs(a);
+  const unit=t=>t.u?(t.u==='°'?'°':' '+t.u):'';
+  const ansStr=t=>t.as!=null?t.as:(t.ch?t.a:Array.isArray(t.a)?'('+t.a.map(v=>nf(v)).join('; ')+')':nf(t.a))+unit(t);
+  const inp='<input class="ti" autocomplete="off" spellcheck="false">';
+  const field=t=>{ const u=t.u?`<span class="tu">${t.u}</span>`:'';
+    if(t.ch) return `<span class="chs">${t.ch.map(c=>`<button type="button" class="chb" data-v="${c}">${c}</button>`).join('')}</span>`;
+    if(Array.isArray(t.a)) return `<span class="tup">= (${inp.replace('ti','ti t2')}; ${inp.replace('ti','ti t2')})${u}</span>`;
+    return `= ${inp}${u}`; };
+  const score=el=>{ const n=el.querySelectorAll('.tk.ok').length; el.querySelector('.pscore').textContent=n===5?'🎉 5 von 5 richtig, Päckchen geschafft!':n?`✔ ${n} von 5 richtig`:''; };
+  function build(el,seed){
+    const P=PK[el.dataset.pack]; if(!P){ el.innerHTML='<i>Übungspäckchen „'+el.dataset.pack+'“ fehlt.</i>'; return; }
+    const R=mkR(seed), ex=P.gen(mkR(seed^0x5bd1e995),0), ts=[0,1,2,3,4].map(i=>P.gen(R,i)); el._ts=ts;
+    el.innerHTML=`<span class="plbl">✏️ Übungspäckchen · 5 Aufgaben zum Selberrechnen</span><div class="ptitle">${P.t}</div><div class="pf">${P.f}</div>`+
+      `<div class="pex"><b>Beispiel:</b> ${ex.q} ${ex.ch?'→':'='} <b>${ansStr(ex)}</b><div class="pexw">So gerechnet: ${ex.how}</div></div>`+
+      `<div class="tasks">${ts.map((t,i)=>`<div class="tk" data-i="${i}"><div class="tq"><b class="tn">${'abcde'[i]})</b> ${t.q} ${field(t)}</div><div class="tfoot"><span class="tm"></span><button type="button" class="tl">Lösung</button></div><div class="th">Lösung: <b>${ansStr(t)}</b><br>${t.how}</div></div>`).join('')}</div>`+
+      `<div class="pbar"><span class="phint">Ergebnis eintippen und Enter drücken. Komma, Punkt und Brüche wie 1/4 gehen.</span><button type="button" class="b sec" data-pk="all">Alle Lösungen</button><button type="button" class="b sec" data-pk="new">🎲 Neue Zahlen</button><span class="pscore"></span></div>`;
+    score(el);
+  }
+  function check(el,tk){ const t=el._ts[+tk.dataset.i], m=tk.querySelector('.tm'); let ok;
+    if(t.ch){ const s=tk.querySelector('.chb.sel'); if(!s) return; ok=s.dataset.v===String(t.a); }
+    else{ const ins=[...tk.querySelectorAll('input.ti')];
+      if(ins.every(x=>!x.value.trim())){ tk.classList.remove('ok','no'); m.textContent=''; score(el); return; }
+      const as=Array.isArray(t.a)?t.a:[t.a], vs=ins.map(x=>parse(x.value));
+      if(vs.some(v=>isNaN(v))){ tk.classList.remove('ok'); tk.classList.add('no'); m.textContent='✘ Zahl nicht erkannt (z. B. 0,25 oder 1/4)'; score(el); return; }
+      ok=vs.every((v,k)=>Math.abs(v-as[k])<=tolOf(t,as[k])); }
+    tk.classList.toggle('ok',ok); tk.classList.toggle('no',!ok); m.textContent=ok?'✔ richtig':'✘ noch nicht, versuch es nochmal'; score(el); }
+  function wire(el){
+    el.addEventListener('keydown',e=>{ if(e.key==='Enter'&&e.target.matches('input.ti')){ e.preventDefault(); check(el,e.target.closest('.tk')); } });
+    el.addEventListener('change',e=>{ if(e.target.matches('input.ti')) check(el,e.target.closest('.tk')); });
+    el.addEventListener('click',e=>{ const b=e.target.closest('button'); if(!b||!el.contains(b)) return; const tk=b.closest('.tk');
+      if(b.classList.contains('chb')){ tk.querySelectorAll('.chb').forEach(x=>x.classList.toggle('sel',x===b)); check(el,tk); }
+      else if(b.classList.contains('tl')){ b.textContent=tk.classList.toggle('show')?'Lösung verbergen':'Lösung'; }
+      else if(b.dataset.pk==='all'){ const tks=[...el.querySelectorAll('.tk')], on=!tks.every(x=>x.classList.contains('show')); tks.forEach(x=>{ x.classList.toggle('show',on); x.querySelector('.tl').textContent=on?'Lösung verbergen':'Lösung'; }); b.textContent=on?'Lösungen verbergen':'Alle Lösungen'; }
+      else if(b.dataset.pk==='new'){ build(el,(Math.random()*4294967296)>>>0); if(window.renderMathInElement) renderMathInElement(el,KOPT); } });
+  }
+  document.querySelectorAll('.pack[data-pack]').forEach(el=>{ build(el,hash(el.dataset.pack)); wire(el); });
+}
+
 function initUI(){
   fillSmallSvgs();
   const WH=[['theta','θ Regler'],['mesh','∂Ω Mesh'],['omega','Ω Inneres'],['w','w Winding Number'],['wt','w̃ geglättet'],['W','W Gitter'],['E','E Energie'],['grad','∂E/∂θ Gradient']];
@@ -3109,7 +3724,8 @@ function initUI(){
   window.addEventListener('scroll',()=>{ if(!ticking){ ticking=true; requestAnimationFrame(spy); } },{passive:true}); spy();
   const io=new IntersectionObserver(ents=>{ for(const en of ents){ const el=en.target; el._vis=en.isIntersecting; if(en.isIntersecting){ _visible.add(el); initDemo(el); } else _visible.delete(el); } },{rootMargin:'250px 0px'});
   document.querySelectorAll('[data-demo]').forEach(el=>io.observe(el));
-  const km=()=>{ if(window.renderMathInElement){ renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false}],throwOnError:false,ignoredTags:['script','noscript','style','textarea','pre','code','option','canvas','svg']}); } else console.warn('KaTeX nicht geladen (offline?) – Formeln bleiben als LaTeX-Text stehen.'); };
+  initPacks();
+  const km=()=>{ if(window.renderMathInElement){ renderMathInElement(document.body,KOPT); } else console.warn('KaTeX nicht geladen (offline?) – Formeln bleiben als LaTeX-Text stehen.'); };
   km();
 }
 if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',initUI); else initUI();
