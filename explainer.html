@@ -1496,6 +1496,20 @@ $$\tilde w(\mathbf x)=\int_{\mathbb R^n}k(\mathbf x-\mathbf x')\,w(\mathbf x')\,
 <div>\(dA(\mathbf x')\)</div><div>Flächen- bzw. Volumenelement um \(\mathbf x'\) (das Paper schreibt auch im 3D \(dA\))</div>
 </div><span class="src">Djuren, Gl. 4</span></div>
 <div class="pack" data-pack="falt"></div>
+<div class="box mind"><span class="lbl">🧠 Bild im Kopf: Was die Ableitung von w̃ bildlich bedeutet (Vorschau auf Gl. 14)</span>
+<b>Der Kern bleibt, wo er ist.</b> Das Fenster um \(\mathbf x\) bewegt sich nicht und ändert seine Form nicht, also ist \(\partial_\theta k=0\). Was sich bewegt, ist der <b>Rand</b> \(\partial\Omega\). Dreht man am Regler \(\theta\), wandert eine Ecke (violetter Pfeil). Die zwei Kanten an dieser Ecke überstreichen einen dünnen Streifen: grün, wo \(\Omega\) wächst, rot, wo es schrumpft. \(\tilde w(\mathbf x)\) ändert sich nur um den Teil des Streifens, der <b>im Fenster</b> liegt. Pro Reglereinheit ist das \(\int v_n\,d\ell\) über das Randstück im Fenster, geteilt durch \(|\square|\). Beim Gauß-Kern zählt jedes Randstück, aber gewichtet mit dem Kernwert dort. <b>Rechts</b> ist \(\tilde w(\mathbf x)\) für jedes \(\theta\) exakt berechnet. Die gestrichelte Tangente hat die Steigung aus der Randformel, und der Prüfwert im grauen Kasten vergleicht sie mit Finiten Differenzen.
+<div class="demo" data-demo="wtderiv"><span class="lbl">② Interaktiv · \(\partial_\theta\tilde w(\mathbf x)=\int_{\partial\Omega}k(\mathbf x-\mathbf x_b)\,v_n\,d\ell\)</span>
+<canvas width="760" height="380"></canvas>
+<div class="controls"><label>Regler \(\theta\) <input type="range" min="-0.8" max="0.8" step="0.01" value="0" data-opt="t"></label><select data-opt="k"><option value="box">Box-Kern (Djuren)</option><option value="gau">Gauß-Kern (GauWN)</option></select><label>Fenstergröße \(s\) <input type="range" min="0.4" max="2.4" step="0.01" value="1.2" data-opt="s"></label></div>
+<div class="readout" data-out></div>
+<p class="cap">Zieh \(\mathbf x\) (violett) oder eine Ecke. Ein Klick auf eine Ecke macht sie zur bewegten Ecke. Schieb \(\mathbf x\) weg von den bewegten Kanten: Dann ist die Ableitung 0, obwohl sich die Form ändert. Beim Gauß-Kern ist \(\sigma=s/2\).</p></div>
+<p style="margin:8px 0 2px"><b>Worüber integriert wird, je nach Dimension:</b></p>
+<div class="legend">
+<div>1D</div><div>Der Rand sind <b>Punkte</b>. Das Integral schrumpft auf einen Wert: \(\partial_\theta\tilde w=v_n/h\), solange die Wand im Voxel liegt (<a href="#k4-switch">Kapitel 4</a>).</div>
+<div>2D</div><div>Der Rand sind <b>Kanten</b>. Integriert wird über die Kantenstücke im Fenster, der Streifen ist eine dünne Fläche (diese Demo, Gl. 21).</div>
+<div>3D</div><div>Der Rand sind <b>Dreiecke</b>. Integriert wird über die Dreiecksstücke im Voxel, der Streifen ist eine dünne Schicht mit Volumen (Gl. 22).</div>
+</div>
+<span class="src">Djuren, Gl. 14 (beliebiger Kern), Gl. 20–22 (Box)</span></div>
 
 <h3 id="k10-energy">Abschn. 3: Das eigentliche Optimierungsproblem (Gl. 5)</h3>
 <div class="where" data-on="W,E"></div>
@@ -2688,6 +2702,72 @@ registerDemo('window', el=>{
     out(el).textContent=`${txtK}\nzum Vergleich die Punktprobe w(x) = ${wn2(X[0],X[1],P,true)>0.5?1:0}: entweder 0 oder 1, nichts dazwischen`; }
   [oK,oS,oF].forEach(o=>o.addEventListener('input',draw)); oK.addEventListener('change',draw);
   draggable(c,v,()=>[{x:X[0],y:X[1],r:16,move:(x,y)=>{X[0]=clamp(x,0,9);X[1]=clamp(y,0,4.26);}},...ptH(P)],draw);
+  draw();
+});
+
+registerDemo('wtderiv', el=>{
+  const c=el.querySelector('canvas'); const ctx=hi(c);
+  const L=new View(c,0,6.2,0,6.2*364/420,{x:8,y:8,w:420,h:364});
+  const G=new View(c,-0.8,0.8,-0.05,1.05,{x:505,y:34,w:240,h:250});
+  const P0=[[0.6,0.9],[3.0,0.6],[5.0,1.3],[4.7,3.6],[3.1,4.6],[1.0,3.9]], n=P0.length;
+  const X=[4.75,2.3]; let k=2;
+  const oT=opt(el,'t'),oK=opt(el,'k'),oS=opt(el,'s');
+  const YM=L.ymax-0.1;
+  const dir=()=>{ const a=P0[(k-1+n)%n],b=P0[k],q=P0[(k+1)%n]; const n1=[b[1]-a[1],a[0]-b[0]],n2=[q[1]-b[1],b[0]-q[0]]; const l1=Math.hypot(n1[0],n1[1])||1,l2=Math.hypot(n2[0],n2[1])||1; const d=[n1[0]/l1+n2[0]/l2,n1[1]/l1+n2[1]/l2],l=Math.hypot(d[0],d[1]); return l<1e-9?[n1[0]/l1,n1[1]/l1]:[d[0]/l,d[1]/l]; };
+  const shape=(t,d)=>P0.map((p,i)=>i===k?[p[0]+t*d[0],p[1]+t*d[1]]:p);
+  const GL=[[-0.9324695142,0.1713244924],[-0.6612093865,0.3607615730],[-0.2386191861,0.4679139346],[0.2386191861,0.4679139346],[0.6612093865,0.3607615730],[0.9324695142,0.1713244924]];
+  const quad=(f,m)=>{ let s=0; const h=1/m; for(let j=0;j<m;j++) for(const [z,wq] of GL) s+=wq*h/2*f(j*h+h*(z+1)/2); return s; };
+  const win=s=>[X[0]-s/2,X[0]+s/2,X[1]-s/2,X[1]+s/2];
+  const boxVal=(P,s)=>{ const [x0,x1,y0,y1]=win(s); const q=clipPoly(P,x0,y0,x1,y1); return q.length>2?polyArea(q)/(s*s):0; };
+  const gauVal=(P,sg)=>{ let S=0; for(let i=0;i<n;i++){ const a=P[i],b=P[(i+1)%n],dx=b[0]-a[0],dy=b[1]-a[1]; if(Math.abs(dy)<1e-14) continue; const m=Math.max(2,Math.ceil(Math.hypot(dx,dy)/(sg/2)));
+      S+=quad(t=>-Phi(X[0]-(a[0]+t*dx),sg)*gau(X[1]-(a[1]+t*dy),sg)*dy,m); } return S; };
+  const value=(P,isBox,s)=>isBox?boxVal(P,s):gauVal(P,s/2);
+  const moving=()=>[[(k-1+n)%n,k],[k,(k+1)%n]];
+  function deriv(P,d,isBox,s){ let S=0,len=0; const sg=s/2,[x0,x1,y0,y1]=win(s);
+    for(const [i0,i1] of moving()){ const a=P[i0],b=P[i1],dx=b[0]-a[0],dy=b[1]-a[1],Ls=Math.hypot(dx,dy); if(Ls<1e-12) continue; const en=(d[0]*dy-d[1]*dx)/Ls;
+      if(isBox){ const cl=clipSeg(a,b,x0,x1,y0,y1); if(!cl) continue; const [t0,t1]=cl, I2=(t1*t1-t0*t0)/2; len+=Ls*(t1-t0); S+=en*Ls*(i1===k?I2:(t1-t0)-I2)/(s*s); }
+      else { const m=Math.max(2,Math.ceil(Ls/(sg/2))); S+=en*Ls*quad(t=>(i1===k?t:1-t)*gau(X[0]-(a[0]+t*dx),sg)*gau(X[1]-(a[1]+t*dy),sg),m); } }
+    return {S,len}; }
+  const path=P=>{ P.forEach((p,i)=>i?ctx.lineTo(L.X(p[0]),L.Y(p[1])):ctx.moveTo(L.X(p[0]),L.Y(p[1]))); ctx.closePath(); };
+  function strips(P,Q,al){ for(const [A,B,col] of [[Q,P,'22,163,74'],[P,Q,'220,38,38']]){ ctx.save(); ctx.beginPath(); ctx.rect(L.rect.x,L.rect.y,L.rect.w,L.rect.h); path(B); ctx.clip('evenodd'); ctx.beginPath(); path(A); ctx.fillStyle=`rgba(${col},${al})`; ctx.fill(); ctx.restore(); } }
+  function draw(){ ctx.clearRect(0,0,c.lw,c.lh); const t=+oT.value,s=+oS.value,isBox=oK.value==='box',sg=s/2,d=dir(),P=shape(t,d),Q=shape(t+0.25,d);
+    const [x0,x1,y0,y1]=win(s), k0=gau(0,sg)**2, wt=p=>gau(X[0]-p[0],sg)*gau(X[1]-p[1],sg)/k0, inWin=p=>p[0]>x0&&p[0]<x1&&p[1]>y0&&p[1]<y1;
+    clipTo(L); ctx.fillStyle='#f8fafc'; ctx.fillRect(L.rect.x,L.rect.y,L.rect.w,L.rect.h);
+    drawPoly(L,P,true,{fill:'rgba(59,130,246,.28)',stroke:null});
+    if(isBox){ strips(P,Q,.2); ctx.save(); ctx.beginPath(); ctx.rect(L.X(x0),L.Y(y1),s*L.sx,s*L.sy); ctx.clip(); strips(P,Q,.7); ctx.restore();
+      ctx.save(); ctx.fillStyle='rgba(124,58,237,.07)'; ctx.strokeStyle=C.grad; ctx.lineWidth=2.5; ctx.fillRect(L.X(x0),L.Y(y1),s*L.sx,s*L.sy); ctx.strokeRect(L.X(x0),L.Y(y1),s*L.sx,s*L.sy); ctx.restore(); }
+    else { strips(P,Q,.45); const gx=L.X(X[0]),gy=L.Y(X[1]),R=3*sg*L.sx, gd=ctx.createRadialGradient(gx,gy,0,gx,gy,R); gd.addColorStop(0,'rgba(124,58,237,.38)'); gd.addColorStop(0.33,'rgba(124,58,237,.16)'); gd.addColorStop(1,'rgba(124,58,237,0)');
+      ctx.save(); ctx.fillStyle=gd; ctx.beginPath(); ctx.arc(gx,gy,R,0,TAU); ctx.fill(); ctx.strokeStyle='rgba(124,58,237,.55)'; ctx.setLineDash([4,4]); ctx.lineWidth=1.3; ctx.beginPath(); ctx.arc(gx,gy,sg*L.sx,0,TAU); ctx.stroke(); ctx.restore(); }
+    drawPoly(L,P,true,{stroke:C.bnd,width:2.5}); drawArrows(L,P,true,{color:C.bnd});
+    if(isBox){ ctx.save(); ctx.beginPath(); ctx.rect(L.X(x0),L.Y(y1),s*L.sx,s*L.sy); ctx.clip(); drawPoly(L,P,true,{stroke:'#9a3412',width:6}); ctx.restore(); }
+    else { ctx.save(); ctx.lineCap='round'; ctx.lineWidth=6; for(let i=0;i<n;i++){ const a=P[i],b=P[(i+1)%n]; for(let m=0;m<60;m++){ const p=[a[0]+(b[0]-a[0])*m/60,a[1]+(b[1]-a[1])*m/60],q=[a[0]+(b[0]-a[0])*(m+1)/60,a[1]+(b[1]-a[1])*(m+1)/60],w_=wt([(p[0]+q[0])/2,(p[1]+q[1])/2]); if(w_<0.02) continue; ctx.strokeStyle=`rgba(91,33,182,${0.85*w_})`; ctx.beginPath(); ctx.moveTo(L.X(p[0]),L.Y(p[1])); ctx.lineTo(L.X(q[0]),L.Y(q[1])); ctx.stroke(); } } ctx.restore(); }
+    for(const [i0,i1] of moving()){ const a=P[i0],b=P[i1],dx=b[0]-a[0],dy=b[1]-a[1],Ls=Math.hypot(dx,dy); if(Ls<1e-9) continue; const nx_=dy/Ls,ny_=-dx/Ls,en=d[0]*nx_+d[1]*ny_;
+      for(let m=1;m<=7;m++){ const tt=m/8,lam=i1===k?tt:1-tt,p=[a[0]+tt*dx,a[1]+tt*dy],vn=lam*en,X0=L.X(p[0]),Y0=L.Y(p[1]); ctx.save(); ctx.globalAlpha=isBox?(inWin(p)?1:.3):.25+.75*wt(p); arrowPx(ctx,X0,Y0,X0+vn*nx_*55,Y0-vn*ny_*55,vn>=0?C.pos:C.neg,2.3,7); ctx.restore(); } }
+    P.forEach((p,i)=>disc(L,p,i===k?7:5,i===k?C.grad:C.ink,'#fff',2));
+    const VX=L.X(P[k][0]),VY=L.Y(P[k][1]); arrowPx(ctx,VX,VY,VX+d[0]*55,VY-d[1]*55,C.grad,3.2,10); txt(ctx,'∂θ vₖ',clamp(VX+d[0]*66,30,406),clamp(VY-d[1]*66,18,362),{align:'center',base:'middle',font:'bold 13px system-ui',color:C.grad,bg:'rgba(255,255,255,.85)'});
+    disc(L,X,6,C.grad,'#fff',2); txt(ctx,'x',L.X(X[0])+9,L.Y(X[1])-9,{font:'bold 14px system-ui',color:C.grad});
+    txt(ctx,'grün/rot: Streifen, den der Rand bei Δθ = 0,25 überstreicht',L.rect.x+6,L.rect.y+18,{font:'12px system-ui',bg:'rgba(255,255,255,.9)'});
+    txt(ctx,isBox?'kräftig: nur der Teil im Fenster zählt':'violett auf dem Rand: Kerngewicht k(x − x_b)',L.rect.x+6,L.rect.y+38,{font:'12px system-ui',bg:'rgba(255,255,255,.9)'});
+    ctx.restore();
+    const N=97, ts=[],vs=[]; for(let j=0;j<N;j++){ const tt=-0.8+1.6*j/(N-1); ts.push(tt); vs.push(value(shape(tt,d),isBox,s)); }
+    const val=value(P,isBox,s), D=deriv(P,d,isBox,s), e=1e-4, fd=(value(shape(t+e,d),isBox,s)-value(shape(t-e,d),isBox,s))/(2*e);
+    const lo=Math.min(...vs),hi_=Math.max(...vs), ym0=Math.min(-0.05,lo-0.05), ym1=Math.max(1.05,hi_+0.05); G.set(-0.8,0.8,ym0,ym1);
+    axes(G,{xt:[-0.8,-0.4,0,0.4,0.8],yt:(ym0>=-0.06&&ym1<=1.06)?[0,0.25,0.5,0.75,1]:undefined,xl:'θ',yl:'w̃(x)',title:'w̃(x) als Funktion von θ'});
+    clipTo(G); ctx.strokeStyle='#2563eb'; ctx.lineWidth=2.5; ctx.lineJoin='round'; ctx.beginPath(); ts.forEach((tt,j)=>j?ctx.lineTo(G.X(tt),G.Y(vs[j])):ctx.moveTo(G.X(tt),G.Y(vs[j]))); ctx.stroke(); ctx.restore();
+    tline(G,t,val,D.S,0.3,C.bnd,2.2); disc(G,[t,val],5.5,C.grad,'#fff',2);
+    txt(ctx,'blau: w̃(x) exakt für jedes θ',G.rect.x,G.rect.y+G.rect.h+44,{font:'12px system-ui',color:'#1d4ed8'});
+    txt(ctx,'gestrichelt: Steigung aus der Randformel',G.rect.x,G.rect.y+G.rect.h+62,{font:'12px system-ui',color:'#c2410c'});
+    const lines=[];
+    if(isBox){ const [qx0,qx1,qy0,qy1]=win(s), q=clipPoly(P,qx0,qy0,qx1,qy1), A=q.length>2?polyArea(q):0;
+      lines.push(`w̃(x) = Fläche(Ω ∩ Fenster) / |□| = ${de(A,4)} / ${de(s*s,4)} = ${de(val,4)}`);
+      lines.push(`∂w̃/∂θ aus der Randformel: (1/|□|) · ∫ v_n dℓ über den Rand im Fenster = ${de(D.S,4)}   Finite Differenzen: ${de(fd,4)}`);
+      lines.push(D.len>1e-9?`Bewegte Kanten im Fenster: Länge ${de(D.len,3)}. ∂k/∂θ = 0: Der Kern wählt nur aus, welcher Teil des Randes zählt.`:'Keine der zwei bewegten Kanten liegt im Fenster: Ableitung 0, obwohl sich die Form bewegt.'); }
+    else { lines.push(`w̃(x) = ∫ k_σ(x − x′) w(x′) dA′ = ${de(val,4)}   (σ = s/2 = ${de(sg,2)})`);
+      lines.push(`∂w̃/∂θ aus der Randformel: ∫ k_σ(x − x_b) v_n dℓ über den ganzen Rand = ${de(D.S,4)}   Finite Differenzen: ${de(fd,4)}`);
+      lines.push('Jeder Randpunkt zählt, gewichtet mit dem Kernwert dort. Der Kern wird ausgewertet, nicht abgeleitet.'); }
+    out(el).textContent=lines.join('\n'); }
+  oT.addEventListener('input',draw); oS.addEventListener('input',draw); oK.addEventListener('change',draw);
+  draggable(c,L,()=>{ const d=dir(),t=+oT.value; return [{x:X[0],y:X[1],r:16,move:(x,y)=>{X[0]=clamp(x,0.1,6.1);X[1]=clamp(y,0.1,YM);}},...shape(t,d).map((p,i)=>({x:p[0],y:p[1],r:12,idx:i,move:(x,y)=>{ const off=i===k?+oT.value:0, dd=dir(); P0[i]=[clamp(x,0.1,6.1)-off*dd[0],clamp(y,0.1,YM)-off*dd[1]]; }}))]; },draw,null,(e,h)=>{ if(h&&h.idx!==undefined&&h.idx!==k){ k=h.idx; oT.value=0; draw(); } });
   draw();
 });
 
